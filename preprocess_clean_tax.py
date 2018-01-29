@@ -8,7 +8,7 @@ final_data = []
 
 for i, line in enumerate(orig_data):
 	if (line.strip() == '') or (line.strip()[0] == '#'):
-		break
+		continue
 	else:
 		final_data.append(line)
 		

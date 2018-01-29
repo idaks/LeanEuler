@@ -13,5 +13,16 @@ import argparse
 import pickle
 
 
-class AntlrCleanTaxListener(CleanTaxListener):
+#class AntlrCleanTaxListener(CleanTaxListener):
 
+
+
+
+
+
+input = FileStream('cleantax_sample.txt')
+lexer = CleanTaxLexer(input)
+stream = CommonTokenStream(lexer)
+parser = CleanTaxParser(stream)
+tree = parser.ct_input()
+print Trees.toStringTree(tree, None, parser)
