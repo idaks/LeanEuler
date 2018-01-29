@@ -6,21 +6,21 @@ options {
 
 //			Parser Rules
 
-input = tax_desc tax_desc articulations_desc ;
+ct_input : tax_desc tax_desc articulations_desc ;
 
-tax_desc = 'taxonomy' TEXT (tax_sub_desc)* ;
+tax_desc : 'taxonomy' TEXT (tax_sub_desc)* ;
 
-tax_sub_desc = '(' TEXT ')' ;
+tax_sub_desc : '(' TEXT ')' ;
 
-articulations_desc = 'articulations' TEXT (articulation)* ;
+articulations_desc : 'articulations' TEXT (articulation)* ;
 
-articulation = '[' TEXT relation TEXT ']' ;
+articulation : '[' TEXT relation TEXT ']' ;
 
-relation = rcc5_rel | rcc32_rel ;
+relation : rcc5_rel | rcc32_rel ;
 
-rcc5_rel = RCC_BASIC_5 ;
+rcc5_rel : RCC_BASIC_5 ;
 
-rcc32_rel = '{' (RCC_BASIC_5)+ '}' ;
+rcc32_rel : '{' (RCC_BASIC_5)+ '}' ;
 
 
 //			Lexer Rules
