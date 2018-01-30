@@ -20,13 +20,14 @@ relation : rcc5_rel | rcc32_rel ;
 
 rcc5_rel : RCC_BASIC_5 ;
 
-rcc32_rel : '{' RCC_BASIC_5+ '}' ;
+rcc32_rel : '{' (RCC_BASIC_5)+ '}' ;
 
 
 //			Lexer Rules
+
+RCC_BASIC_5 : '<' | '>' | '=' | '!' | 'o' | 'is_included_in' | 'includes' | 'equals' | 'disjoint' | 'overlaps' ;
 
 TEXT: [a-zA-Z0-9\\_.,/:\-"]+ ;
 
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+ -> skip ;
 
-RCC_BASIC_5 : '<' | '>' | '=' | '!' | 'o' | 'is_included_in' | 'includes' | 'equals' | 'disjoint' | 'overlaps' ;
