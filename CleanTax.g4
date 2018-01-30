@@ -8,11 +8,11 @@ options {
 
 ct_input : tax_desc tax_desc articulations_desc ;
 
-tax_desc : 'taxonomy' TEXT (tax_sub_desc)* ;
+tax_desc : 'taxonomy' TEXT+ (tax_sub_desc)* ;
 
-tax_sub_desc : '(' TEXT ')' ;
+tax_sub_desc : '(' TEXT+ ')' ;
 
-articulations_desc : 'articulations' TEXT (articulation)* ;
+articulations_desc : 'articulations' TEXT+ (articulation)* ;
 
 articulation : '[' TEXT relation TEXT ']' ;
 
