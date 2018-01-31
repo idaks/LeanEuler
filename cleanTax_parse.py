@@ -13,8 +13,20 @@ import argparse
 import pickle
 
 
-#class AntlrCleanTaxListener(CleanTaxListener):
+# class AntlrCleanTaxListener(CleanTaxListener):
 
+# 	def __init__(self):
+# 		self.data = {}
+
+# 	def exitCt_input(self, ctx):
+# 		self.data = {}
+
+# 	def enterTax_desc(self, ctx):
+
+# 		tax_name = ctx.TEXT(0)
+        
+
+		
 
 
 
