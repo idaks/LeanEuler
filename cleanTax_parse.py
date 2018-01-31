@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 from sys import argv
 from antlr4 import *
@@ -13,17 +15,28 @@ import argparse
 import pickle
 
 
-# class AntlrCleanTaxListener(CleanTaxListener):
+class AntlrCleanTaxListener(CleanTaxListener):
 
-# 	def __init__(self):
-# 		self.data = {}
+	def __init__(self):
+		self.data = {'taxonomies' : [], 
+					 'articulations': [], 
+					 'current_taxonomy': None,
+					 'current_articulation': None}
 
-# 	def exitCt_input(self, ctx):
-# 		self.data = {}
+	def exitCt_input(self, ctx):
+		self.data = {}
 
-# 	def enterTax_desc(self, ctx):
+	def enterTax_desc(self, ctx):
 
-# 		tax_name = ctx.TEXT(0)
+		tax_name = []
+		i = 0
+		while ctx.TEXT(i) is not None:
+			tax_name.append(ctx.TEXT(i))
+			i += 1
+
+		self.data['current_taxonomy'] = tax_name[0]
+
+
         
 
 		
@@ -37,4 +50,4 @@ lexer = CleanTaxLexer(input)
 stream = CommonTokenStream(lexer)
 parser = CleanTaxParser(stream)
 tree = parser.ct_input()
-print Trees.toStringTree(tree, None, parser)
+print (Trees.toStringTree(tree, None, parser))

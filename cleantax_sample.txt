@@ -8,9 +8,9 @@ taxonomy NDC National_Diversity_Council
 (K1 A1 A2 A3)
 articulations CEN NDC
 [CEN.USA = NDC.USA]
-[CEN.West > NDC.West]
+[CEN.West >< NDC.West]
 [CEN.West ! NDC.Northeast]
 [CEN.South o NDC.Southwest]
 [CEN.South includes NDC.Southeast]
-[CEN.Midwest equals NDC.Midwest]
+[CEN.Midwest == NDC.Midwest]
 [CEN.Northeast is_included_in NDC.Northeast]
