@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import time
 from sys import argv
 from antlr4 import *
 from CleanTaxLexer import CleanTaxLexer
@@ -14,15 +15,27 @@ import string
 import argparse
 import pickle
 from anytree import Node, RenderTree
+from graphviz import Digraph
+
+
+#EDGE_TYPES
+PARENT= "parent"
+IS_INCLUDED_IN = "<"
+INCLUDES = ">"
+EQUALS = "="
+DISJOINT = "!"
+OVERLAPS = "o"
 
 
 class AntlrCleanTaxListener(CleanTaxListener):
 
 	def __init__(self):
-		self.data = {'taxonomies' : {}, 
+		self.data = {'taxonomies' : {},
+					 'graphviz_trees' : {},
 					 'articulations': [], 
 					 'current_taxonomy': None,
-					 'current_articulation': None}
+					 'current_articulation': None
+					 'current_relation' : None}
 
 	def exitCt_input(self, ctx):
 		#print (self.data['taxonomies'])
@@ -41,6 +54,9 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		print (tax_name)
 
 		self.data['taxonomies'][tax_name[0]] = {tax_name[0]: Node(tax_name[0])}
+		
+		self.data['graphviz_trees'][tax_name[0]] = Digraph(comment='Taxonomy {}'.format(tax_name[0]))
+		self.data['graphviz_trees'][tax_name[0]].node(tax_name[0])
 
 
 	def enterTax_sub_desc(self, ctx):
@@ -70,20 +86,35 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		if (parent != None) and (parent not in self.data['taxonomies'][self.data['current_taxonomy']]):
 
 			self.data['taxonomies'][self.data['current_taxonomy']][parent] = Node(parent, parent = self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']])
+			self.data['graphviz_trees'][self.data['current_taxonomy']].node(parent)
+			self.data['graphviz_trees'][self.data['current_taxonomy']].edge(tail_name = self.data['current_taxonomy'], head_name = parent, type = PARENT)
 
 		for child in children:
 
 			self.data['taxonomies'][self.data['current_taxonomy']][child] = Node(child, parent = self.data['taxonomies'][self.data['current_taxonomy']][parent])
+			self.data['graphviz_trees'][self.data['current_taxonomy']].node(child)
+			self.data['graphviz_trees'][self.data['current_taxonomy']].edge(tail_name = parent, head_name = child, type = PARENT)
+
 
 
 	def exitTax_desc(self, ctx):
 
 		print(RenderTree(self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']]))
-
+		self.data['graphviz_trees'][self.data['current_taxonomy']].render(view=True)
 		self.data['current_taxonomy'] = None
 
 
+	def enterRcc5_rel(self, ctx):
 
+		pass
+
+	def enterRcc32_rel(self, ctx):
+
+		pass
+
+	def exitArticulation(self, ctx):
+
+		pass
 
 
 
