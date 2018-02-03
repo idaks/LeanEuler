@@ -19,27 +19,44 @@ from graphviz import Digraph
 
 
 #EDGE_TYPES
-PARENT= "parent"
+PARENT = "parent"
 IS_INCLUDED_IN = "<"
 INCLUDES = ">"
 EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
 
+def rcc_basic_5_to_edge_type(rl):
+
+	if rl in ['><', 'o', 'overlaps']:
+		return OVERLAPS
+	elif rl in ['<', 'is_included_in']:
+		return IS_INCLUDED_IN
+	elif rl in ['>', 'includes']:
+		return INCLUDES
+	elif rl in ['==', '=', 'equals']:
+		return EQUALS
+	elif rl in ['!', 'disjoint']:
+		return DISJOINT
+
+	return PARENT
+
+
 
 class AntlrCleanTaxListener(CleanTaxListener):
 
 	def __init__(self):
 		self.data = {'taxonomies' : {},
-					 'graphviz_trees' : {},
-					 'articulations': [], 
+					 'graphviz_tree' : Digraph(comment='Taxonomies'),
 					 'current_taxonomy': None,
 					 'current_articulation': None
-					 'current_relation' : None}
+					}
 
 	def exitCt_input(self, ctx):
 		#print (self.data['taxonomies'])
 		#print (self.data['current_taxonomy'])
+		self.data['graphviz_tree'].render(view=True)
+		print (self.data['graphviz_tree'].source)
 		self.data = {}
 
 	def enterTax_desc(self, ctx):
@@ -54,9 +71,7 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		print (tax_name)
 
 		self.data['taxonomies'][tax_name[0]] = {tax_name[0]: Node(tax_name[0])}
-		
-		self.data['graphviz_trees'][tax_name[0]] = Digraph(comment='Taxonomy {}'.format(tax_name[0]))
-		self.data['graphviz_trees'][tax_name[0]].node(tax_name[0])
+		self.data['graphviz_tree'].node(tax_name[0])
 
 
 	def enterTax_sub_desc(self, ctx):
@@ -86,35 +101,68 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		if (parent != None) and (parent not in self.data['taxonomies'][self.data['current_taxonomy']]):
 
 			self.data['taxonomies'][self.data['current_taxonomy']][parent] = Node(parent, parent = self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']])
-			self.data['graphviz_trees'][self.data['current_taxonomy']].node(parent)
-			self.data['graphviz_trees'][self.data['current_taxonomy']].edge(tail_name = self.data['current_taxonomy'], head_name = parent, type = PARENT)
+			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],parent))
+			self.data['graphviz_tree'].edge(tail_name = self.data['current_taxonomy'], head_name = "{}.{}".format(self.data['current_taxonomy'],parent), label = PARENT, type = PARENT)
 
 		for child in children:
 
 			self.data['taxonomies'][self.data['current_taxonomy']][child] = Node(child, parent = self.data['taxonomies'][self.data['current_taxonomy']][parent])
-			self.data['graphviz_trees'][self.data['current_taxonomy']].node(child)
-			self.data['graphviz_trees'][self.data['current_taxonomy']].edge(tail_name = parent, head_name = child, type = PARENT)
+			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],child))
+			self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(self.data['current_taxonomy'],parent), head_name = "{}.{}".format(self.data['current_taxonomy'],child), label = PARENT, type = PARENT)
 
 
 
 	def exitTax_desc(self, ctx):
 
 		print(RenderTree(self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']]))
-		self.data['graphviz_trees'][self.data['current_taxonomy']].render(view=True)
+		
 		self.data['current_taxonomy'] = None
 
 
 	def enterRcc5_rel(self, ctx):
 
-		pass
+		if ctx.RCC_BASIC_5 is not None:
+
+			self.data['current_relation'] = [rcc_basic_5_to_edge_type(ctx.RCC_BASIC_5().getText().strip())]
 
 	def enterRcc32_rel(self, ctx):
 
-		pass
+		i = 0
+		rls = []
+		while ctx.RCC_BASIC_5(i) is not None:
+			rls.append(ctx.RCC_BASIC_5(i).getText().strip())
+			i+=1
+
+		rls = list(map(rcc_basic_5_to_edge_type, rls))
+		self.data['current_relation'] = rls
+
 
 	def exitArticulation(self, ctx):
 
-		pass
+		node1 = None
+		node2 = None
+
+		if ctx.TEXT(0) is None or ctx.TEXT(1) is None:
+			return
+
+		node1 = ctx.TEXT(0).getText().strip()
+		node2 = ctx.TEXT(1).getText().strip()
+
+		node1 = node1.split('.')
+		tax1 = node1[0]
+		node1 = node1[1]
+
+		node2 = node2.split('.')
+		tax2 = node2[0]
+		node2 = node2[1]
+
+		rl_type_str = ','.join(map(str, self.data['current_relation']))
+		self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(tax1, node1), head_name = "{}.{}".format(tax2, node2), label = rl_type_str, type = rl_type_str)
+		self.data['current_relation'] = None
+
+
+
+
 
 
 
