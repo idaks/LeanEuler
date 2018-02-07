@@ -49,15 +49,9 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		self.data = {'taxonomies' : {},
 					 'graphviz_tree' : Digraph(comment='Taxonomies'),
 					 'current_taxonomy': None,
-					 'current_articulation': None
+					 'current_articulation': None,
+					 'articulation_list' : []
 					}
-
-	def exitCt_input(self, ctx):
-		#print (self.data['taxonomies'])
-		#print (self.data['current_taxonomy'])
-		self.data['graphviz_tree'].render(view=True)
-		print (self.data['graphviz_tree'].source)
-		self.data = {}
 
 	def enterTax_desc(self, ctx):
 
@@ -156,11 +150,20 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		tax2 = node2[0]
 		node2 = node2[1]
 
+		self.data['current_relation'].sort()
 		rl_type_str = ','.join(map(str, self.data['current_relation']))
 		self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(tax1, node1), head_name = "{}.{}".format(tax2, node2), label = rl_type_str, type = rl_type_str)
+		self.data['articulation_list'].append(("{}.{}".format(tax1, node1), rl_type_str, "{}.{}".format(tax2, node2)))
 		self.data['current_relation'] = None
 
-
+	def exitCt_input(self, ctx):
+		#print (self.data['taxonomies'])
+		#print (self.data['current_taxonomy'])
+		self.data['graphviz_tree'].render(view=True)
+		print (self.data['graphviz_tree'].source)
+		df = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
+		print (df)
+		self.data = {}
 
 
 
@@ -175,9 +178,9 @@ class AntlrCleanTaxListener(CleanTaxListener):
 
 
 
-
-input = FileStream('cleantax_sample.txt')
-lexer = CleanTaxLexer(input)
+script, file = argv
+file = FileStream(file)
+lexer = CleanTaxLexer(file)
 stream = CommonTokenStream(lexer)
 parser = CleanTaxParser(stream)
 tree = parser.ct_input()
