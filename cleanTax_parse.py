@@ -68,7 +68,6 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		self.data['taxonomies'][tax_name[0]] = {tax_name[0]: Node(tax_name[0])}
 		self.data['graphviz_tree'].node(tax_name[0])
 
-
 	def enterTax_sub_desc(self, ctx):
 
 		# print ("HERE")
@@ -105,14 +104,11 @@ class AntlrCleanTaxListener(CleanTaxListener):
 			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],child))
 			self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(self.data['current_taxonomy'],parent), head_name = "{}.{}".format(self.data['current_taxonomy'],child), label = PARENT, type = PARENT)
 
-
-
 	def exitTax_desc(self, ctx):
 
 		print(RenderTree(self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']]))
 		
 		self.data['current_taxonomy'] = None
-
 
 	def enterRcc5_rel(self, ctx):
 
@@ -130,7 +126,6 @@ class AntlrCleanTaxListener(CleanTaxListener):
 
 		rls = list(map(rcc_basic_5_to_edge_type, rls))
 		self.data['current_relation'] = rls
-
 
 	def exitArticulation(self, ctx):
 
