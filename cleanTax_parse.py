@@ -16,6 +16,7 @@ import argparse
 import pickle
 from anytree import Node, RenderTree
 from graphviz import Digraph
+from helper import lineno, isfloat, mkdir_p
 
 
 #EDGE_TYPES
@@ -164,17 +165,6 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		df = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
 		print (df)
 		self.data = {}
-
-
-
-
-
-
-
-        
-
-		
-
 
 
 
