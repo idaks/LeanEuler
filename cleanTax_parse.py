@@ -27,6 +27,7 @@ EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
 
+#Convert a given relation to one of the aboe edge types
 def rcc_basic_5_to_edge_type(rl):
 
 	if rl in ['><', 'o', 'overlaps']:
@@ -41,7 +42,6 @@ def rcc_basic_5_to_edge_type(rl):
 		return DISJOINT
 
 	return PARENT
-
 
 
 class AntlrCleanTaxListener(CleanTaxListener):
@@ -97,12 +97,14 @@ class AntlrCleanTaxListener(CleanTaxListener):
 			self.data['taxonomies'][self.data['current_taxonomy']][parent] = Node(parent, parent = self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']])
 			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],parent))
 			self.data['graphviz_tree'].edge(tail_name = self.data['current_taxonomy'], head_name = "{}.{}".format(self.data['current_taxonomy'],parent), label = PARENT, type = PARENT)
+			self.data['articulation_list'].append(("{}".format(self.data['current_taxonomy']), PARENT, "{}.{}".format(self.data['current_taxonomy'], parent)))
 
 		for child in children:
 
 			self.data['taxonomies'][self.data['current_taxonomy']][child] = Node(child, parent = self.data['taxonomies'][self.data['current_taxonomy']][parent])
 			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],child))
 			self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(self.data['current_taxonomy'],parent), head_name = "{}.{}".format(self.data['current_taxonomy'],child), label = PARENT, type = PARENT)
+			self.data['articulation_list'].append(("{}.{}".format(self.data['current_taxonomy'],parent), PARENT, "{}.{}".format(self.data['current_taxonomy'],child)))
 
 	def exitTax_desc(self, ctx):
 
