@@ -15,5 +15,3 @@ dr(cCEN_West, nNDC_Northeast).
 po(cCEN_South, nNDC_Southwest).
 eq(cCEN_Midwest, nNDC_Midwest).
 pp(cCEN_Northeast, nNDC_Northeast).
-
-#show eq/2.

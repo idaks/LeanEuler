@@ -18,6 +18,9 @@ from anytree import Node, RenderTree
 from graphviz import Digraph
 from helper import lineno, isfloat, mkdir_p
 
+PICKLE_FOLDER = "Temp_Pickle_Data"
+CLINGO_INPUT_FOLDER = 'Preprocessed_CleanTax_Input'
+TAX_DESC_PANDAS_FILE = 'taxDesc'
 
 #EDGE_TYPES
 PARENT = "parent"
@@ -26,6 +29,10 @@ INCLUDES = ">"
 EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
+
+ANYTREE_DATA = None
+GRAPHVIZ_DATA = None
+RELATION_DATA = None
 
 #Convert a given relation to one of the aboe edge types
 def rcc_basic_5_to_edge_type(rl):
@@ -157,21 +164,43 @@ class AntlrCleanTaxListener(CleanTaxListener):
 	def exitCt_input(self, ctx):
 		#print (self.data['taxonomies'])
 		#print (self.data['current_taxonomy'])
+		global RELATION_DATA
 		self.data['graphviz_tree'].render(view=True)
 		print (self.data['graphviz_tree'].source)
 		df = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
-		print (df)
+		RELATION_DATA = df
+		print (RELATION_DATA)
 		self.data = {}
 
 
+def __main__():
 
-script, file = argv
-file = FileStream(file)
-lexer = CleanTaxLexer(file)
-stream = CommonTokenStream(lexer)
-parser = CleanTaxParser(stream)
-tree = parser.ct_input()
-#print (Trees.toStringTree(tree, None, parser))
-lean_euler = AntlrCleanTaxListener()
-walker = ParseTreeWalker()
-walker.walk(lean_euler, tree)
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-f", "--fname", type = str, help = "provide the preprocessed cleantax txt file to parse. Need not provide one if it already exists in the cleanTax_input folder as $project_name.txt")
+	parser.add_argument("project_name", type = str, help = "provide session/project name used while preprocessing")
+	args = parser.parse_args()
+
+	fname = args.fname
+	project_name = args.project_name
+	if fname == None:
+		fname = CLINGO_INPUT_FOLDER + '/' + str(project_name) + '.txt'
+	if not os.path.exists(fname):
+		print ("No file by the name {}.txt exists in the clingo_output folder. Please recheck the project name.".format(project_name))
+		exit(1)
+
+	file = FileStream(fname)
+	lexer = CleanTaxLexer(file)
+	stream = CommonTokenStream(lexer)
+	parser = CleanTaxParser(stream)
+	tree = parser.ct_input()
+	#print (Trees.toStringTree(tree, None, parser))
+	lean_euler = AntlrCleanTaxListener()
+	walker = ParseTreeWalker()
+	walker.walk(lean_euler, tree)
+
+	mkdir_p(PICKLE_FOLDER + '/' + str(project_name))
+	with open(PICKLE_FOLDER + '/' + str(project_name) + '/' + TAX_DESC_PANDAS_FILE + '.pkl', 'wb') as f:
+		pickle.dump(RELATION_DATA, f)
+
+if __name__ == '__main__':
+	__main__()

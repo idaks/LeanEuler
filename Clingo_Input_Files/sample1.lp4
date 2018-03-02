@@ -1,3 +1,5 @@
+%RCC RULES:
+
 eq(X,Y) :- eq(X,Z), eq(Z,Y).
 dr(X,Y) :- eq(X,Z), dr(Z,Y).
 pp(X,Y) :- eq(X,Z), pp(Z,Y).
@@ -38,14 +40,11 @@ u(X) :- bl(_,X).
 u(X) :- bl(X,_).
 
 eq(X,X) :- u(X).
-
-pi(X,Y) :- pp(Y,X).    
-pp(X,Y) :- pi(Y,X).    
-
+pi(X,Y) :- pp(Y,X).
+pp(X,Y) :- pi(Y,X).
 eq(X,Y) :- eq(Y,X).
 po(X,Y) :- po(Y,X).
 dr(X,Y) :- dr(Y,X).
-
 dr(Y,Z) :- bl(X,Y), bl(X,Z), Y != Z.
 pp(Y,X) :- bl(X,Y).
 
@@ -61,3 +60,33 @@ pp(Y,X) :- bl(X,Y).
 :- pp(X,Y), pi(X,Y).
 :- pp(X,Y), po(X,Y).
 :- pi(X,Y), po(X,Y).
+
+%TAXONOMY DESC RULES
+
+bl(aCEN,aCEN_USA).
+bl(aCEN_USA,aCEN_Northeast).
+bl(aCEN_USA,aCEN_Midwest).
+bl(aCEN_USA,aCEN_South).
+bl(aCEN_USA,aCEN_West).
+bl(aCEN_Northeast,aCEN_P1).
+bl(aCEN_Northeast,aCEN_P2).
+bl(aCEN_Midwest,aCEN_B1).
+bl(aCEN_Midwest,aCEN_B2).
+bl(aCEN_Midwest,aCEN_B3).
+bl(bNDC,bNDC_USA).
+bl(bNDC_USA,bNDC_Midwest).
+bl(bNDC_USA,bNDC_Northeast).
+bl(bNDC_USA,bNDC_Southeast).
+bl(bNDC_USA,bNDC_Southwest).
+bl(bNDC_USA,bNDC_West).
+bl(bNDC_West,bNDC_K1).
+bl(bNDC_K1,bNDC_A1).
+bl(bNDC_K1,bNDC_A2).
+bl(bNDC_K1,bNDC_A3).
+eq(aCEN_USA,bNDC_USA).
+po(aCEN_West,bNDC_West).
+dr(aCEN_West,bNDC_Northeast).
+po(aCEN_South,bNDC_Southwest).
+pi(aCEN_South,bNDC_Southeast).
+eq(aCEN_Midwest,bNDC_Midwest).
+pp(aCEN_Northeast,bNDC_Northeast).
