@@ -95,6 +95,7 @@ def __main__():
 		rules_to_write.append(asp_rule)
 
 	clingo_file.writelines("\n".join(rules_to_write))
+	clingo_file.close()
 
 
 
