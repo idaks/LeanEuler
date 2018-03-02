@@ -1,0 +1,11 @@
+taxonomy CEN Census_Regions
+(USA Northeast Midwest South West)
+taxonomy NDC National_Diversity_Council
+(USA Midwest Northeast Southeast Southwest West)
+articulations CEN NDC
+[CEN.USA equals NDC.USA]
+[CEN.West includes NDC.West]
+[CEN.South overlaps NDC.Southwest]
+[CEN.South includes NDC.Southeast]
+[CEN.Midwest equals NDC.Midwest]
+[CEN.Northeast is_included_in NDC.Northeast]
