@@ -1,17 +1,17 @@
-bl(cCEN_USA, cCEN_Northeast).
-bl(cCEN_USA, cCEN_Midwest).
-bl(cCEN_USA, cCEN_South).
-bl(cCEN_USA, cCEN_West).
+bl("CEN_USA", "CEN_Northeast").
+bl("CEN_USA", "CEN_Midwest").
+bl("CEN_USA", "CEN_South").
+bl("CEN_USA", "CEN_West").
 
-bl(nNDC_USA, nNDC_Midwest).
-bl(nNDC_USA, nNDC_Northeast).
-bl(nNDC_USA, nNDC_Southeast).
-bl(nNDC_USA, nNDC_Southwest).
-bl(nNDC_USA, nNDC_West).
+bl("NDC_USA", "NDC_Midwest").
+bl("NDC_USA", "NDC_Northeast").
+bl("NDC_USA", "NDC_Southeast").
+bl("NDC_USA", "NDC_Southwest").
+bl("NDC_USA", "NDC_West").
 
-eq(cCEN_USA, nNDC_USA).
-pi(cCEN_West, nNDC_West).
-dr(cCEN_West, nNDC_Northeast).
-po(cCEN_South, nNDC_Southwest).
-eq(cCEN_Midwest, nNDC_Midwest).
-pp(cCEN_Northeast, nNDC_Northeast).
+eq("CEN_USA", "NDC_USA").
+pi("CEN_West", "NDC_West").
+dr("CEN_West", "NDC_Northeast").
+po("CEN_South", "NDC_Southwest").
+eq("CEN_Midwest", "NDC_Midwest").
+pp("CEN_Northeast", "NDC_Northeast").

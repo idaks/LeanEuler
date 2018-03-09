@@ -21,13 +21,17 @@ EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
 
-def gen_node_name(node_name, taxonomy_dict):
+# def gen_node_name(node_name, taxonomy_dict):
 
-	tax_name = node_name.split('.')[0]
-	if tax_name not in taxonomy_dict:
-		taxonomy_dict[tax_name] = chr(ord('a') + len(taxonomy_dict))
+# 	tax_name = node_name.split('.')[0]
+# 	if tax_name not in taxonomy_dict:
+# 		taxonomy_dict[tax_name] = chr(ord('a') + len(taxonomy_dict))
 
-	return "{}{}".format(taxonomy_dict[tax_name], node_name.replace(".", "_"))
+# 	return "{}{}".format(taxonomy_dict[tax_name], node_name.replace(".", "_"))
+
+def gen_node_name(node_name):
+
+	return "\"{}\"".format(node_name.replace(".", "_"))
 
 def get_rule(node1, rl, node2):
 
@@ -79,7 +83,7 @@ def __main__():
 
 	rules_to_write = get_rcc_rules()
 	rules_to_write.append("%TAXONOMY DESC RULES\n")
-	taxonomy_dict = {}
+	#taxonomy_dict = {}
 
 	for index, row in df.iterrows():
 
@@ -87,8 +91,8 @@ def __main__():
 		relations = row[REL_COL]
 		node2 = row[NODE2_COL]
 
-		node1 = gen_node_name(node1, taxonomy_dict)
-		node2 = gen_node_name(node2, taxonomy_dict)
+		node1 = gen_node_name(node1) #, taxonomy_dict)
+		node2 = gen_node_name(node2) #, taxonomy_dict)
 
 		asp_rule = get_asp_rule(node1, relations.split(","), node2)
 		#print (asp_rule)
