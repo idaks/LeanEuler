@@ -70,7 +70,7 @@ class AntlrCleanTaxListener(CleanTaxListener):
 			i += 1
 
 		self.data['current_taxonomy'] = tax_name[0]
-		print (tax_name)
+		#print (tax_name)
 
 		self.data['taxonomies'][tax_name[0]] = {tax_name[0]: Node(tax_name[0])}
 		self.data['graphviz_tree'].node(tax_name[0])
@@ -115,8 +115,7 @@ class AntlrCleanTaxListener(CleanTaxListener):
 
 	def exitTax_desc(self, ctx):
 
-		print(RenderTree(self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']]))
-		
+		#print(RenderTree(self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']]))
 		self.data['current_taxonomy'] = None
 
 	def enterRcc5_rel(self, ctx):
@@ -165,11 +164,11 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		#print (self.data['taxonomies'])
 		#print (self.data['current_taxonomy'])
 		global RELATION_DATA
-		self.data['graphviz_tree'].render(view=True)
-		print (self.data['graphviz_tree'].source)
+		#self.data['graphviz_tree'].render(view=True)
+		#print (self.data['graphviz_tree'].source)
 		df = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
 		RELATION_DATA = df
-		print (RELATION_DATA)
+		#print (RELATION_DATA)
 		self.data = {}
 
 

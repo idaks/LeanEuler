@@ -92,8 +92,8 @@ def get_rcc_rules():
     rcc_rules.append("")
     rcc_rules.append("eq(X,X) :- u(X).")
 
-    rcc_rules.append("pi(X,Y) :- pp(Y,X).")    
-    rcc_rules.append("pp(X,Y) :- pi(Y,X).")    
+    rcc_rules.append("pi(X,Y) :- pp(Y,X).")
+    rcc_rules.append("pp(X,Y) :- pi(Y,X).")
 
     rcc_rules.append("eq(X,Y) :- eq(Y,X).")
     rcc_rules.append("po(X,Y) :- po(Y,X).")
