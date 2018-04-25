@@ -14,6 +14,12 @@ EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
 
+rl = {
+	"=": int('010', 2),
+	"o": int('111', 2),
+	""
+}
+
 def gen_node_name(node_name: str):
 
 	return "\"{}\"".format(node_name.replace(".", "_"))
