@@ -91,8 +91,8 @@ def __main__():
 		relations = row[REL_COL]
 		node2 = row[NODE2_COL]
 
-		node1 = gen_node_name(node1) #, taxonomy_dict)
-		node2 = gen_node_name(node2) #, taxonomy_dict)
+		#node1 = gen_node_name(node1) #, taxonomy_dict)
+		#node2 = gen_node_name(node2) #, taxonomy_dict)
 
 		asp_rule = get_asp_rule(node1, relations.split(","), node2)
 		#print (asp_rule)

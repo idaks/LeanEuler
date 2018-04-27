@@ -20,7 +20,7 @@ def __main__():
 			continue
 		else:
 			final_data.append(line)
-			
+
 	temp_data = open("{}/{}.txt".format(OUTPUT_FOLDER, args.project_name), 'w')
 	temp_data.writelines(final_data)
 	temp_data.close()

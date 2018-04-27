@@ -21,6 +21,7 @@ from helper import lineno, isfloat, mkdir_p
 PICKLE_FOLDER = "Temp_Pickle_Data"
 CLINGO_INPUT_FOLDER = 'Preprocessed_CleanTax_Input'
 TAX_DESC_PANDAS_FILE = 'taxDesc'
+ANYTREE_FILE = 'anytree'
 
 #EDGE_TYPES
 PARENT = "parent"
@@ -33,6 +34,10 @@ OVERLAPS = "o"
 ANYTREE_DATA = None
 GRAPHVIZ_DATA = None
 RELATION_DATA = None
+
+def gen_node_name(node: str, tax_name: str):
+
+	return "\"{}_{}\"".format(tax_name, node)
 
 #Convert a given relation to one of the aboe edge types
 def rcc_basic_5_to_edge_type(rl):
@@ -101,17 +106,17 @@ class AntlrCleanTaxListener(CleanTaxListener):
 
 		if (parent != None) and (parent not in self.data['taxonomies'][self.data['current_taxonomy']]):
 
-			self.data['taxonomies'][self.data['current_taxonomy']][parent] = Node(parent, parent = self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']])
+			self.data['taxonomies'][self.data['current_taxonomy']][parent] = Node(gen_node_name(parent, self.data['current_taxonomy']), parent = self.data['taxonomies'][self.data['current_taxonomy']][self.data['current_taxonomy']])
 			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],parent))
 			self.data['graphviz_tree'].edge(tail_name = self.data['current_taxonomy'], head_name = "{}.{}".format(self.data['current_taxonomy'],parent), label = PARENT, type = PARENT)
 			#self.data['articulation_list'].append(("{}".format(self.data['current_taxonomy']), PARENT, "{}.{}".format(self.data['current_taxonomy'], parent)))
 
 		for child in children:
 
-			self.data['taxonomies'][self.data['current_taxonomy']][child] = Node(child, parent = self.data['taxonomies'][self.data['current_taxonomy']][parent])
+			self.data['taxonomies'][self.data['current_taxonomy']][child] = Node(gen_node_name(child, self.data['current_taxonomy']), parent = self.data['taxonomies'][self.data['current_taxonomy']][parent])
 			self.data['graphviz_tree'].node("{}.{}".format(self.data['current_taxonomy'],child))
 			self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(self.data['current_taxonomy'],parent), head_name = "{}.{}".format(self.data['current_taxonomy'],child), label = PARENT, type = PARENT)
-			self.data['articulation_list'].append(("{}.{}".format(self.data['current_taxonomy'],parent), PARENT, "{}.{}".format(self.data['current_taxonomy'],child)))
+			self.data['articulation_list'].append((gen_node_name(parent, self.data['current_taxonomy']), PARENT, gen_node_name(child, self.data['current_taxonomy'])))
 
 	def exitTax_desc(self, ctx):
 
@@ -157,17 +162,19 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		self.data['current_relation'].sort()
 		rl_type_str = ','.join(map(str, self.data['current_relation']))
 		self.data['graphviz_tree'].edge(tail_name = "{}.{}".format(tax1, node1), head_name = "{}.{}".format(tax2, node2), label = rl_type_str, type = rl_type_str)
-		self.data['articulation_list'].append(("{}.{}".format(tax1, node1), rl_type_str, "{}.{}".format(tax2, node2)))
+		self.data['articulation_list'].append((gen_node_name(node1, tax1), rl_type_str, gen_node_name(node2, tax2)))
 		self.data['current_relation'] = None
 
 	def exitCt_input(self, ctx):
 		#print (self.data['taxonomies'])
 		#print (self.data['current_taxonomy'])
 		global RELATION_DATA
+		global ANYTREE_DATA
 		#self.data['graphviz_tree'].render(view=True)
 		#print (self.data['graphviz_tree'].source)
 		df = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
 		RELATION_DATA = df
+		ANYTREE_DATA = self.data['taxonomies']
 		#print (RELATION_DATA)
 		self.data = {}
 
@@ -197,9 +204,12 @@ def __main__():
 	walker = ParseTreeWalker()
 	walker.walk(lean_euler, tree)
 
-	mkdir_p(PICKLE_FOLDER + '/' + str(project_name))
-	with open(PICKLE_FOLDER + '/' + str(project_name) + '/' + TAX_DESC_PANDAS_FILE + '.pkl', 'wb') as f:
+	pickle_folder = PICKLE_FOLDER + '/' + str(project_name)
+	mkdir_p(pickle_folder)
+	with open(pickle_folder + '/' + TAX_DESC_PANDAS_FILE + '.pkl', 'wb') as f:
 		pickle.dump(RELATION_DATA, f)
+	with open(pickle_folder + '/' + ANYTREE_FILE + '.pkl', 'wb') as f:
+		pickle.dump(ANYTREE_DATA, f)
 
 if __name__ == '__main__':
 	__main__()

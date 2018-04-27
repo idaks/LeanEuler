@@ -14,11 +14,6 @@ EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
 
-rl = {
-	"=": int('010', 2),
-	"o": int('111', 2),
-	""
-}
 
 def gen_node_name(node_name: str):
 
@@ -64,20 +59,20 @@ def ir_out_in(n1: str, n2: str, idx: int):
 
 	return ir_in_out(n2, n1, idx)
 
-def gen_isa_rule(n1: str, n2: str, idx: int):
+def gen_isa_rule(n1: str, n2: str, idx: int):  # For every parent-child relation
 
 	r1 = ir_in_out(n1, n2, idx) #"ir(X, r{}) :- in({}, X), out({}, X).".format(idx, n1, n2)
 	r2 = count_non_zero_in_in(n1, n2) #":- #count {{X : vrs(X), in({}, X), in({}, X)}} <= 0.".format(n1, n2)
 	return "\n".join([r1,r2])
 
-def gen_coverage_rule(parent: str, children: list):
+def gen_coverage_rule(parent: str, children: list):  # For every non-leaf node
 
 	lhs = 'out({}, X)'.format(parent)
 	rhs = ", ".join(list(map(lambda x: 'out({}, X)'.format(x), children)))
 
 	return "{} :- {}.".format(lhs, rhs)
 
-def gen_sibling_disjointness(n1: str, n2: str, idx: int):
+def gen_sibling_disjointness(n1: str, n2: str, idx: int):  # For every pair of siblings
 
 	r1 = ir_in_in(n1, n2, idx) #"ir(X, r{}) :- in({}, X), in({}, X).".format(idx, n1, n2)
 	r2 = count_nonzero_in_out(n1, n2)
@@ -85,7 +80,7 @@ def gen_sibling_disjointness(n1: str, n2: str, idx: int):
 
 	return "\n".join([r1,r2,r3])
 
-def gen_region_constraints():
+def gen_region_constraints():  # Standard
 
 	irs = "irs(X) :- ir(X, _)."
 	vrs = "vrs(X) :- vr(X, _)."
@@ -95,12 +90,12 @@ def gen_region_constraints():
 
 	return "\n".join([irs, vrs, vr, ir, exactly_one])
 
-def gen_euler_bit():
+def gen_euler_bit():  # Standard
 
 	r1 = "bit(M, {}, V) :- r(M), M1=M/1, V = M1 \ 5.".format(0)
 	r2 = "bit(M, {}, V) :- r(M), M1=M/1, V = M1 \ 5.".format(1)
 
-def gen_region_meanings():
+def gen_region_meanings():  # Standard
 
 	in_rule =   "in(X, M) :- r(M), concept(X, T, N), N1=N+1, bit(M, T, N1)."
 	out_rule = "out(X, M) :- r(M), concept(X, T, N), N1=N+1, not bit(M, T, N1)."
