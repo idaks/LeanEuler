@@ -1,0 +1,63 @@
+taxonomy CEN Census_Regions
+(USA Northeast Midwest South West)
+(Northeast CT MA ME NH NJ NY PA RI VT)
+(Midwest IL IN IA KS MI MN MO NE ND OH SD WI)
+(South AL AR DE DC FL GA KY LA MD MS NC OK SC TN TX VA WV)
+(West AZ CA CO ID MT NV NM OR UT WA WY)
+taxonomy NDC National_Diversity_Council
+(USA Midwest Northeast Southeast Southwest West)
+(Northeast CT DC DE MD MA ME NH NJ NY PA RI VT)
+(Midwest IA IL IN KS MI MN MO ND NE OH SD WI)
+(Southeast AL AR FL GA KY LA MS NC SC TN VA WV)
+(Southwest AZ NM OK TX)
+(West CA CO ID MT NV OR WA WY UT)
+articulations CEN NDC
+[CEN.AL equals NDC.AL]
+[CEN.AR equals NDC.AR]
+[CEN.AZ equals NDC.AZ]
+[CEN.CA equals NDC.CA]
+[CEN.CO equals NDC.CO]
+[CEN.CT equals NDC.CT]
+[CEN.DC equals NDC.DC]
+[CEN.DE equals NDC.DE]
+[CEN.FL equals NDC.FL]
+[CEN.GA equals NDC.GA]
+[CEN.IA equals NDC.IA]
+[CEN.ID equals NDC.ID]
+[CEN.IL equals NDC.IL]
+[CEN.IN equals NDC.IN]
+[CEN.KS equals NDC.KS]
+[CEN.KY equals NDC.KY]
+[CEN.LA equals NDC.LA]
+[CEN.MA equals NDC.MA]
+[CEN.MD equals NDC.MD]
+[CEN.ME equals NDC.ME]
+[CEN.MI equals NDC.MI]
+[CEN.MN equals NDC.MN]
+[CEN.MO equals NDC.MO]
+[CEN.MS equals NDC.MS]
+[CEN.MT equals NDC.MT]
+[CEN.NC equals NDC.NC]
+[CEN.ND equals NDC.ND]
+[CEN.NE equals NDC.NE]
+[CEN.NH equals NDC.NH]
+[CEN.NJ equals NDC.NJ]
+[CEN.NM equals NDC.NM]
+[CEN.NV equals NDC.NV]
+[CEN.NY equals NDC.NY]
+[CEN.OH equals NDC.OH]
+[CEN.OK equals NDC.OK]
+[CEN.OR equals NDC.OR]
+[CEN.PA equals NDC.PA]
+[CEN.RI equals NDC.RI]
+[CEN.SC equals NDC.SC]
+[CEN.SD equals NDC.SD]
+[CEN.TN equals NDC.TN]
+[CEN.TX equals NDC.TX]
+[CEN.UT equals NDC.UT]
+[CEN.VA equals NDC.VA]
+[CEN.VT equals NDC.VT]
+[CEN.WA equals NDC.WA]
+[CEN.WI equals NDC.WI]
+[CEN.WV equals NDC.WV]
+[CEN.WY equals NDC.WY]
