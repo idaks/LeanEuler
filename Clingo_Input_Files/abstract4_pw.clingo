@@ -1,0 +1,252 @@
+%%% Euler regions
+r(1..24).
+
+%%% Concepts
+tax(t1,0).
+concept2(A, B) :- concept(A,B,_).
+concept2(c1_A,0).
+concept(c1_C,0,0).
+concept(c1_B,0,1).
+concept(c1_E,0,2).
+concept(c1_D,0,3).
+tax(t2,1).
+concept2(A, B) :- concept(A,B,_).
+concept2(c2_A,1).
+concept(c2_B,1,0).
+concept(c2_D,1,1).
+concept(c2_G,1,2).
+concept(c2_F,1,3).
+%%% Euler Bit
+bit(M, 0, V):-r(M),M1=M/1, V = M1 \ 5.
+bit(M, 1, V):-r(M),M1=M/5, V = M1 \ 5.
+
+
+%%% Meaning of regions
+in(X, M) :- r(M),concept(X,T,N),N1=N+1,bit(M,T,N1).
+out(X, M) :- r(M),concept(X,T,N),N1=N+1,not bit(M,T,N1).
+in(X, M) :- r(M),concept2(X,_),not out(X, M).
+irs(M) :- in(X, M), out(X, M), r(M), concept2(X,_).
+
+%%% Constraints of regions.
+irs(X) :- ir(X, _).
+vrs(X) :- vr(X, _).
+vr(X, X) :- not irs(X), r(X).
+ir(X, X) :- not vrs(X), r(X), pw.
+:- vrs(X), irs(X), pw.
+
+
+%%% Parent-Child relations
+%% ISA
+% c1_B isa c1_A
+ir(X, r0) :- in(c1_B, X), out(c1_A, X), pw.
+:- #count {X : vrs(X), in(c1_B,X), in(c1_A,X)} <= 0, pw.
+
+% c1_C isa c1_A
+ir(X, r1) :- in(c1_C, X), out(c1_A, X), pw.
+:- #count {X : vrs(X), in(c1_C,X), in(c1_A,X)} <= 0, pw.
+
+
+% c1_D isa c1_A
+ir(X, r2) :- in(c1_D, X), out(c1_A, X), pw.
+:- #count {X : vrs(X), in(c1_D,X), in(c1_A,X)} <= 0, pw.
+
+
+% c1_E isa c1_A
+ir(X, r3) :- in(c1_E, X), out(c1_A, X), pw.
+:- #count {X : vrs(X), in(c1_E,X), in(c1_A,X)} <= 0, pw.
+
+
+%% coverage
+out(c1_A, X) :- out(c1_B, X), out(c1_C, X), out(c1_D, X), out(c1_E, X), pw.
+%% sibling disjointness
+% c1_B ! c1_C
+ir(X, r5) :- in(c1_B, X), in(c1_C, X).
+:- #count {X : vrs(X), in(c1_B,X), out(c1_C,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1_B,X), in(c1_C,X)} <= 0, pw.
+
+
+% c1_B ! c1_D
+ir(X, r6) :- in(c1_B, X), in(c1_D, X).
+:- #count {X : vrs(X), in(c1_B,X), out(c1_D,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1_B,X), in(c1_D,X)} <= 0, pw.
+
+
+% c1_B ! c1_E
+ir(X, r7) :- in(c1_B, X), in(c1_E, X).
+:- #count {X : vrs(X), in(c1_B,X), out(c1_E,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1_B,X), in(c1_E,X)} <= 0, pw.
+
+
+% c1_C ! c1_D
+ir(X, r8) :- in(c1_C, X), in(c1_D, X).
+:- #count {X : vrs(X), in(c1_C,X), out(c1_D,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1_C,X), in(c1_D,X)} <= 0, pw.
+
+
+% c1_C ! c1_E
+ir(X, r9) :- in(c1_C, X), in(c1_E, X).
+:- #count {X : vrs(X), in(c1_C,X), out(c1_E,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1_C,X), in(c1_E,X)} <= 0, pw.
+
+
+% c1_D ! c1_E
+ir(X, r10) :- in(c1_D, X), in(c1_E, X).
+:- #count {X : vrs(X), in(c1_D,X), out(c1_E,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c1_D,X), in(c1_E,X)} <= 0, pw.
+
+
+%% ISA
+% c2_B isa c2_A
+ir(X, r11) :- in(c2_B, X), out(c2_A, X), pw.
+:- #count {X : vrs(X), in(c2_B,X), in(c2_A,X)} <= 0, pw.
+
+
+% c2_D isa c2_A
+ir(X, r12) :- in(c2_D, X), out(c2_A, X), pw.
+:- #count {X : vrs(X), in(c2_D,X), in(c2_A,X)} <= 0, pw.
+
+
+% c2_F isa c2_A
+ir(X, r13) :- in(c2_F, X), out(c2_A, X), pw.
+:- #count {X : vrs(X), in(c2_F,X), in(c2_A,X)} <= 0, pw.
+
+
+% c2_G isa c2_A
+ir(X, r14) :- in(c2_G, X), out(c2_A, X), pw.
+:- #count {X : vrs(X), in(c2_G,X), in(c2_A,X)} <= 0, pw.
+
+
+%% coverage
+out(c2_A, X) :- out(c2_B, X), out(c2_D, X), out(c2_F, X), out(c2_G, X), pw.
+%% sibling disjointness
+% c2_B ! c2_D
+ir(X, r16) :- in(c2_B, X), in(c2_D, X).
+:- #count {X : vrs(X), in(c2_B,X), out(c2_D,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2_B,X), in(c2_D,X)} <= 0, pw.
+
+% c2_B ! c2_F
+ir(X, r17) :- in(c2_B, X), in(c2_F, X).
+:- #count {X : vrs(X), in(c2_B,X), out(c2_F,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2_B,X), in(c2_F,X)} <= 0, pw.
+
+% c2_B ! c2_G
+ir(X, r18) :- in(c2_B, X), in(c2_G, X).
+:- #count {X : vrs(X), in(c2_B,X), out(c2_G,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2_B,X), in(c2_G,X)} <= 0, pw.
+
+
+% c2_D ! c2_F
+ir(X, r19) :- in(c2_D, X), in(c2_F, X).
+:- #count {X : vrs(X), in(c2_D,X), out(c2_F,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2_D,X), in(c2_F,X)} <= 0, pw.
+
+
+% c2_D ! c2_G
+ir(X, r20) :- in(c2_D, X), in(c2_G, X).
+:- #count {X : vrs(X), in(c2_D,X), out(c2_G,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2_D,X), in(c2_G,X)} <= 0, pw.
+
+
+% c2_F ! c2_G
+ir(X, r21) :- in(c2_F, X), in(c2_G, X).
+:- #count {X : vrs(X), in(c2_F,X), out(c2_G,X)} <= 0, pw.
+:- #count {X : vrs(X), out(c2_F,X), in(c2_G,X)} <= 0, pw.
+
+
+
+%%% Articulations
+% 1.A {is_included_in equals} 2.A
+
+%ir(X, r22) :- in(c1_A,X), out(c2_A,X).
+%:- #count {X : vrs(X), in(c1_A,X), in(c2_A,X)} <= 0, pw.
+%vr(X, r22) ; ir(X, r22) :- out(c1_A,X), in(c2_A,X).
+
+:- #count {A : vrs(A), in(c1_A, A), out(c2_A, A)} > 0,
+   #count {B : vrs(B), in(c1_A, B), in(c2_A, B)} = 0,
+   #count {C : vrs(C), out(c1_A, C), in(c2_A, C)} > 0.
+:- #count {A : vrs(A), in(c1_A, A), out(c2_A, A)} > 0,
+   #count {B : vrs(B), in(c1_A, B), in(c2_A, B)} > 0,
+   #count {C : vrs(C), out(c1_A, C), in(c2_A, C)} = 0.
+:- #count {A : vrs(A), in(c1_A, A), out(c2_A, A)} > 0,
+   #count {B : vrs(B), in(c1_A, B), in(c2_A, B)} > 0,
+   #count {C : vrs(C), out(c1_A, C), in(c2_A, C)} > 0.
+ir(X, r20) :- in(c1_A, X), out(c2_A, X).
+:- #count {X : vrs(X), in(c1_A, X), in(c2_A, X)} = 0.
+vr(X, r20) ; ir(X, r20) :- out(c1_A, X), in(c2_A, X).
+
+
+
+% 1.B equals 2.B
+%ir(X, r23) :- out(c1_B,X), in(c2_B,X).
+%ir(X, r23) :- in(c1_B,X), out(c2_B,X).
+%:- #count {X : vrs(X), in(c1_B,X), in(c2_B,X)} <= 0, pw.
+
+:- #count {A : vrs(A), in(c1_B, A), out(c2_B, A)} > 0, #count {B : vrs(B), in(c1_B, B), in(c2_B, B)} = 0, #count {C : vrs(C), out(c1_B, C), in(c2_B, C)} > 0.
+:- #count {A : vrs(A), in(c1_B, A), out(c2_B, A)} > 0, #count {B : vrs(B), in(c1_B, B), in(c2_B, B)} > 0, #count {C : vrs(C), out(c1_B, C), in(c2_B, C)} = 0.
+:- #count {A : vrs(A), in(c1_B, A), out(c2_B, A)} > 0, #count {B : vrs(B), in(c1_B, B), in(c2_B, B)} > 0, #count {C : vrs(C), out(c1_B, C), in(c2_B, C)} > 0.
+:- #count {A : vrs(A), in(c1_B, A), out(c2_B, A)} = 0, #count {B : vrs(B), in(c1_B, B), in(c2_B, B)} > 0, #count {C : vrs(C), out(c1_B, C), in(c2_B, C)} > 0.
+ir(X, r23) :- in(c1_B, X), out(c2_B, X).
+:- #count {X : vrs(X), in(c1_B, X), in(c2_B, X)} = 0.
+ir(X, r23) :- out(c1_B, X), in(c2_B, X).
+
+
+
+% 1.C {is_included_in overlaps} 2.F
+%vr(X, r24) ; ir(X, r24) :- in(c1_C,X), out(c2_F,X).
+%:- #count {X : vrs(X), in(c1_C,X), in(c2_F,X)} <= 0, pw.
+%:- #count {X : vrs(X), out(c1_C,X), in(c2_F,X)} <= 0, pw.
+
+:- #count {A : vrs(A), in(c1_C, A), out(c2_F, A)} > 0,
+   #count {B : vrs(B), in(c1_C, B), in(c2_F, B)} = 0,
+   #count {C : vrs(C), out(c1_C, C), in(c2_F, C)} > 0.
+:- #count {A : vrs(A), in(c1_C, A), out(c2_F, A)} = 0,
+   #count {B : vrs(B), in(c1_C, B), in(c2_F, B)} > 0,
+   #count {C : vrs(C), out(c1_C, C), in(c2_F, C)} = 0.
+:- #count {A : vrs(A), in(c1_C, A), out(c2_F, A)} > 0,
+   #count {B : vrs(B), in(c1_C, B), in(c2_F, B)} > 0,
+   #count {C : vrs(C), out(c1_C, C), in(c2_F, C)} = 0.
+vr(X, r22) ; ir(X, r24) :- in(c1_C, X), out(c2_F, X).
+:- #count {X : vrs(X), in(c1_C, X), in(c2_F, X)} = 0.
+:- #count {X : vrs(X), out(c1_C, X), in(c2_F, X)} = 0.
+
+% 1.D equals 2.D
+ir(X, r25) :- out(c1_D,X), in(c2_D,X).
+ir(X, r25) :- in(c1_D,X), out(c2_D,X).
+
+:- #count {X : vrs(X), in(c1_D,X), in(c2_D,X)} <= 0, pw.
+
+
+
+% 1.E {equals overlaps} 2.G
+:- 0 < #count {X : vrs(X), in(c1_E,X), out(c2_G,X)}, #count {Y : vrs(Y), in(c2_G,Y), out(c1_E,Y)} <= 0, pw.
+:- #count {X : vrs(X), in(c1_E,X), out(c2_G,X)} <= 0, 0 < #count {Y : vrs(Y), in(c2_G,Y), out(c1_E,Y)}.
+:- #count {X : vrs(X), in(c1_E,X), in(c2_G,X)} <= 0, pw.
+
+
+%%% Decoding now
+:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "><"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- rel(X, Y, "><"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), pw.
+:- not rel(X, Y, "="), not rel(X, Y, "<"), not rel(X, Y, ">"), not rel(X, Y, "><"), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2, not ncf(X), not ncf(Y), pw.
+
+rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2), pw.
+rel(X, Y, "><") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2), pw.
+rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2), pw.
+
+
+hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R), not ncf(X), not ncf(Y), pw.
+
+
+pw.
+#show rel/3.
