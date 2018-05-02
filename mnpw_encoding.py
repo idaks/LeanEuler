@@ -96,11 +96,10 @@ def gen_isa_rule(child: str, parent: str, idx: int):  # For every parent-child r
     r2 = ":- {}.".format(not_filter_helper(n1=child, n2=parent, rel1="in", rel2="in", sign="=", r_var="X"))
     return "\n".join([header, r1,r2, ''])
 
-def gen_euler_bit():  # Standard
+def gen_euler_bit(tax_id, prod, count):  # Standard
     header = '%  Euler Bit'
-    r1 = "bit(M, {}, V) :- r(M), M1=M/1, V = M1 \ 5.".format(0)
-    r2 = "bit(M, {}, V) :- r(M), M1=M/5, V = M1 \ 5.".format(1)
-    return [header, r1, r2, '']
+    r1 = "bit(M, {}, V) :- r(M), M1=M/{}, V = M1 \ {}.".format(tax_id, prod, count)
+    return [header, r1, '']
 
 def gen_region_meanings():  # Standard
     header = "% Region Meanings"
@@ -124,15 +123,15 @@ def euler_region_count(end, start=1):
 
 rule_count = 0
 
-def initial_rules():
+def initial_rules(num_regions):
     global rule_count
-    euler_region_count_rule = euler_region_count(rule_count-1)
-    euler_bit_rules = gen_euler_bit()
+    euler_region_count_rule = euler_region_count(num_regions)
+    # euler_bit_rules = gen_euler_bit()
     region_meaning_rules = gen_region_meanings()
     region_constraint_rules = gen_region_constraints()
     concept2_concept_rule = concept2_concept_rel()
     all_rules = euler_region_count_rule
-    all_rules.extend(euler_bit_rules)
+    # all_rules.extend(euler_bit_rules)
     all_rules.extend(region_meaning_rules)
     all_rules.extend(region_constraint_rules)
     all_rules.append(concept2_concept_rule)
@@ -271,10 +270,17 @@ def get_rules(articulations, anytree_):
     coverage_rules = []
     concept_rules = []
     isa_rules = []
+    euler_bit_rules = []
 
+    num_regions = 0
+    prod = 1
     for i, tax_name in enumerate(anytree_.keys()):
         root = anytree_[tax_name][tax_name].children[0]
         all_rules = gen_tax_rules(root, tax_id=i)
+        n_concepts = all_rules[4]
+        euler_bit_rules.extend(gen_euler_bit(i, prod, n_concepts+1))
+        prod *= (n_concepts + 1)
+        num_regions = (num_regions * n_concepts) + num_regions + n_concepts
         sibling_disjointness_rules.extend(all_rules[0])
         coverage_rules.extend(all_rules[1])
         concept_rules.extend(all_rules[2])
@@ -289,11 +295,12 @@ def get_rules(articulations, anytree_):
             articulation_rules.extend(gen_rules(n1, n2, rel))
 
     decoding_rules_ = decoding_rules()
-    init_rules = initial_rules()
+    init_rules = initial_rules(num_regions=num_regions)
 
     rules_to_write.extend(init_rules)
     rules_to_write.append('')
     rules_to_write.append('% Taxonomy Description\n')
+    rules_to_write.extend(euler_bit_rules)
     rules_to_write.extend(concept_rules)
     rules_to_write.append('')
     rules_to_write.extend(isa_rules)
