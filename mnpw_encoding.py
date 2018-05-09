@@ -118,6 +118,9 @@ def gen_region_constraints():  # Standard
     exactly_one = ":- vrs(X), irs(X)."
     return [header, irs, vrs, vr, ir, exactly_one, '']
 
+def gen_bl_rules(parent, children):
+    return ['bl({}, {}).'.format(parent, child) for child in children]
+
 def euler_region_count(end, start=1):
     return ["r({}..{}).".format(start, end), '']
 
@@ -144,26 +147,29 @@ def gen_tax_rules(root, tax_id=0, concept_count=0):
     cov_r = []
     concept_r = []
     isa_r = []
+    bl_rules = []
     if len(children) > 0:
         for n1 in range(len(children)):
             for n2 in range(n1+1, len(children)):
                 sd_r.append(gen_sibling_disjointness(children[n1].name, children[n2].name, rule_count))
                 rule_count += 1
         cov_r.extend([gen_coverage_rule(root.name, list(map(lambda x: x.name, children)))])
+        bl_rules.extend(gen_bl_rules(root.name, list(map(lambda x: x.name, children))))
         concept_r.extend([gen_concept2_rule(root.name, tax_id)])
         for child in children:
             isa_r.append(gen_isa_rule(child.name, root.name, rule_count))
             rule_count += 1
         for child in children:
-            t_sd_r, t_cov_r, t_concept_r, t_isa_r, concept_count = gen_tax_rules(child, tax_id, concept_count)
+            t_sd_r, t_cov_r, t_concept_r, t_isa_r, t_bl_rules, concept_count = gen_tax_rules(child, tax_id, concept_count)
             sd_r.extend(t_sd_r)
             cov_r.extend(t_cov_r)
             concept_r.extend(t_concept_r)
             isa_r.extend(t_isa_r)
+            bl_rules.extend(t_bl_rules)
     else:
         concept_r = [gen_concept_rule(root.name, tax_id, concept_count)]
         concept_count += 1
-    return sd_r, cov_r, concept_r, isa_r, concept_count
+    return sd_r, cov_r, concept_r, isa_r, bl_rules, concept_count
 
 def gen_rules(n1, n2, rels):
     """
@@ -243,7 +249,7 @@ def decoding_rules():
     all_rules.append('')
     return all_rules
 
-def final_filter(show_rel=True, rcc_conversion=False):
+def final_filter(show_rel=True, rcc_conversion=True):
 
     filter_rules = []
     if show_rel:
@@ -252,13 +258,29 @@ def final_filter(show_rel=True, rcc_conversion=False):
         filter_rules.append('eq(A, B) :- rel(A, B, "=").')
         filter_rules.append('po(A, B) :- rel(A, B, "o").')
         filter_rules.append('dr(A, B) :- rel(A, B, "!").')
-        filter_rules.append('pi(A, B) :- rel(A, B, "<").')
-        filter_rules.append('pp(A, B) :- rel(A, B, ">").')
+        filter_rules.append('pp(A, B) :- rel(A, B, "<").')
+        filter_rules.append('pp(B, A) :- rel(A, B, ">").')
+        filter_rules.append("pp(Y,X) :- bl(X,Y).")
+        filter_rules.append("u(X) :- bl(_,X).")
+        filter_rules.append("u(X) :- bl(X,_).")
+        # filter_rules.append("u(X) :- dr(X,_).")
+        # filter_rules.append("u(X) :- dr(_,X).")
+        # filter_rules.append("u(X) :- eq(X,_).")
+        # filter_rules.append("u(X) :- eq(_,X).")
+        # filter_rules.append("u(X) :- po(X,_).")
+        # filter_rules.append("u(X) :- po(_,X).")
+        # filter_rules.append("u(X) :- pp(X,_).")
+        # filter_rules.append("u(X) :- pp(_,X).")
+        # filter_rules.append("u(X) :- pi(X,_).")
+        # filter_rules.append("u(X) :- pi(_,X).")
         filter_rules.append('#show eq/2.')
         filter_rules.append('#show po/2.')
         filter_rules.append('#show pp/2.')
-        filter_rules.append('#show pi/2.')
+        # filter_rules.append('#show pi/2.')
         filter_rules.append('#show dr/2.')
+        filter_rules.append('#show bl/2.')
+        filter_rules.append('#show u/1.')
+
     return filter_rules
 
 def get_rules(articulations, anytree_):
@@ -271,13 +293,14 @@ def get_rules(articulations, anytree_):
     concept_rules = []
     isa_rules = []
     euler_bit_rules = []
+    bl_rules = []
 
     num_regions = 0
     prod = 1
     for i, tax_name in enumerate(anytree_.keys()):
         root = anytree_[tax_name][tax_name].children[0]
         all_rules = gen_tax_rules(root, tax_id=i)
-        n_concepts = all_rules[4]
+        n_concepts = all_rules[5]
         euler_bit_rules.extend(gen_euler_bit(i, prod, n_concepts+1))
         prod *= (n_concepts + 1)
         num_regions = (num_regions * n_concepts) + num_regions + n_concepts
@@ -285,6 +308,7 @@ def get_rules(articulations, anytree_):
         coverage_rules.extend(all_rules[1])
         concept_rules.extend(all_rules[2])
         isa_rules.extend(all_rules[3])
+        bl_rules.extend(all_rules[4])
 
     articulation_rules = ['% Articulations', '']
     for idx, row in articulations.iterrows():
@@ -308,6 +332,9 @@ def get_rules(articulations, anytree_):
     rules_to_write.extend(sibling_disjointness_rules)
     rules_to_write.extend(articulation_rules)
     rules_to_write.extend(decoding_rules_)
+    rules_to_write.append('\n% Child Parent Rules for Viz\n')
+    rules_to_write.extend(bl_rules)
+    rules_to_write.append('')
     rules_to_write.extend(final_filter())
 
     return rules_to_write

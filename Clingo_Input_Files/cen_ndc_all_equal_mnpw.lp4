@@ -3347,13 +3347,13 @@ ir(X, r646) :- in("NDC_WY", X), in("NDC_UT", X).
    #count {C : vrs(C), out("CEN_AL", C), in("NDC_AL", C)} > 0.
 :- #count {A : vrs(A), in("CEN_AL", A), out("NDC_AL", A)} > 0,
    #count {B : vrs(B), in("CEN_AL", B), in("NDC_AL", B)} > 0,
-   #count {C : vrs(C), out("CEN_AL", C), in("NDC_AL", C)} = 0.
-:- #count {A : vrs(A), in("CEN_AL", A), out("NDC_AL", A)} > 0,
-   #count {B : vrs(B), in("CEN_AL", B), in("NDC_AL", B)} > 0,
    #count {C : vrs(C), out("CEN_AL", C), in("NDC_AL", C)} > 0.
 :- #count {A : vrs(A), in("CEN_AL", A), out("NDC_AL", A)} = 0,
    #count {B : vrs(B), in("CEN_AL", B), in("NDC_AL", B)} > 0,
    #count {C : vrs(C), out("CEN_AL", C), in("NDC_AL", C)} > 0.
+:- #count {A : vrs(A), in("CEN_AL", A), out("NDC_AL", A)} > 0,
+   #count {B : vrs(B), in("CEN_AL", B), in("NDC_AL", B)} > 0,
+   #count {C : vrs(C), out("CEN_AL", C), in("NDC_AL", C)} = 0.
 ir(X, r656) :- in("CEN_AL", X), out("NDC_AL", X).
 :- #count {X : vrs(X), in("CEN_AL", X), in("NDC_AL", X)} = 0.
 ir(X, r656) :- out("CEN_AL", X), in("NDC_AL", X).
@@ -3364,13 +3364,13 @@ ir(X, r656) :- out("CEN_AL", X), in("NDC_AL", X).
    #count {C : vrs(C), out("CEN_AR", C), in("NDC_AR", C)} > 0.
 :- #count {A : vrs(A), in("CEN_AR", A), out("NDC_AR", A)} > 0,
    #count {B : vrs(B), in("CEN_AR", B), in("NDC_AR", B)} > 0,
-   #count {C : vrs(C), out("CEN_AR", C), in("NDC_AR", C)} = 0.
-:- #count {A : vrs(A), in("CEN_AR", A), out("NDC_AR", A)} > 0,
-   #count {B : vrs(B), in("CEN_AR", B), in("NDC_AR", B)} > 0,
    #count {C : vrs(C), out("CEN_AR", C), in("NDC_AR", C)} > 0.
 :- #count {A : vrs(A), in("CEN_AR", A), out("NDC_AR", A)} = 0,
    #count {B : vrs(B), in("CEN_AR", B), in("NDC_AR", B)} > 0,
    #count {C : vrs(C), out("CEN_AR", C), in("NDC_AR", C)} > 0.
+:- #count {A : vrs(A), in("CEN_AR", A), out("NDC_AR", A)} > 0,
+   #count {B : vrs(B), in("CEN_AR", B), in("NDC_AR", B)} > 0,
+   #count {C : vrs(C), out("CEN_AR", C), in("NDC_AR", C)} = 0.
 ir(X, r657) :- in("CEN_AR", X), out("NDC_AR", X).
 :- #count {X : vrs(X), in("CEN_AR", X), in("NDC_AR", X)} = 0.
 ir(X, r657) :- out("CEN_AR", X), in("NDC_AR", X).
@@ -3381,13 +3381,13 @@ ir(X, r657) :- out("CEN_AR", X), in("NDC_AR", X).
    #count {C : vrs(C), out("CEN_AZ", C), in("NDC_AZ", C)} > 0.
 :- #count {A : vrs(A), in("CEN_AZ", A), out("NDC_AZ", A)} > 0,
    #count {B : vrs(B), in("CEN_AZ", B), in("NDC_AZ", B)} > 0,
-   #count {C : vrs(C), out("CEN_AZ", C), in("NDC_AZ", C)} = 0.
-:- #count {A : vrs(A), in("CEN_AZ", A), out("NDC_AZ", A)} > 0,
-   #count {B : vrs(B), in("CEN_AZ", B), in("NDC_AZ", B)} > 0,
    #count {C : vrs(C), out("CEN_AZ", C), in("NDC_AZ", C)} > 0.
 :- #count {A : vrs(A), in("CEN_AZ", A), out("NDC_AZ", A)} = 0,
    #count {B : vrs(B), in("CEN_AZ", B), in("NDC_AZ", B)} > 0,
    #count {C : vrs(C), out("CEN_AZ", C), in("NDC_AZ", C)} > 0.
+:- #count {A : vrs(A), in("CEN_AZ", A), out("NDC_AZ", A)} > 0,
+   #count {B : vrs(B), in("CEN_AZ", B), in("NDC_AZ", B)} > 0,
+   #count {C : vrs(C), out("CEN_AZ", C), in("NDC_AZ", C)} = 0.
 ir(X, r658) :- in("CEN_AZ", X), out("NDC_AZ", X).
 :- #count {X : vrs(X), in("CEN_AZ", X), in("NDC_AZ", X)} = 0.
 ir(X, r658) :- out("CEN_AZ", X), in("NDC_AZ", X).
@@ -3398,13 +3398,13 @@ ir(X, r658) :- out("CEN_AZ", X), in("NDC_AZ", X).
    #count {C : vrs(C), out("CEN_CA", C), in("NDC_CA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_CA", A), out("NDC_CA", A)} > 0,
    #count {B : vrs(B), in("CEN_CA", B), in("NDC_CA", B)} > 0,
-   #count {C : vrs(C), out("CEN_CA", C), in("NDC_CA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_CA", A), out("NDC_CA", A)} > 0,
-   #count {B : vrs(B), in("CEN_CA", B), in("NDC_CA", B)} > 0,
    #count {C : vrs(C), out("CEN_CA", C), in("NDC_CA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_CA", A), out("NDC_CA", A)} = 0,
    #count {B : vrs(B), in("CEN_CA", B), in("NDC_CA", B)} > 0,
    #count {C : vrs(C), out("CEN_CA", C), in("NDC_CA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_CA", A), out("NDC_CA", A)} > 0,
+   #count {B : vrs(B), in("CEN_CA", B), in("NDC_CA", B)} > 0,
+   #count {C : vrs(C), out("CEN_CA", C), in("NDC_CA", C)} = 0.
 ir(X, r659) :- in("CEN_CA", X), out("NDC_CA", X).
 :- #count {X : vrs(X), in("CEN_CA", X), in("NDC_CA", X)} = 0.
 ir(X, r659) :- out("CEN_CA", X), in("NDC_CA", X).
@@ -3415,13 +3415,13 @@ ir(X, r659) :- out("CEN_CA", X), in("NDC_CA", X).
    #count {C : vrs(C), out("CEN_CO", C), in("NDC_CO", C)} > 0.
 :- #count {A : vrs(A), in("CEN_CO", A), out("NDC_CO", A)} > 0,
    #count {B : vrs(B), in("CEN_CO", B), in("NDC_CO", B)} > 0,
-   #count {C : vrs(C), out("CEN_CO", C), in("NDC_CO", C)} = 0.
-:- #count {A : vrs(A), in("CEN_CO", A), out("NDC_CO", A)} > 0,
-   #count {B : vrs(B), in("CEN_CO", B), in("NDC_CO", B)} > 0,
    #count {C : vrs(C), out("CEN_CO", C), in("NDC_CO", C)} > 0.
 :- #count {A : vrs(A), in("CEN_CO", A), out("NDC_CO", A)} = 0,
    #count {B : vrs(B), in("CEN_CO", B), in("NDC_CO", B)} > 0,
    #count {C : vrs(C), out("CEN_CO", C), in("NDC_CO", C)} > 0.
+:- #count {A : vrs(A), in("CEN_CO", A), out("NDC_CO", A)} > 0,
+   #count {B : vrs(B), in("CEN_CO", B), in("NDC_CO", B)} > 0,
+   #count {C : vrs(C), out("CEN_CO", C), in("NDC_CO", C)} = 0.
 ir(X, r660) :- in("CEN_CO", X), out("NDC_CO", X).
 :- #count {X : vrs(X), in("CEN_CO", X), in("NDC_CO", X)} = 0.
 ir(X, r660) :- out("CEN_CO", X), in("NDC_CO", X).
@@ -3432,13 +3432,13 @@ ir(X, r660) :- out("CEN_CO", X), in("NDC_CO", X).
    #count {C : vrs(C), out("CEN_CT", C), in("NDC_CT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_CT", A), out("NDC_CT", A)} > 0,
    #count {B : vrs(B), in("CEN_CT", B), in("NDC_CT", B)} > 0,
-   #count {C : vrs(C), out("CEN_CT", C), in("NDC_CT", C)} = 0.
-:- #count {A : vrs(A), in("CEN_CT", A), out("NDC_CT", A)} > 0,
-   #count {B : vrs(B), in("CEN_CT", B), in("NDC_CT", B)} > 0,
    #count {C : vrs(C), out("CEN_CT", C), in("NDC_CT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_CT", A), out("NDC_CT", A)} = 0,
    #count {B : vrs(B), in("CEN_CT", B), in("NDC_CT", B)} > 0,
    #count {C : vrs(C), out("CEN_CT", C), in("NDC_CT", C)} > 0.
+:- #count {A : vrs(A), in("CEN_CT", A), out("NDC_CT", A)} > 0,
+   #count {B : vrs(B), in("CEN_CT", B), in("NDC_CT", B)} > 0,
+   #count {C : vrs(C), out("CEN_CT", C), in("NDC_CT", C)} = 0.
 ir(X, r661) :- in("CEN_CT", X), out("NDC_CT", X).
 :- #count {X : vrs(X), in("CEN_CT", X), in("NDC_CT", X)} = 0.
 ir(X, r661) :- out("CEN_CT", X), in("NDC_CT", X).
@@ -3449,13 +3449,13 @@ ir(X, r661) :- out("CEN_CT", X), in("NDC_CT", X).
    #count {C : vrs(C), out("CEN_DC", C), in("NDC_DC", C)} > 0.
 :- #count {A : vrs(A), in("CEN_DC", A), out("NDC_DC", A)} > 0,
    #count {B : vrs(B), in("CEN_DC", B), in("NDC_DC", B)} > 0,
-   #count {C : vrs(C), out("CEN_DC", C), in("NDC_DC", C)} = 0.
-:- #count {A : vrs(A), in("CEN_DC", A), out("NDC_DC", A)} > 0,
-   #count {B : vrs(B), in("CEN_DC", B), in("NDC_DC", B)} > 0,
    #count {C : vrs(C), out("CEN_DC", C), in("NDC_DC", C)} > 0.
 :- #count {A : vrs(A), in("CEN_DC", A), out("NDC_DC", A)} = 0,
    #count {B : vrs(B), in("CEN_DC", B), in("NDC_DC", B)} > 0,
    #count {C : vrs(C), out("CEN_DC", C), in("NDC_DC", C)} > 0.
+:- #count {A : vrs(A), in("CEN_DC", A), out("NDC_DC", A)} > 0,
+   #count {B : vrs(B), in("CEN_DC", B), in("NDC_DC", B)} > 0,
+   #count {C : vrs(C), out("CEN_DC", C), in("NDC_DC", C)} = 0.
 ir(X, r662) :- in("CEN_DC", X), out("NDC_DC", X).
 :- #count {X : vrs(X), in("CEN_DC", X), in("NDC_DC", X)} = 0.
 ir(X, r662) :- out("CEN_DC", X), in("NDC_DC", X).
@@ -3466,13 +3466,13 @@ ir(X, r662) :- out("CEN_DC", X), in("NDC_DC", X).
    #count {C : vrs(C), out("CEN_DE", C), in("NDC_DE", C)} > 0.
 :- #count {A : vrs(A), in("CEN_DE", A), out("NDC_DE", A)} > 0,
    #count {B : vrs(B), in("CEN_DE", B), in("NDC_DE", B)} > 0,
-   #count {C : vrs(C), out("CEN_DE", C), in("NDC_DE", C)} = 0.
-:- #count {A : vrs(A), in("CEN_DE", A), out("NDC_DE", A)} > 0,
-   #count {B : vrs(B), in("CEN_DE", B), in("NDC_DE", B)} > 0,
    #count {C : vrs(C), out("CEN_DE", C), in("NDC_DE", C)} > 0.
 :- #count {A : vrs(A), in("CEN_DE", A), out("NDC_DE", A)} = 0,
    #count {B : vrs(B), in("CEN_DE", B), in("NDC_DE", B)} > 0,
    #count {C : vrs(C), out("CEN_DE", C), in("NDC_DE", C)} > 0.
+:- #count {A : vrs(A), in("CEN_DE", A), out("NDC_DE", A)} > 0,
+   #count {B : vrs(B), in("CEN_DE", B), in("NDC_DE", B)} > 0,
+   #count {C : vrs(C), out("CEN_DE", C), in("NDC_DE", C)} = 0.
 ir(X, r663) :- in("CEN_DE", X), out("NDC_DE", X).
 :- #count {X : vrs(X), in("CEN_DE", X), in("NDC_DE", X)} = 0.
 ir(X, r663) :- out("CEN_DE", X), in("NDC_DE", X).
@@ -3483,13 +3483,13 @@ ir(X, r663) :- out("CEN_DE", X), in("NDC_DE", X).
    #count {C : vrs(C), out("CEN_FL", C), in("NDC_FL", C)} > 0.
 :- #count {A : vrs(A), in("CEN_FL", A), out("NDC_FL", A)} > 0,
    #count {B : vrs(B), in("CEN_FL", B), in("NDC_FL", B)} > 0,
-   #count {C : vrs(C), out("CEN_FL", C), in("NDC_FL", C)} = 0.
-:- #count {A : vrs(A), in("CEN_FL", A), out("NDC_FL", A)} > 0,
-   #count {B : vrs(B), in("CEN_FL", B), in("NDC_FL", B)} > 0,
    #count {C : vrs(C), out("CEN_FL", C), in("NDC_FL", C)} > 0.
 :- #count {A : vrs(A), in("CEN_FL", A), out("NDC_FL", A)} = 0,
    #count {B : vrs(B), in("CEN_FL", B), in("NDC_FL", B)} > 0,
    #count {C : vrs(C), out("CEN_FL", C), in("NDC_FL", C)} > 0.
+:- #count {A : vrs(A), in("CEN_FL", A), out("NDC_FL", A)} > 0,
+   #count {B : vrs(B), in("CEN_FL", B), in("NDC_FL", B)} > 0,
+   #count {C : vrs(C), out("CEN_FL", C), in("NDC_FL", C)} = 0.
 ir(X, r664) :- in("CEN_FL", X), out("NDC_FL", X).
 :- #count {X : vrs(X), in("CEN_FL", X), in("NDC_FL", X)} = 0.
 ir(X, r664) :- out("CEN_FL", X), in("NDC_FL", X).
@@ -3500,13 +3500,13 @@ ir(X, r664) :- out("CEN_FL", X), in("NDC_FL", X).
    #count {C : vrs(C), out("CEN_GA", C), in("NDC_GA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_GA", A), out("NDC_GA", A)} > 0,
    #count {B : vrs(B), in("CEN_GA", B), in("NDC_GA", B)} > 0,
-   #count {C : vrs(C), out("CEN_GA", C), in("NDC_GA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_GA", A), out("NDC_GA", A)} > 0,
-   #count {B : vrs(B), in("CEN_GA", B), in("NDC_GA", B)} > 0,
    #count {C : vrs(C), out("CEN_GA", C), in("NDC_GA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_GA", A), out("NDC_GA", A)} = 0,
    #count {B : vrs(B), in("CEN_GA", B), in("NDC_GA", B)} > 0,
    #count {C : vrs(C), out("CEN_GA", C), in("NDC_GA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_GA", A), out("NDC_GA", A)} > 0,
+   #count {B : vrs(B), in("CEN_GA", B), in("NDC_GA", B)} > 0,
+   #count {C : vrs(C), out("CEN_GA", C), in("NDC_GA", C)} = 0.
 ir(X, r665) :- in("CEN_GA", X), out("NDC_GA", X).
 :- #count {X : vrs(X), in("CEN_GA", X), in("NDC_GA", X)} = 0.
 ir(X, r665) :- out("CEN_GA", X), in("NDC_GA", X).
@@ -3517,13 +3517,13 @@ ir(X, r665) :- out("CEN_GA", X), in("NDC_GA", X).
    #count {C : vrs(C), out("CEN_IA", C), in("NDC_IA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_IA", A), out("NDC_IA", A)} > 0,
    #count {B : vrs(B), in("CEN_IA", B), in("NDC_IA", B)} > 0,
-   #count {C : vrs(C), out("CEN_IA", C), in("NDC_IA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_IA", A), out("NDC_IA", A)} > 0,
-   #count {B : vrs(B), in("CEN_IA", B), in("NDC_IA", B)} > 0,
    #count {C : vrs(C), out("CEN_IA", C), in("NDC_IA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_IA", A), out("NDC_IA", A)} = 0,
    #count {B : vrs(B), in("CEN_IA", B), in("NDC_IA", B)} > 0,
    #count {C : vrs(C), out("CEN_IA", C), in("NDC_IA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_IA", A), out("NDC_IA", A)} > 0,
+   #count {B : vrs(B), in("CEN_IA", B), in("NDC_IA", B)} > 0,
+   #count {C : vrs(C), out("CEN_IA", C), in("NDC_IA", C)} = 0.
 ir(X, r666) :- in("CEN_IA", X), out("NDC_IA", X).
 :- #count {X : vrs(X), in("CEN_IA", X), in("NDC_IA", X)} = 0.
 ir(X, r666) :- out("CEN_IA", X), in("NDC_IA", X).
@@ -3534,13 +3534,13 @@ ir(X, r666) :- out("CEN_IA", X), in("NDC_IA", X).
    #count {C : vrs(C), out("CEN_ID", C), in("NDC_ID", C)} > 0.
 :- #count {A : vrs(A), in("CEN_ID", A), out("NDC_ID", A)} > 0,
    #count {B : vrs(B), in("CEN_ID", B), in("NDC_ID", B)} > 0,
-   #count {C : vrs(C), out("CEN_ID", C), in("NDC_ID", C)} = 0.
-:- #count {A : vrs(A), in("CEN_ID", A), out("NDC_ID", A)} > 0,
-   #count {B : vrs(B), in("CEN_ID", B), in("NDC_ID", B)} > 0,
    #count {C : vrs(C), out("CEN_ID", C), in("NDC_ID", C)} > 0.
 :- #count {A : vrs(A), in("CEN_ID", A), out("NDC_ID", A)} = 0,
    #count {B : vrs(B), in("CEN_ID", B), in("NDC_ID", B)} > 0,
    #count {C : vrs(C), out("CEN_ID", C), in("NDC_ID", C)} > 0.
+:- #count {A : vrs(A), in("CEN_ID", A), out("NDC_ID", A)} > 0,
+   #count {B : vrs(B), in("CEN_ID", B), in("NDC_ID", B)} > 0,
+   #count {C : vrs(C), out("CEN_ID", C), in("NDC_ID", C)} = 0.
 ir(X, r667) :- in("CEN_ID", X), out("NDC_ID", X).
 :- #count {X : vrs(X), in("CEN_ID", X), in("NDC_ID", X)} = 0.
 ir(X, r667) :- out("CEN_ID", X), in("NDC_ID", X).
@@ -3551,13 +3551,13 @@ ir(X, r667) :- out("CEN_ID", X), in("NDC_ID", X).
    #count {C : vrs(C), out("CEN_IL", C), in("NDC_IL", C)} > 0.
 :- #count {A : vrs(A), in("CEN_IL", A), out("NDC_IL", A)} > 0,
    #count {B : vrs(B), in("CEN_IL", B), in("NDC_IL", B)} > 0,
-   #count {C : vrs(C), out("CEN_IL", C), in("NDC_IL", C)} = 0.
-:- #count {A : vrs(A), in("CEN_IL", A), out("NDC_IL", A)} > 0,
-   #count {B : vrs(B), in("CEN_IL", B), in("NDC_IL", B)} > 0,
    #count {C : vrs(C), out("CEN_IL", C), in("NDC_IL", C)} > 0.
 :- #count {A : vrs(A), in("CEN_IL", A), out("NDC_IL", A)} = 0,
    #count {B : vrs(B), in("CEN_IL", B), in("NDC_IL", B)} > 0,
    #count {C : vrs(C), out("CEN_IL", C), in("NDC_IL", C)} > 0.
+:- #count {A : vrs(A), in("CEN_IL", A), out("NDC_IL", A)} > 0,
+   #count {B : vrs(B), in("CEN_IL", B), in("NDC_IL", B)} > 0,
+   #count {C : vrs(C), out("CEN_IL", C), in("NDC_IL", C)} = 0.
 ir(X, r668) :- in("CEN_IL", X), out("NDC_IL", X).
 :- #count {X : vrs(X), in("CEN_IL", X), in("NDC_IL", X)} = 0.
 ir(X, r668) :- out("CEN_IL", X), in("NDC_IL", X).
@@ -3568,13 +3568,13 @@ ir(X, r668) :- out("CEN_IL", X), in("NDC_IL", X).
    #count {C : vrs(C), out("CEN_IN", C), in("NDC_IN", C)} > 0.
 :- #count {A : vrs(A), in("CEN_IN", A), out("NDC_IN", A)} > 0,
    #count {B : vrs(B), in("CEN_IN", B), in("NDC_IN", B)} > 0,
-   #count {C : vrs(C), out("CEN_IN", C), in("NDC_IN", C)} = 0.
-:- #count {A : vrs(A), in("CEN_IN", A), out("NDC_IN", A)} > 0,
-   #count {B : vrs(B), in("CEN_IN", B), in("NDC_IN", B)} > 0,
    #count {C : vrs(C), out("CEN_IN", C), in("NDC_IN", C)} > 0.
 :- #count {A : vrs(A), in("CEN_IN", A), out("NDC_IN", A)} = 0,
    #count {B : vrs(B), in("CEN_IN", B), in("NDC_IN", B)} > 0,
    #count {C : vrs(C), out("CEN_IN", C), in("NDC_IN", C)} > 0.
+:- #count {A : vrs(A), in("CEN_IN", A), out("NDC_IN", A)} > 0,
+   #count {B : vrs(B), in("CEN_IN", B), in("NDC_IN", B)} > 0,
+   #count {C : vrs(C), out("CEN_IN", C), in("NDC_IN", C)} = 0.
 ir(X, r669) :- in("CEN_IN", X), out("NDC_IN", X).
 :- #count {X : vrs(X), in("CEN_IN", X), in("NDC_IN", X)} = 0.
 ir(X, r669) :- out("CEN_IN", X), in("NDC_IN", X).
@@ -3585,13 +3585,13 @@ ir(X, r669) :- out("CEN_IN", X), in("NDC_IN", X).
    #count {C : vrs(C), out("CEN_KS", C), in("NDC_KS", C)} > 0.
 :- #count {A : vrs(A), in("CEN_KS", A), out("NDC_KS", A)} > 0,
    #count {B : vrs(B), in("CEN_KS", B), in("NDC_KS", B)} > 0,
-   #count {C : vrs(C), out("CEN_KS", C), in("NDC_KS", C)} = 0.
-:- #count {A : vrs(A), in("CEN_KS", A), out("NDC_KS", A)} > 0,
-   #count {B : vrs(B), in("CEN_KS", B), in("NDC_KS", B)} > 0,
    #count {C : vrs(C), out("CEN_KS", C), in("NDC_KS", C)} > 0.
 :- #count {A : vrs(A), in("CEN_KS", A), out("NDC_KS", A)} = 0,
    #count {B : vrs(B), in("CEN_KS", B), in("NDC_KS", B)} > 0,
    #count {C : vrs(C), out("CEN_KS", C), in("NDC_KS", C)} > 0.
+:- #count {A : vrs(A), in("CEN_KS", A), out("NDC_KS", A)} > 0,
+   #count {B : vrs(B), in("CEN_KS", B), in("NDC_KS", B)} > 0,
+   #count {C : vrs(C), out("CEN_KS", C), in("NDC_KS", C)} = 0.
 ir(X, r670) :- in("CEN_KS", X), out("NDC_KS", X).
 :- #count {X : vrs(X), in("CEN_KS", X), in("NDC_KS", X)} = 0.
 ir(X, r670) :- out("CEN_KS", X), in("NDC_KS", X).
@@ -3602,13 +3602,13 @@ ir(X, r670) :- out("CEN_KS", X), in("NDC_KS", X).
    #count {C : vrs(C), out("CEN_KY", C), in("NDC_KY", C)} > 0.
 :- #count {A : vrs(A), in("CEN_KY", A), out("NDC_KY", A)} > 0,
    #count {B : vrs(B), in("CEN_KY", B), in("NDC_KY", B)} > 0,
-   #count {C : vrs(C), out("CEN_KY", C), in("NDC_KY", C)} = 0.
-:- #count {A : vrs(A), in("CEN_KY", A), out("NDC_KY", A)} > 0,
-   #count {B : vrs(B), in("CEN_KY", B), in("NDC_KY", B)} > 0,
    #count {C : vrs(C), out("CEN_KY", C), in("NDC_KY", C)} > 0.
 :- #count {A : vrs(A), in("CEN_KY", A), out("NDC_KY", A)} = 0,
    #count {B : vrs(B), in("CEN_KY", B), in("NDC_KY", B)} > 0,
    #count {C : vrs(C), out("CEN_KY", C), in("NDC_KY", C)} > 0.
+:- #count {A : vrs(A), in("CEN_KY", A), out("NDC_KY", A)} > 0,
+   #count {B : vrs(B), in("CEN_KY", B), in("NDC_KY", B)} > 0,
+   #count {C : vrs(C), out("CEN_KY", C), in("NDC_KY", C)} = 0.
 ir(X, r671) :- in("CEN_KY", X), out("NDC_KY", X).
 :- #count {X : vrs(X), in("CEN_KY", X), in("NDC_KY", X)} = 0.
 ir(X, r671) :- out("CEN_KY", X), in("NDC_KY", X).
@@ -3619,13 +3619,13 @@ ir(X, r671) :- out("CEN_KY", X), in("NDC_KY", X).
    #count {C : vrs(C), out("CEN_LA", C), in("NDC_LA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_LA", A), out("NDC_LA", A)} > 0,
    #count {B : vrs(B), in("CEN_LA", B), in("NDC_LA", B)} > 0,
-   #count {C : vrs(C), out("CEN_LA", C), in("NDC_LA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_LA", A), out("NDC_LA", A)} > 0,
-   #count {B : vrs(B), in("CEN_LA", B), in("NDC_LA", B)} > 0,
    #count {C : vrs(C), out("CEN_LA", C), in("NDC_LA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_LA", A), out("NDC_LA", A)} = 0,
    #count {B : vrs(B), in("CEN_LA", B), in("NDC_LA", B)} > 0,
    #count {C : vrs(C), out("CEN_LA", C), in("NDC_LA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_LA", A), out("NDC_LA", A)} > 0,
+   #count {B : vrs(B), in("CEN_LA", B), in("NDC_LA", B)} > 0,
+   #count {C : vrs(C), out("CEN_LA", C), in("NDC_LA", C)} = 0.
 ir(X, r672) :- in("CEN_LA", X), out("NDC_LA", X).
 :- #count {X : vrs(X), in("CEN_LA", X), in("NDC_LA", X)} = 0.
 ir(X, r672) :- out("CEN_LA", X), in("NDC_LA", X).
@@ -3636,13 +3636,13 @@ ir(X, r672) :- out("CEN_LA", X), in("NDC_LA", X).
    #count {C : vrs(C), out("CEN_MA", C), in("NDC_MA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MA", A), out("NDC_MA", A)} > 0,
    #count {B : vrs(B), in("CEN_MA", B), in("NDC_MA", B)} > 0,
-   #count {C : vrs(C), out("CEN_MA", C), in("NDC_MA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MA", A), out("NDC_MA", A)} > 0,
-   #count {B : vrs(B), in("CEN_MA", B), in("NDC_MA", B)} > 0,
    #count {C : vrs(C), out("CEN_MA", C), in("NDC_MA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MA", A), out("NDC_MA", A)} = 0,
    #count {B : vrs(B), in("CEN_MA", B), in("NDC_MA", B)} > 0,
    #count {C : vrs(C), out("CEN_MA", C), in("NDC_MA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MA", A), out("NDC_MA", A)} > 0,
+   #count {B : vrs(B), in("CEN_MA", B), in("NDC_MA", B)} > 0,
+   #count {C : vrs(C), out("CEN_MA", C), in("NDC_MA", C)} = 0.
 ir(X, r673) :- in("CEN_MA", X), out("NDC_MA", X).
 :- #count {X : vrs(X), in("CEN_MA", X), in("NDC_MA", X)} = 0.
 ir(X, r673) :- out("CEN_MA", X), in("NDC_MA", X).
@@ -3653,13 +3653,13 @@ ir(X, r673) :- out("CEN_MA", X), in("NDC_MA", X).
    #count {C : vrs(C), out("CEN_MD", C), in("NDC_MD", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MD", A), out("NDC_MD", A)} > 0,
    #count {B : vrs(B), in("CEN_MD", B), in("NDC_MD", B)} > 0,
-   #count {C : vrs(C), out("CEN_MD", C), in("NDC_MD", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MD", A), out("NDC_MD", A)} > 0,
-   #count {B : vrs(B), in("CEN_MD", B), in("NDC_MD", B)} > 0,
    #count {C : vrs(C), out("CEN_MD", C), in("NDC_MD", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MD", A), out("NDC_MD", A)} = 0,
    #count {B : vrs(B), in("CEN_MD", B), in("NDC_MD", B)} > 0,
    #count {C : vrs(C), out("CEN_MD", C), in("NDC_MD", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MD", A), out("NDC_MD", A)} > 0,
+   #count {B : vrs(B), in("CEN_MD", B), in("NDC_MD", B)} > 0,
+   #count {C : vrs(C), out("CEN_MD", C), in("NDC_MD", C)} = 0.
 ir(X, r674) :- in("CEN_MD", X), out("NDC_MD", X).
 :- #count {X : vrs(X), in("CEN_MD", X), in("NDC_MD", X)} = 0.
 ir(X, r674) :- out("CEN_MD", X), in("NDC_MD", X).
@@ -3670,13 +3670,13 @@ ir(X, r674) :- out("CEN_MD", X), in("NDC_MD", X).
    #count {C : vrs(C), out("CEN_ME", C), in("NDC_ME", C)} > 0.
 :- #count {A : vrs(A), in("CEN_ME", A), out("NDC_ME", A)} > 0,
    #count {B : vrs(B), in("CEN_ME", B), in("NDC_ME", B)} > 0,
-   #count {C : vrs(C), out("CEN_ME", C), in("NDC_ME", C)} = 0.
-:- #count {A : vrs(A), in("CEN_ME", A), out("NDC_ME", A)} > 0,
-   #count {B : vrs(B), in("CEN_ME", B), in("NDC_ME", B)} > 0,
    #count {C : vrs(C), out("CEN_ME", C), in("NDC_ME", C)} > 0.
 :- #count {A : vrs(A), in("CEN_ME", A), out("NDC_ME", A)} = 0,
    #count {B : vrs(B), in("CEN_ME", B), in("NDC_ME", B)} > 0,
    #count {C : vrs(C), out("CEN_ME", C), in("NDC_ME", C)} > 0.
+:- #count {A : vrs(A), in("CEN_ME", A), out("NDC_ME", A)} > 0,
+   #count {B : vrs(B), in("CEN_ME", B), in("NDC_ME", B)} > 0,
+   #count {C : vrs(C), out("CEN_ME", C), in("NDC_ME", C)} = 0.
 ir(X, r675) :- in("CEN_ME", X), out("NDC_ME", X).
 :- #count {X : vrs(X), in("CEN_ME", X), in("NDC_ME", X)} = 0.
 ir(X, r675) :- out("CEN_ME", X), in("NDC_ME", X).
@@ -3687,13 +3687,13 @@ ir(X, r675) :- out("CEN_ME", X), in("NDC_ME", X).
    #count {C : vrs(C), out("CEN_MI", C), in("NDC_MI", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MI", A), out("NDC_MI", A)} > 0,
    #count {B : vrs(B), in("CEN_MI", B), in("NDC_MI", B)} > 0,
-   #count {C : vrs(C), out("CEN_MI", C), in("NDC_MI", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MI", A), out("NDC_MI", A)} > 0,
-   #count {B : vrs(B), in("CEN_MI", B), in("NDC_MI", B)} > 0,
    #count {C : vrs(C), out("CEN_MI", C), in("NDC_MI", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MI", A), out("NDC_MI", A)} = 0,
    #count {B : vrs(B), in("CEN_MI", B), in("NDC_MI", B)} > 0,
    #count {C : vrs(C), out("CEN_MI", C), in("NDC_MI", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MI", A), out("NDC_MI", A)} > 0,
+   #count {B : vrs(B), in("CEN_MI", B), in("NDC_MI", B)} > 0,
+   #count {C : vrs(C), out("CEN_MI", C), in("NDC_MI", C)} = 0.
 ir(X, r676) :- in("CEN_MI", X), out("NDC_MI", X).
 :- #count {X : vrs(X), in("CEN_MI", X), in("NDC_MI", X)} = 0.
 ir(X, r676) :- out("CEN_MI", X), in("NDC_MI", X).
@@ -3704,13 +3704,13 @@ ir(X, r676) :- out("CEN_MI", X), in("NDC_MI", X).
    #count {C : vrs(C), out("CEN_MN", C), in("NDC_MN", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MN", A), out("NDC_MN", A)} > 0,
    #count {B : vrs(B), in("CEN_MN", B), in("NDC_MN", B)} > 0,
-   #count {C : vrs(C), out("CEN_MN", C), in("NDC_MN", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MN", A), out("NDC_MN", A)} > 0,
-   #count {B : vrs(B), in("CEN_MN", B), in("NDC_MN", B)} > 0,
    #count {C : vrs(C), out("CEN_MN", C), in("NDC_MN", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MN", A), out("NDC_MN", A)} = 0,
    #count {B : vrs(B), in("CEN_MN", B), in("NDC_MN", B)} > 0,
    #count {C : vrs(C), out("CEN_MN", C), in("NDC_MN", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MN", A), out("NDC_MN", A)} > 0,
+   #count {B : vrs(B), in("CEN_MN", B), in("NDC_MN", B)} > 0,
+   #count {C : vrs(C), out("CEN_MN", C), in("NDC_MN", C)} = 0.
 ir(X, r677) :- in("CEN_MN", X), out("NDC_MN", X).
 :- #count {X : vrs(X), in("CEN_MN", X), in("NDC_MN", X)} = 0.
 ir(X, r677) :- out("CEN_MN", X), in("NDC_MN", X).
@@ -3721,13 +3721,13 @@ ir(X, r677) :- out("CEN_MN", X), in("NDC_MN", X).
    #count {C : vrs(C), out("CEN_MO", C), in("NDC_MO", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MO", A), out("NDC_MO", A)} > 0,
    #count {B : vrs(B), in("CEN_MO", B), in("NDC_MO", B)} > 0,
-   #count {C : vrs(C), out("CEN_MO", C), in("NDC_MO", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MO", A), out("NDC_MO", A)} > 0,
-   #count {B : vrs(B), in("CEN_MO", B), in("NDC_MO", B)} > 0,
    #count {C : vrs(C), out("CEN_MO", C), in("NDC_MO", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MO", A), out("NDC_MO", A)} = 0,
    #count {B : vrs(B), in("CEN_MO", B), in("NDC_MO", B)} > 0,
    #count {C : vrs(C), out("CEN_MO", C), in("NDC_MO", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MO", A), out("NDC_MO", A)} > 0,
+   #count {B : vrs(B), in("CEN_MO", B), in("NDC_MO", B)} > 0,
+   #count {C : vrs(C), out("CEN_MO", C), in("NDC_MO", C)} = 0.
 ir(X, r678) :- in("CEN_MO", X), out("NDC_MO", X).
 :- #count {X : vrs(X), in("CEN_MO", X), in("NDC_MO", X)} = 0.
 ir(X, r678) :- out("CEN_MO", X), in("NDC_MO", X).
@@ -3738,13 +3738,13 @@ ir(X, r678) :- out("CEN_MO", X), in("NDC_MO", X).
    #count {C : vrs(C), out("CEN_MS", C), in("NDC_MS", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MS", A), out("NDC_MS", A)} > 0,
    #count {B : vrs(B), in("CEN_MS", B), in("NDC_MS", B)} > 0,
-   #count {C : vrs(C), out("CEN_MS", C), in("NDC_MS", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MS", A), out("NDC_MS", A)} > 0,
-   #count {B : vrs(B), in("CEN_MS", B), in("NDC_MS", B)} > 0,
    #count {C : vrs(C), out("CEN_MS", C), in("NDC_MS", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MS", A), out("NDC_MS", A)} = 0,
    #count {B : vrs(B), in("CEN_MS", B), in("NDC_MS", B)} > 0,
    #count {C : vrs(C), out("CEN_MS", C), in("NDC_MS", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MS", A), out("NDC_MS", A)} > 0,
+   #count {B : vrs(B), in("CEN_MS", B), in("NDC_MS", B)} > 0,
+   #count {C : vrs(C), out("CEN_MS", C), in("NDC_MS", C)} = 0.
 ir(X, r679) :- in("CEN_MS", X), out("NDC_MS", X).
 :- #count {X : vrs(X), in("CEN_MS", X), in("NDC_MS", X)} = 0.
 ir(X, r679) :- out("CEN_MS", X), in("NDC_MS", X).
@@ -3755,13 +3755,13 @@ ir(X, r679) :- out("CEN_MS", X), in("NDC_MS", X).
    #count {C : vrs(C), out("CEN_MT", C), in("NDC_MT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MT", A), out("NDC_MT", A)} > 0,
    #count {B : vrs(B), in("CEN_MT", B), in("NDC_MT", B)} > 0,
-   #count {C : vrs(C), out("CEN_MT", C), in("NDC_MT", C)} = 0.
-:- #count {A : vrs(A), in("CEN_MT", A), out("NDC_MT", A)} > 0,
-   #count {B : vrs(B), in("CEN_MT", B), in("NDC_MT", B)} > 0,
    #count {C : vrs(C), out("CEN_MT", C), in("NDC_MT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_MT", A), out("NDC_MT", A)} = 0,
    #count {B : vrs(B), in("CEN_MT", B), in("NDC_MT", B)} > 0,
    #count {C : vrs(C), out("CEN_MT", C), in("NDC_MT", C)} > 0.
+:- #count {A : vrs(A), in("CEN_MT", A), out("NDC_MT", A)} > 0,
+   #count {B : vrs(B), in("CEN_MT", B), in("NDC_MT", B)} > 0,
+   #count {C : vrs(C), out("CEN_MT", C), in("NDC_MT", C)} = 0.
 ir(X, r680) :- in("CEN_MT", X), out("NDC_MT", X).
 :- #count {X : vrs(X), in("CEN_MT", X), in("NDC_MT", X)} = 0.
 ir(X, r680) :- out("CEN_MT", X), in("NDC_MT", X).
@@ -3772,13 +3772,13 @@ ir(X, r680) :- out("CEN_MT", X), in("NDC_MT", X).
    #count {C : vrs(C), out("CEN_NC", C), in("NDC_NC", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NC", A), out("NDC_NC", A)} > 0,
    #count {B : vrs(B), in("CEN_NC", B), in("NDC_NC", B)} > 0,
-   #count {C : vrs(C), out("CEN_NC", C), in("NDC_NC", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NC", A), out("NDC_NC", A)} > 0,
-   #count {B : vrs(B), in("CEN_NC", B), in("NDC_NC", B)} > 0,
    #count {C : vrs(C), out("CEN_NC", C), in("NDC_NC", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NC", A), out("NDC_NC", A)} = 0,
    #count {B : vrs(B), in("CEN_NC", B), in("NDC_NC", B)} > 0,
    #count {C : vrs(C), out("CEN_NC", C), in("NDC_NC", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NC", A), out("NDC_NC", A)} > 0,
+   #count {B : vrs(B), in("CEN_NC", B), in("NDC_NC", B)} > 0,
+   #count {C : vrs(C), out("CEN_NC", C), in("NDC_NC", C)} = 0.
 ir(X, r681) :- in("CEN_NC", X), out("NDC_NC", X).
 :- #count {X : vrs(X), in("CEN_NC", X), in("NDC_NC", X)} = 0.
 ir(X, r681) :- out("CEN_NC", X), in("NDC_NC", X).
@@ -3789,13 +3789,13 @@ ir(X, r681) :- out("CEN_NC", X), in("NDC_NC", X).
    #count {C : vrs(C), out("CEN_ND", C), in("NDC_ND", C)} > 0.
 :- #count {A : vrs(A), in("CEN_ND", A), out("NDC_ND", A)} > 0,
    #count {B : vrs(B), in("CEN_ND", B), in("NDC_ND", B)} > 0,
-   #count {C : vrs(C), out("CEN_ND", C), in("NDC_ND", C)} = 0.
-:- #count {A : vrs(A), in("CEN_ND", A), out("NDC_ND", A)} > 0,
-   #count {B : vrs(B), in("CEN_ND", B), in("NDC_ND", B)} > 0,
    #count {C : vrs(C), out("CEN_ND", C), in("NDC_ND", C)} > 0.
 :- #count {A : vrs(A), in("CEN_ND", A), out("NDC_ND", A)} = 0,
    #count {B : vrs(B), in("CEN_ND", B), in("NDC_ND", B)} > 0,
    #count {C : vrs(C), out("CEN_ND", C), in("NDC_ND", C)} > 0.
+:- #count {A : vrs(A), in("CEN_ND", A), out("NDC_ND", A)} > 0,
+   #count {B : vrs(B), in("CEN_ND", B), in("NDC_ND", B)} > 0,
+   #count {C : vrs(C), out("CEN_ND", C), in("NDC_ND", C)} = 0.
 ir(X, r682) :- in("CEN_ND", X), out("NDC_ND", X).
 :- #count {X : vrs(X), in("CEN_ND", X), in("NDC_ND", X)} = 0.
 ir(X, r682) :- out("CEN_ND", X), in("NDC_ND", X).
@@ -3806,13 +3806,13 @@ ir(X, r682) :- out("CEN_ND", X), in("NDC_ND", X).
    #count {C : vrs(C), out("CEN_NE", C), in("NDC_NE", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NE", A), out("NDC_NE", A)} > 0,
    #count {B : vrs(B), in("CEN_NE", B), in("NDC_NE", B)} > 0,
-   #count {C : vrs(C), out("CEN_NE", C), in("NDC_NE", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NE", A), out("NDC_NE", A)} > 0,
-   #count {B : vrs(B), in("CEN_NE", B), in("NDC_NE", B)} > 0,
    #count {C : vrs(C), out("CEN_NE", C), in("NDC_NE", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NE", A), out("NDC_NE", A)} = 0,
    #count {B : vrs(B), in("CEN_NE", B), in("NDC_NE", B)} > 0,
    #count {C : vrs(C), out("CEN_NE", C), in("NDC_NE", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NE", A), out("NDC_NE", A)} > 0,
+   #count {B : vrs(B), in("CEN_NE", B), in("NDC_NE", B)} > 0,
+   #count {C : vrs(C), out("CEN_NE", C), in("NDC_NE", C)} = 0.
 ir(X, r683) :- in("CEN_NE", X), out("NDC_NE", X).
 :- #count {X : vrs(X), in("CEN_NE", X), in("NDC_NE", X)} = 0.
 ir(X, r683) :- out("CEN_NE", X), in("NDC_NE", X).
@@ -3823,13 +3823,13 @@ ir(X, r683) :- out("CEN_NE", X), in("NDC_NE", X).
    #count {C : vrs(C), out("CEN_NH", C), in("NDC_NH", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NH", A), out("NDC_NH", A)} > 0,
    #count {B : vrs(B), in("CEN_NH", B), in("NDC_NH", B)} > 0,
-   #count {C : vrs(C), out("CEN_NH", C), in("NDC_NH", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NH", A), out("NDC_NH", A)} > 0,
-   #count {B : vrs(B), in("CEN_NH", B), in("NDC_NH", B)} > 0,
    #count {C : vrs(C), out("CEN_NH", C), in("NDC_NH", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NH", A), out("NDC_NH", A)} = 0,
    #count {B : vrs(B), in("CEN_NH", B), in("NDC_NH", B)} > 0,
    #count {C : vrs(C), out("CEN_NH", C), in("NDC_NH", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NH", A), out("NDC_NH", A)} > 0,
+   #count {B : vrs(B), in("CEN_NH", B), in("NDC_NH", B)} > 0,
+   #count {C : vrs(C), out("CEN_NH", C), in("NDC_NH", C)} = 0.
 ir(X, r684) :- in("CEN_NH", X), out("NDC_NH", X).
 :- #count {X : vrs(X), in("CEN_NH", X), in("NDC_NH", X)} = 0.
 ir(X, r684) :- out("CEN_NH", X), in("NDC_NH", X).
@@ -3840,13 +3840,13 @@ ir(X, r684) :- out("CEN_NH", X), in("NDC_NH", X).
    #count {C : vrs(C), out("CEN_NJ", C), in("NDC_NJ", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NJ", A), out("NDC_NJ", A)} > 0,
    #count {B : vrs(B), in("CEN_NJ", B), in("NDC_NJ", B)} > 0,
-   #count {C : vrs(C), out("CEN_NJ", C), in("NDC_NJ", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NJ", A), out("NDC_NJ", A)} > 0,
-   #count {B : vrs(B), in("CEN_NJ", B), in("NDC_NJ", B)} > 0,
    #count {C : vrs(C), out("CEN_NJ", C), in("NDC_NJ", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NJ", A), out("NDC_NJ", A)} = 0,
    #count {B : vrs(B), in("CEN_NJ", B), in("NDC_NJ", B)} > 0,
    #count {C : vrs(C), out("CEN_NJ", C), in("NDC_NJ", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NJ", A), out("NDC_NJ", A)} > 0,
+   #count {B : vrs(B), in("CEN_NJ", B), in("NDC_NJ", B)} > 0,
+   #count {C : vrs(C), out("CEN_NJ", C), in("NDC_NJ", C)} = 0.
 ir(X, r685) :- in("CEN_NJ", X), out("NDC_NJ", X).
 :- #count {X : vrs(X), in("CEN_NJ", X), in("NDC_NJ", X)} = 0.
 ir(X, r685) :- out("CEN_NJ", X), in("NDC_NJ", X).
@@ -3857,13 +3857,13 @@ ir(X, r685) :- out("CEN_NJ", X), in("NDC_NJ", X).
    #count {C : vrs(C), out("CEN_NM", C), in("NDC_NM", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NM", A), out("NDC_NM", A)} > 0,
    #count {B : vrs(B), in("CEN_NM", B), in("NDC_NM", B)} > 0,
-   #count {C : vrs(C), out("CEN_NM", C), in("NDC_NM", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NM", A), out("NDC_NM", A)} > 0,
-   #count {B : vrs(B), in("CEN_NM", B), in("NDC_NM", B)} > 0,
    #count {C : vrs(C), out("CEN_NM", C), in("NDC_NM", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NM", A), out("NDC_NM", A)} = 0,
    #count {B : vrs(B), in("CEN_NM", B), in("NDC_NM", B)} > 0,
    #count {C : vrs(C), out("CEN_NM", C), in("NDC_NM", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NM", A), out("NDC_NM", A)} > 0,
+   #count {B : vrs(B), in("CEN_NM", B), in("NDC_NM", B)} > 0,
+   #count {C : vrs(C), out("CEN_NM", C), in("NDC_NM", C)} = 0.
 ir(X, r686) :- in("CEN_NM", X), out("NDC_NM", X).
 :- #count {X : vrs(X), in("CEN_NM", X), in("NDC_NM", X)} = 0.
 ir(X, r686) :- out("CEN_NM", X), in("NDC_NM", X).
@@ -3874,13 +3874,13 @@ ir(X, r686) :- out("CEN_NM", X), in("NDC_NM", X).
    #count {C : vrs(C), out("CEN_NV", C), in("NDC_NV", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NV", A), out("NDC_NV", A)} > 0,
    #count {B : vrs(B), in("CEN_NV", B), in("NDC_NV", B)} > 0,
-   #count {C : vrs(C), out("CEN_NV", C), in("NDC_NV", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NV", A), out("NDC_NV", A)} > 0,
-   #count {B : vrs(B), in("CEN_NV", B), in("NDC_NV", B)} > 0,
    #count {C : vrs(C), out("CEN_NV", C), in("NDC_NV", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NV", A), out("NDC_NV", A)} = 0,
    #count {B : vrs(B), in("CEN_NV", B), in("NDC_NV", B)} > 0,
    #count {C : vrs(C), out("CEN_NV", C), in("NDC_NV", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NV", A), out("NDC_NV", A)} > 0,
+   #count {B : vrs(B), in("CEN_NV", B), in("NDC_NV", B)} > 0,
+   #count {C : vrs(C), out("CEN_NV", C), in("NDC_NV", C)} = 0.
 ir(X, r687) :- in("CEN_NV", X), out("NDC_NV", X).
 :- #count {X : vrs(X), in("CEN_NV", X), in("NDC_NV", X)} = 0.
 ir(X, r687) :- out("CEN_NV", X), in("NDC_NV", X).
@@ -3891,13 +3891,13 @@ ir(X, r687) :- out("CEN_NV", X), in("NDC_NV", X).
    #count {C : vrs(C), out("CEN_NY", C), in("NDC_NY", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NY", A), out("NDC_NY", A)} > 0,
    #count {B : vrs(B), in("CEN_NY", B), in("NDC_NY", B)} > 0,
-   #count {C : vrs(C), out("CEN_NY", C), in("NDC_NY", C)} = 0.
-:- #count {A : vrs(A), in("CEN_NY", A), out("NDC_NY", A)} > 0,
-   #count {B : vrs(B), in("CEN_NY", B), in("NDC_NY", B)} > 0,
    #count {C : vrs(C), out("CEN_NY", C), in("NDC_NY", C)} > 0.
 :- #count {A : vrs(A), in("CEN_NY", A), out("NDC_NY", A)} = 0,
    #count {B : vrs(B), in("CEN_NY", B), in("NDC_NY", B)} > 0,
    #count {C : vrs(C), out("CEN_NY", C), in("NDC_NY", C)} > 0.
+:- #count {A : vrs(A), in("CEN_NY", A), out("NDC_NY", A)} > 0,
+   #count {B : vrs(B), in("CEN_NY", B), in("NDC_NY", B)} > 0,
+   #count {C : vrs(C), out("CEN_NY", C), in("NDC_NY", C)} = 0.
 ir(X, r688) :- in("CEN_NY", X), out("NDC_NY", X).
 :- #count {X : vrs(X), in("CEN_NY", X), in("NDC_NY", X)} = 0.
 ir(X, r688) :- out("CEN_NY", X), in("NDC_NY", X).
@@ -3908,13 +3908,13 @@ ir(X, r688) :- out("CEN_NY", X), in("NDC_NY", X).
    #count {C : vrs(C), out("CEN_OH", C), in("NDC_OH", C)} > 0.
 :- #count {A : vrs(A), in("CEN_OH", A), out("NDC_OH", A)} > 0,
    #count {B : vrs(B), in("CEN_OH", B), in("NDC_OH", B)} > 0,
-   #count {C : vrs(C), out("CEN_OH", C), in("NDC_OH", C)} = 0.
-:- #count {A : vrs(A), in("CEN_OH", A), out("NDC_OH", A)} > 0,
-   #count {B : vrs(B), in("CEN_OH", B), in("NDC_OH", B)} > 0,
    #count {C : vrs(C), out("CEN_OH", C), in("NDC_OH", C)} > 0.
 :- #count {A : vrs(A), in("CEN_OH", A), out("NDC_OH", A)} = 0,
    #count {B : vrs(B), in("CEN_OH", B), in("NDC_OH", B)} > 0,
    #count {C : vrs(C), out("CEN_OH", C), in("NDC_OH", C)} > 0.
+:- #count {A : vrs(A), in("CEN_OH", A), out("NDC_OH", A)} > 0,
+   #count {B : vrs(B), in("CEN_OH", B), in("NDC_OH", B)} > 0,
+   #count {C : vrs(C), out("CEN_OH", C), in("NDC_OH", C)} = 0.
 ir(X, r689) :- in("CEN_OH", X), out("NDC_OH", X).
 :- #count {X : vrs(X), in("CEN_OH", X), in("NDC_OH", X)} = 0.
 ir(X, r689) :- out("CEN_OH", X), in("NDC_OH", X).
@@ -3925,13 +3925,13 @@ ir(X, r689) :- out("CEN_OH", X), in("NDC_OH", X).
    #count {C : vrs(C), out("CEN_OK", C), in("NDC_OK", C)} > 0.
 :- #count {A : vrs(A), in("CEN_OK", A), out("NDC_OK", A)} > 0,
    #count {B : vrs(B), in("CEN_OK", B), in("NDC_OK", B)} > 0,
-   #count {C : vrs(C), out("CEN_OK", C), in("NDC_OK", C)} = 0.
-:- #count {A : vrs(A), in("CEN_OK", A), out("NDC_OK", A)} > 0,
-   #count {B : vrs(B), in("CEN_OK", B), in("NDC_OK", B)} > 0,
    #count {C : vrs(C), out("CEN_OK", C), in("NDC_OK", C)} > 0.
 :- #count {A : vrs(A), in("CEN_OK", A), out("NDC_OK", A)} = 0,
    #count {B : vrs(B), in("CEN_OK", B), in("NDC_OK", B)} > 0,
    #count {C : vrs(C), out("CEN_OK", C), in("NDC_OK", C)} > 0.
+:- #count {A : vrs(A), in("CEN_OK", A), out("NDC_OK", A)} > 0,
+   #count {B : vrs(B), in("CEN_OK", B), in("NDC_OK", B)} > 0,
+   #count {C : vrs(C), out("CEN_OK", C), in("NDC_OK", C)} = 0.
 ir(X, r690) :- in("CEN_OK", X), out("NDC_OK", X).
 :- #count {X : vrs(X), in("CEN_OK", X), in("NDC_OK", X)} = 0.
 ir(X, r690) :- out("CEN_OK", X), in("NDC_OK", X).
@@ -3942,13 +3942,13 @@ ir(X, r690) :- out("CEN_OK", X), in("NDC_OK", X).
    #count {C : vrs(C), out("CEN_OR", C), in("NDC_OR", C)} > 0.
 :- #count {A : vrs(A), in("CEN_OR", A), out("NDC_OR", A)} > 0,
    #count {B : vrs(B), in("CEN_OR", B), in("NDC_OR", B)} > 0,
-   #count {C : vrs(C), out("CEN_OR", C), in("NDC_OR", C)} = 0.
-:- #count {A : vrs(A), in("CEN_OR", A), out("NDC_OR", A)} > 0,
-   #count {B : vrs(B), in("CEN_OR", B), in("NDC_OR", B)} > 0,
    #count {C : vrs(C), out("CEN_OR", C), in("NDC_OR", C)} > 0.
 :- #count {A : vrs(A), in("CEN_OR", A), out("NDC_OR", A)} = 0,
    #count {B : vrs(B), in("CEN_OR", B), in("NDC_OR", B)} > 0,
    #count {C : vrs(C), out("CEN_OR", C), in("NDC_OR", C)} > 0.
+:- #count {A : vrs(A), in("CEN_OR", A), out("NDC_OR", A)} > 0,
+   #count {B : vrs(B), in("CEN_OR", B), in("NDC_OR", B)} > 0,
+   #count {C : vrs(C), out("CEN_OR", C), in("NDC_OR", C)} = 0.
 ir(X, r691) :- in("CEN_OR", X), out("NDC_OR", X).
 :- #count {X : vrs(X), in("CEN_OR", X), in("NDC_OR", X)} = 0.
 ir(X, r691) :- out("CEN_OR", X), in("NDC_OR", X).
@@ -3959,13 +3959,13 @@ ir(X, r691) :- out("CEN_OR", X), in("NDC_OR", X).
    #count {C : vrs(C), out("CEN_PA", C), in("NDC_PA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_PA", A), out("NDC_PA", A)} > 0,
    #count {B : vrs(B), in("CEN_PA", B), in("NDC_PA", B)} > 0,
-   #count {C : vrs(C), out("CEN_PA", C), in("NDC_PA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_PA", A), out("NDC_PA", A)} > 0,
-   #count {B : vrs(B), in("CEN_PA", B), in("NDC_PA", B)} > 0,
    #count {C : vrs(C), out("CEN_PA", C), in("NDC_PA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_PA", A), out("NDC_PA", A)} = 0,
    #count {B : vrs(B), in("CEN_PA", B), in("NDC_PA", B)} > 0,
    #count {C : vrs(C), out("CEN_PA", C), in("NDC_PA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_PA", A), out("NDC_PA", A)} > 0,
+   #count {B : vrs(B), in("CEN_PA", B), in("NDC_PA", B)} > 0,
+   #count {C : vrs(C), out("CEN_PA", C), in("NDC_PA", C)} = 0.
 ir(X, r692) :- in("CEN_PA", X), out("NDC_PA", X).
 :- #count {X : vrs(X), in("CEN_PA", X), in("NDC_PA", X)} = 0.
 ir(X, r692) :- out("CEN_PA", X), in("NDC_PA", X).
@@ -3976,13 +3976,13 @@ ir(X, r692) :- out("CEN_PA", X), in("NDC_PA", X).
    #count {C : vrs(C), out("CEN_RI", C), in("NDC_RI", C)} > 0.
 :- #count {A : vrs(A), in("CEN_RI", A), out("NDC_RI", A)} > 0,
    #count {B : vrs(B), in("CEN_RI", B), in("NDC_RI", B)} > 0,
-   #count {C : vrs(C), out("CEN_RI", C), in("NDC_RI", C)} = 0.
-:- #count {A : vrs(A), in("CEN_RI", A), out("NDC_RI", A)} > 0,
-   #count {B : vrs(B), in("CEN_RI", B), in("NDC_RI", B)} > 0,
    #count {C : vrs(C), out("CEN_RI", C), in("NDC_RI", C)} > 0.
 :- #count {A : vrs(A), in("CEN_RI", A), out("NDC_RI", A)} = 0,
    #count {B : vrs(B), in("CEN_RI", B), in("NDC_RI", B)} > 0,
    #count {C : vrs(C), out("CEN_RI", C), in("NDC_RI", C)} > 0.
+:- #count {A : vrs(A), in("CEN_RI", A), out("NDC_RI", A)} > 0,
+   #count {B : vrs(B), in("CEN_RI", B), in("NDC_RI", B)} > 0,
+   #count {C : vrs(C), out("CEN_RI", C), in("NDC_RI", C)} = 0.
 ir(X, r693) :- in("CEN_RI", X), out("NDC_RI", X).
 :- #count {X : vrs(X), in("CEN_RI", X), in("NDC_RI", X)} = 0.
 ir(X, r693) :- out("CEN_RI", X), in("NDC_RI", X).
@@ -3993,13 +3993,13 @@ ir(X, r693) :- out("CEN_RI", X), in("NDC_RI", X).
    #count {C : vrs(C), out("CEN_SC", C), in("NDC_SC", C)} > 0.
 :- #count {A : vrs(A), in("CEN_SC", A), out("NDC_SC", A)} > 0,
    #count {B : vrs(B), in("CEN_SC", B), in("NDC_SC", B)} > 0,
-   #count {C : vrs(C), out("CEN_SC", C), in("NDC_SC", C)} = 0.
-:- #count {A : vrs(A), in("CEN_SC", A), out("NDC_SC", A)} > 0,
-   #count {B : vrs(B), in("CEN_SC", B), in("NDC_SC", B)} > 0,
    #count {C : vrs(C), out("CEN_SC", C), in("NDC_SC", C)} > 0.
 :- #count {A : vrs(A), in("CEN_SC", A), out("NDC_SC", A)} = 0,
    #count {B : vrs(B), in("CEN_SC", B), in("NDC_SC", B)} > 0,
    #count {C : vrs(C), out("CEN_SC", C), in("NDC_SC", C)} > 0.
+:- #count {A : vrs(A), in("CEN_SC", A), out("NDC_SC", A)} > 0,
+   #count {B : vrs(B), in("CEN_SC", B), in("NDC_SC", B)} > 0,
+   #count {C : vrs(C), out("CEN_SC", C), in("NDC_SC", C)} = 0.
 ir(X, r694) :- in("CEN_SC", X), out("NDC_SC", X).
 :- #count {X : vrs(X), in("CEN_SC", X), in("NDC_SC", X)} = 0.
 ir(X, r694) :- out("CEN_SC", X), in("NDC_SC", X).
@@ -4010,13 +4010,13 @@ ir(X, r694) :- out("CEN_SC", X), in("NDC_SC", X).
    #count {C : vrs(C), out("CEN_SD", C), in("NDC_SD", C)} > 0.
 :- #count {A : vrs(A), in("CEN_SD", A), out("NDC_SD", A)} > 0,
    #count {B : vrs(B), in("CEN_SD", B), in("NDC_SD", B)} > 0,
-   #count {C : vrs(C), out("CEN_SD", C), in("NDC_SD", C)} = 0.
-:- #count {A : vrs(A), in("CEN_SD", A), out("NDC_SD", A)} > 0,
-   #count {B : vrs(B), in("CEN_SD", B), in("NDC_SD", B)} > 0,
    #count {C : vrs(C), out("CEN_SD", C), in("NDC_SD", C)} > 0.
 :- #count {A : vrs(A), in("CEN_SD", A), out("NDC_SD", A)} = 0,
    #count {B : vrs(B), in("CEN_SD", B), in("NDC_SD", B)} > 0,
    #count {C : vrs(C), out("CEN_SD", C), in("NDC_SD", C)} > 0.
+:- #count {A : vrs(A), in("CEN_SD", A), out("NDC_SD", A)} > 0,
+   #count {B : vrs(B), in("CEN_SD", B), in("NDC_SD", B)} > 0,
+   #count {C : vrs(C), out("CEN_SD", C), in("NDC_SD", C)} = 0.
 ir(X, r695) :- in("CEN_SD", X), out("NDC_SD", X).
 :- #count {X : vrs(X), in("CEN_SD", X), in("NDC_SD", X)} = 0.
 ir(X, r695) :- out("CEN_SD", X), in("NDC_SD", X).
@@ -4027,13 +4027,13 @@ ir(X, r695) :- out("CEN_SD", X), in("NDC_SD", X).
    #count {C : vrs(C), out("CEN_TN", C), in("NDC_TN", C)} > 0.
 :- #count {A : vrs(A), in("CEN_TN", A), out("NDC_TN", A)} > 0,
    #count {B : vrs(B), in("CEN_TN", B), in("NDC_TN", B)} > 0,
-   #count {C : vrs(C), out("CEN_TN", C), in("NDC_TN", C)} = 0.
-:- #count {A : vrs(A), in("CEN_TN", A), out("NDC_TN", A)} > 0,
-   #count {B : vrs(B), in("CEN_TN", B), in("NDC_TN", B)} > 0,
    #count {C : vrs(C), out("CEN_TN", C), in("NDC_TN", C)} > 0.
 :- #count {A : vrs(A), in("CEN_TN", A), out("NDC_TN", A)} = 0,
    #count {B : vrs(B), in("CEN_TN", B), in("NDC_TN", B)} > 0,
    #count {C : vrs(C), out("CEN_TN", C), in("NDC_TN", C)} > 0.
+:- #count {A : vrs(A), in("CEN_TN", A), out("NDC_TN", A)} > 0,
+   #count {B : vrs(B), in("CEN_TN", B), in("NDC_TN", B)} > 0,
+   #count {C : vrs(C), out("CEN_TN", C), in("NDC_TN", C)} = 0.
 ir(X, r696) :- in("CEN_TN", X), out("NDC_TN", X).
 :- #count {X : vrs(X), in("CEN_TN", X), in("NDC_TN", X)} = 0.
 ir(X, r696) :- out("CEN_TN", X), in("NDC_TN", X).
@@ -4044,13 +4044,13 @@ ir(X, r696) :- out("CEN_TN", X), in("NDC_TN", X).
    #count {C : vrs(C), out("CEN_TX", C), in("NDC_TX", C)} > 0.
 :- #count {A : vrs(A), in("CEN_TX", A), out("NDC_TX", A)} > 0,
    #count {B : vrs(B), in("CEN_TX", B), in("NDC_TX", B)} > 0,
-   #count {C : vrs(C), out("CEN_TX", C), in("NDC_TX", C)} = 0.
-:- #count {A : vrs(A), in("CEN_TX", A), out("NDC_TX", A)} > 0,
-   #count {B : vrs(B), in("CEN_TX", B), in("NDC_TX", B)} > 0,
    #count {C : vrs(C), out("CEN_TX", C), in("NDC_TX", C)} > 0.
 :- #count {A : vrs(A), in("CEN_TX", A), out("NDC_TX", A)} = 0,
    #count {B : vrs(B), in("CEN_TX", B), in("NDC_TX", B)} > 0,
    #count {C : vrs(C), out("CEN_TX", C), in("NDC_TX", C)} > 0.
+:- #count {A : vrs(A), in("CEN_TX", A), out("NDC_TX", A)} > 0,
+   #count {B : vrs(B), in("CEN_TX", B), in("NDC_TX", B)} > 0,
+   #count {C : vrs(C), out("CEN_TX", C), in("NDC_TX", C)} = 0.
 ir(X, r697) :- in("CEN_TX", X), out("NDC_TX", X).
 :- #count {X : vrs(X), in("CEN_TX", X), in("NDC_TX", X)} = 0.
 ir(X, r697) :- out("CEN_TX", X), in("NDC_TX", X).
@@ -4061,13 +4061,13 @@ ir(X, r697) :- out("CEN_TX", X), in("NDC_TX", X).
    #count {C : vrs(C), out("CEN_UT", C), in("NDC_UT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_UT", A), out("NDC_UT", A)} > 0,
    #count {B : vrs(B), in("CEN_UT", B), in("NDC_UT", B)} > 0,
-   #count {C : vrs(C), out("CEN_UT", C), in("NDC_UT", C)} = 0.
-:- #count {A : vrs(A), in("CEN_UT", A), out("NDC_UT", A)} > 0,
-   #count {B : vrs(B), in("CEN_UT", B), in("NDC_UT", B)} > 0,
    #count {C : vrs(C), out("CEN_UT", C), in("NDC_UT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_UT", A), out("NDC_UT", A)} = 0,
    #count {B : vrs(B), in("CEN_UT", B), in("NDC_UT", B)} > 0,
    #count {C : vrs(C), out("CEN_UT", C), in("NDC_UT", C)} > 0.
+:- #count {A : vrs(A), in("CEN_UT", A), out("NDC_UT", A)} > 0,
+   #count {B : vrs(B), in("CEN_UT", B), in("NDC_UT", B)} > 0,
+   #count {C : vrs(C), out("CEN_UT", C), in("NDC_UT", C)} = 0.
 ir(X, r698) :- in("CEN_UT", X), out("NDC_UT", X).
 :- #count {X : vrs(X), in("CEN_UT", X), in("NDC_UT", X)} = 0.
 ir(X, r698) :- out("CEN_UT", X), in("NDC_UT", X).
@@ -4078,13 +4078,13 @@ ir(X, r698) :- out("CEN_UT", X), in("NDC_UT", X).
    #count {C : vrs(C), out("CEN_VA", C), in("NDC_VA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_VA", A), out("NDC_VA", A)} > 0,
    #count {B : vrs(B), in("CEN_VA", B), in("NDC_VA", B)} > 0,
-   #count {C : vrs(C), out("CEN_VA", C), in("NDC_VA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_VA", A), out("NDC_VA", A)} > 0,
-   #count {B : vrs(B), in("CEN_VA", B), in("NDC_VA", B)} > 0,
    #count {C : vrs(C), out("CEN_VA", C), in("NDC_VA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_VA", A), out("NDC_VA", A)} = 0,
    #count {B : vrs(B), in("CEN_VA", B), in("NDC_VA", B)} > 0,
    #count {C : vrs(C), out("CEN_VA", C), in("NDC_VA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_VA", A), out("NDC_VA", A)} > 0,
+   #count {B : vrs(B), in("CEN_VA", B), in("NDC_VA", B)} > 0,
+   #count {C : vrs(C), out("CEN_VA", C), in("NDC_VA", C)} = 0.
 ir(X, r699) :- in("CEN_VA", X), out("NDC_VA", X).
 :- #count {X : vrs(X), in("CEN_VA", X), in("NDC_VA", X)} = 0.
 ir(X, r699) :- out("CEN_VA", X), in("NDC_VA", X).
@@ -4095,13 +4095,13 @@ ir(X, r699) :- out("CEN_VA", X), in("NDC_VA", X).
    #count {C : vrs(C), out("CEN_VT", C), in("NDC_VT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_VT", A), out("NDC_VT", A)} > 0,
    #count {B : vrs(B), in("CEN_VT", B), in("NDC_VT", B)} > 0,
-   #count {C : vrs(C), out("CEN_VT", C), in("NDC_VT", C)} = 0.
-:- #count {A : vrs(A), in("CEN_VT", A), out("NDC_VT", A)} > 0,
-   #count {B : vrs(B), in("CEN_VT", B), in("NDC_VT", B)} > 0,
    #count {C : vrs(C), out("CEN_VT", C), in("NDC_VT", C)} > 0.
 :- #count {A : vrs(A), in("CEN_VT", A), out("NDC_VT", A)} = 0,
    #count {B : vrs(B), in("CEN_VT", B), in("NDC_VT", B)} > 0,
    #count {C : vrs(C), out("CEN_VT", C), in("NDC_VT", C)} > 0.
+:- #count {A : vrs(A), in("CEN_VT", A), out("NDC_VT", A)} > 0,
+   #count {B : vrs(B), in("CEN_VT", B), in("NDC_VT", B)} > 0,
+   #count {C : vrs(C), out("CEN_VT", C), in("NDC_VT", C)} = 0.
 ir(X, r700) :- in("CEN_VT", X), out("NDC_VT", X).
 :- #count {X : vrs(X), in("CEN_VT", X), in("NDC_VT", X)} = 0.
 ir(X, r700) :- out("CEN_VT", X), in("NDC_VT", X).
@@ -4112,13 +4112,13 @@ ir(X, r700) :- out("CEN_VT", X), in("NDC_VT", X).
    #count {C : vrs(C), out("CEN_WA", C), in("NDC_WA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WA", A), out("NDC_WA", A)} > 0,
    #count {B : vrs(B), in("CEN_WA", B), in("NDC_WA", B)} > 0,
-   #count {C : vrs(C), out("CEN_WA", C), in("NDC_WA", C)} = 0.
-:- #count {A : vrs(A), in("CEN_WA", A), out("NDC_WA", A)} > 0,
-   #count {B : vrs(B), in("CEN_WA", B), in("NDC_WA", B)} > 0,
    #count {C : vrs(C), out("CEN_WA", C), in("NDC_WA", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WA", A), out("NDC_WA", A)} = 0,
    #count {B : vrs(B), in("CEN_WA", B), in("NDC_WA", B)} > 0,
    #count {C : vrs(C), out("CEN_WA", C), in("NDC_WA", C)} > 0.
+:- #count {A : vrs(A), in("CEN_WA", A), out("NDC_WA", A)} > 0,
+   #count {B : vrs(B), in("CEN_WA", B), in("NDC_WA", B)} > 0,
+   #count {C : vrs(C), out("CEN_WA", C), in("NDC_WA", C)} = 0.
 ir(X, r701) :- in("CEN_WA", X), out("NDC_WA", X).
 :- #count {X : vrs(X), in("CEN_WA", X), in("NDC_WA", X)} = 0.
 ir(X, r701) :- out("CEN_WA", X), in("NDC_WA", X).
@@ -4129,13 +4129,13 @@ ir(X, r701) :- out("CEN_WA", X), in("NDC_WA", X).
    #count {C : vrs(C), out("CEN_WI", C), in("NDC_WI", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WI", A), out("NDC_WI", A)} > 0,
    #count {B : vrs(B), in("CEN_WI", B), in("NDC_WI", B)} > 0,
-   #count {C : vrs(C), out("CEN_WI", C), in("NDC_WI", C)} = 0.
-:- #count {A : vrs(A), in("CEN_WI", A), out("NDC_WI", A)} > 0,
-   #count {B : vrs(B), in("CEN_WI", B), in("NDC_WI", B)} > 0,
    #count {C : vrs(C), out("CEN_WI", C), in("NDC_WI", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WI", A), out("NDC_WI", A)} = 0,
    #count {B : vrs(B), in("CEN_WI", B), in("NDC_WI", B)} > 0,
    #count {C : vrs(C), out("CEN_WI", C), in("NDC_WI", C)} > 0.
+:- #count {A : vrs(A), in("CEN_WI", A), out("NDC_WI", A)} > 0,
+   #count {B : vrs(B), in("CEN_WI", B), in("NDC_WI", B)} > 0,
+   #count {C : vrs(C), out("CEN_WI", C), in("NDC_WI", C)} = 0.
 ir(X, r702) :- in("CEN_WI", X), out("NDC_WI", X).
 :- #count {X : vrs(X), in("CEN_WI", X), in("NDC_WI", X)} = 0.
 ir(X, r702) :- out("CEN_WI", X), in("NDC_WI", X).
@@ -4146,13 +4146,13 @@ ir(X, r702) :- out("CEN_WI", X), in("NDC_WI", X).
    #count {C : vrs(C), out("CEN_WV", C), in("NDC_WV", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WV", A), out("NDC_WV", A)} > 0,
    #count {B : vrs(B), in("CEN_WV", B), in("NDC_WV", B)} > 0,
-   #count {C : vrs(C), out("CEN_WV", C), in("NDC_WV", C)} = 0.
-:- #count {A : vrs(A), in("CEN_WV", A), out("NDC_WV", A)} > 0,
-   #count {B : vrs(B), in("CEN_WV", B), in("NDC_WV", B)} > 0,
    #count {C : vrs(C), out("CEN_WV", C), in("NDC_WV", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WV", A), out("NDC_WV", A)} = 0,
    #count {B : vrs(B), in("CEN_WV", B), in("NDC_WV", B)} > 0,
    #count {C : vrs(C), out("CEN_WV", C), in("NDC_WV", C)} > 0.
+:- #count {A : vrs(A), in("CEN_WV", A), out("NDC_WV", A)} > 0,
+   #count {B : vrs(B), in("CEN_WV", B), in("NDC_WV", B)} > 0,
+   #count {C : vrs(C), out("CEN_WV", C), in("NDC_WV", C)} = 0.
 ir(X, r703) :- in("CEN_WV", X), out("NDC_WV", X).
 :- #count {X : vrs(X), in("CEN_WV", X), in("NDC_WV", X)} = 0.
 ir(X, r703) :- out("CEN_WV", X), in("NDC_WV", X).
@@ -4163,39 +4163,164 @@ ir(X, r703) :- out("CEN_WV", X), in("NDC_WV", X).
    #count {C : vrs(C), out("CEN_WY", C), in("NDC_WY", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WY", A), out("NDC_WY", A)} > 0,
    #count {B : vrs(B), in("CEN_WY", B), in("NDC_WY", B)} > 0,
-   #count {C : vrs(C), out("CEN_WY", C), in("NDC_WY", C)} = 0.
-:- #count {A : vrs(A), in("CEN_WY", A), out("NDC_WY", A)} > 0,
-   #count {B : vrs(B), in("CEN_WY", B), in("NDC_WY", B)} > 0,
    #count {C : vrs(C), out("CEN_WY", C), in("NDC_WY", C)} > 0.
 :- #count {A : vrs(A), in("CEN_WY", A), out("NDC_WY", A)} = 0,
    #count {B : vrs(B), in("CEN_WY", B), in("NDC_WY", B)} > 0,
    #count {C : vrs(C), out("CEN_WY", C), in("NDC_WY", C)} > 0.
+:- #count {A : vrs(A), in("CEN_WY", A), out("NDC_WY", A)} > 0,
+   #count {B : vrs(B), in("CEN_WY", B), in("NDC_WY", B)} > 0,
+   #count {C : vrs(C), out("CEN_WY", C), in("NDC_WY", C)} = 0.
 ir(X, r704) :- in("CEN_WY", X), out("NDC_WY", X).
 :- #count {X : vrs(X), in("CEN_WY", X), in("NDC_WY", X)} = 0.
 ir(X, r704) :- out("CEN_WY", X), in("NDC_WY", X).
 
 % Decoding Rules
-:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "="), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
 :- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, ">"), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, ">"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "<"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "o"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "!"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "!"), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "!"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
 
-:- not rel(X, Y, "="), not rel(X, Y, ">"), not rel(X, Y, "<"), not rel(X, Y, "o"), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2.
+:- not rel(X, Y, "="), not rel(X, Y, "!"), not rel(X, Y, "o"), not rel(X, Y, "<"), not rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), N1 < N2.
 
 rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
-rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
-rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
-rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
 rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
 
 hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R).
 hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R).
 hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R).
 
+
+% Child Parent Rules for Viz
+
+bl("CEN_USA", "CEN_Northeast").
+bl("CEN_USA", "CEN_Midwest").
+bl("CEN_USA", "CEN_South").
+bl("CEN_USA", "CEN_West").
+bl("CEN_Northeast", "CEN_CT").
+bl("CEN_Northeast", "CEN_MA").
+bl("CEN_Northeast", "CEN_ME").
+bl("CEN_Northeast", "CEN_NH").
+bl("CEN_Northeast", "CEN_NJ").
+bl("CEN_Northeast", "CEN_NY").
+bl("CEN_Northeast", "CEN_PA").
+bl("CEN_Northeast", "CEN_RI").
+bl("CEN_Northeast", "CEN_VT").
+bl("CEN_Midwest", "CEN_IL").
+bl("CEN_Midwest", "CEN_IN").
+bl("CEN_Midwest", "CEN_IA").
+bl("CEN_Midwest", "CEN_KS").
+bl("CEN_Midwest", "CEN_MI").
+bl("CEN_Midwest", "CEN_MN").
+bl("CEN_Midwest", "CEN_MO").
+bl("CEN_Midwest", "CEN_NE").
+bl("CEN_Midwest", "CEN_ND").
+bl("CEN_Midwest", "CEN_OH").
+bl("CEN_Midwest", "CEN_SD").
+bl("CEN_Midwest", "CEN_WI").
+bl("CEN_South", "CEN_AL").
+bl("CEN_South", "CEN_AR").
+bl("CEN_South", "CEN_DE").
+bl("CEN_South", "CEN_DC").
+bl("CEN_South", "CEN_FL").
+bl("CEN_South", "CEN_GA").
+bl("CEN_South", "CEN_KY").
+bl("CEN_South", "CEN_LA").
+bl("CEN_South", "CEN_MD").
+bl("CEN_South", "CEN_MS").
+bl("CEN_South", "CEN_NC").
+bl("CEN_South", "CEN_OK").
+bl("CEN_South", "CEN_SC").
+bl("CEN_South", "CEN_TN").
+bl("CEN_South", "CEN_TX").
+bl("CEN_South", "CEN_VA").
+bl("CEN_South", "CEN_WV").
+bl("CEN_West", "CEN_AZ").
+bl("CEN_West", "CEN_CA").
+bl("CEN_West", "CEN_CO").
+bl("CEN_West", "CEN_ID").
+bl("CEN_West", "CEN_MT").
+bl("CEN_West", "CEN_NV").
+bl("CEN_West", "CEN_NM").
+bl("CEN_West", "CEN_OR").
+bl("CEN_West", "CEN_UT").
+bl("CEN_West", "CEN_WA").
+bl("CEN_West", "CEN_WY").
+bl("NDC_USA", "NDC_Midwest").
+bl("NDC_USA", "NDC_Northeast").
+bl("NDC_USA", "NDC_Southeast").
+bl("NDC_USA", "NDC_Southwest").
+bl("NDC_USA", "NDC_West").
+bl("NDC_Midwest", "NDC_IA").
+bl("NDC_Midwest", "NDC_IL").
+bl("NDC_Midwest", "NDC_IN").
+bl("NDC_Midwest", "NDC_KS").
+bl("NDC_Midwest", "NDC_MI").
+bl("NDC_Midwest", "NDC_MN").
+bl("NDC_Midwest", "NDC_MO").
+bl("NDC_Midwest", "NDC_ND").
+bl("NDC_Midwest", "NDC_NE").
+bl("NDC_Midwest", "NDC_OH").
+bl("NDC_Midwest", "NDC_SD").
+bl("NDC_Midwest", "NDC_WI").
+bl("NDC_Northeast", "NDC_CT").
+bl("NDC_Northeast", "NDC_DC").
+bl("NDC_Northeast", "NDC_DE").
+bl("NDC_Northeast", "NDC_MD").
+bl("NDC_Northeast", "NDC_MA").
+bl("NDC_Northeast", "NDC_ME").
+bl("NDC_Northeast", "NDC_NH").
+bl("NDC_Northeast", "NDC_NJ").
+bl("NDC_Northeast", "NDC_NY").
+bl("NDC_Northeast", "NDC_PA").
+bl("NDC_Northeast", "NDC_RI").
+bl("NDC_Northeast", "NDC_VT").
+bl("NDC_Southeast", "NDC_AL").
+bl("NDC_Southeast", "NDC_AR").
+bl("NDC_Southeast", "NDC_FL").
+bl("NDC_Southeast", "NDC_GA").
+bl("NDC_Southeast", "NDC_KY").
+bl("NDC_Southeast", "NDC_LA").
+bl("NDC_Southeast", "NDC_MS").
+bl("NDC_Southeast", "NDC_NC").
+bl("NDC_Southeast", "NDC_SC").
+bl("NDC_Southeast", "NDC_TN").
+bl("NDC_Southeast", "NDC_VA").
+bl("NDC_Southeast", "NDC_WV").
+bl("NDC_Southwest", "NDC_AZ").
+bl("NDC_Southwest", "NDC_NM").
+bl("NDC_Southwest", "NDC_OK").
+bl("NDC_Southwest", "NDC_TX").
+bl("NDC_West", "NDC_CA").
+bl("NDC_West", "NDC_CO").
+bl("NDC_West", "NDC_ID").
+bl("NDC_West", "NDC_MT").
+bl("NDC_West", "NDC_NV").
+bl("NDC_West", "NDC_OR").
+bl("NDC_West", "NDC_WA").
+bl("NDC_West", "NDC_WY").
+bl("NDC_West", "NDC_UT").
+
 #show rel/3.
+eq(A, B) :- rel(A, B, "=").
+po(A, B) :- rel(A, B, "o").
+dr(A, B) :- rel(A, B, "!").
+pp(A, B) :- rel(A, B, "<").
+pp(B, A) :- rel(A, B, ">").
+pp(Y,X) :- bl(X,Y).
+u(X) :- bl(_,X).
+u(X) :- bl(X,_).
+#show eq/2.
+#show po/2.
+#show pp/2.
+#show dr/2.
+#show bl/2.
+#show u/1.

@@ -1,9 +1,5 @@
 r(1..24).
 
-%  Euler Bit
-bit(M, 0, V) :- r(M), M1=M/1, V = M1 \ 5.
-bit(M, 1, V) :- r(M), M1=M/5, V = M1 \ 5.
-
 % Region Meanings
 in(X, M) :- r(M), concept(X, T, N), N1=N+1, bit(M, T, N1).
 out(X, M) :- r(M), concept(X, T, N), N1=N+1, not bit(M, T, N1).
@@ -20,6 +16,12 @@ ir(X, X) :- not vrs(X), r(X).
 concept2(A, B) :- concept(A,B,_).
 
 % Taxonomy Description
+
+%  Euler Bit
+bit(M, 0, V) :- r(M), M1=M/1, V = M1 \ 5.
+
+%  Euler Bit
+bit(M, 1, V) :- r(M), M1=M/5, V = M1 \ 5.
 
 concept2("1_A", 0).
 concept("1_B", 0, 0).
@@ -147,6 +149,9 @@ ir(X, r20) :- in("1_A", X), out("2_A", X).
 vr(X, r20) ; ir(X, r20) :- out("1_A", X), in("2_A", X).
 
 % "1_B" ['='] "2_B"
+:- #count {A : vrs(A), in("1_B", A), out("2_B", A)} > 0,
+   #count {B : vrs(B), in("1_B", B), in("2_B", B)} > 0,
+   #count {C : vrs(C), out("1_B", C), in("2_B", C)} > 0.
 :- #count {A : vrs(A), in("1_B", A), out("2_B", A)} = 0,
    #count {B : vrs(B), in("1_B", B), in("2_B", B)} > 0,
    #count {C : vrs(C), out("1_B", C), in("2_B", C)} > 0.
@@ -156,20 +161,17 @@ vr(X, r20) ; ir(X, r20) :- out("1_A", X), in("2_A", X).
 :- #count {A : vrs(A), in("1_B", A), out("2_B", A)} > 0,
    #count {B : vrs(B), in("1_B", B), in("2_B", B)} > 0,
    #count {C : vrs(C), out("1_B", C), in("2_B", C)} = 0.
-:- #count {A : vrs(A), in("1_B", A), out("2_B", A)} > 0,
-   #count {B : vrs(B), in("1_B", B), in("2_B", B)} > 0,
-   #count {C : vrs(C), out("1_B", C), in("2_B", C)} > 0.
 ir(X, r21) :- in("1_B", X), out("2_B", X).
 :- #count {X : vrs(X), in("1_B", X), in("2_B", X)} = 0.
 ir(X, r21) :- out("1_B", X), in("2_B", X).
 
 % "1_C" ['<', 'o'] "2_F"
-:- #count {A : vrs(A), in("1_C", A), out("2_F", A)} = 0,
-   #count {B : vrs(B), in("1_C", B), in("2_F", B)} > 0,
-   #count {C : vrs(C), out("1_C", C), in("2_F", C)} = 0.
 :- #count {A : vrs(A), in("1_C", A), out("2_F", A)} > 0,
    #count {B : vrs(B), in("1_C", B), in("2_F", B)} = 0,
    #count {C : vrs(C), out("1_C", C), in("2_F", C)} > 0.
+:- #count {A : vrs(A), in("1_C", A), out("2_F", A)} = 0,
+   #count {B : vrs(B), in("1_C", B), in("2_F", B)} > 0,
+   #count {C : vrs(C), out("1_C", C), in("2_F", C)} = 0.
 :- #count {A : vrs(A), in("1_C", A), out("2_F", A)} > 0,
    #count {B : vrs(B), in("1_C", B), in("2_F", B)} > 0,
    #count {C : vrs(C), out("1_C", C), in("2_F", C)} = 0.
@@ -178,6 +180,9 @@ vr(X, r22) ; ir(X, r22) :- in("1_C", X), out("2_F", X).
 :- #count {X : vrs(X), out("1_C", X), in("2_F", X)} = 0.
 
 % "1_D" ['='] "2_D"
+:- #count {A : vrs(A), in("1_D", A), out("2_D", A)} > 0,
+   #count {B : vrs(B), in("1_D", B), in("2_D", B)} > 0,
+   #count {C : vrs(C), out("1_D", C), in("2_D", C)} > 0.
 :- #count {A : vrs(A), in("1_D", A), out("2_D", A)} = 0,
    #count {B : vrs(B), in("1_D", B), in("2_D", B)} > 0,
    #count {C : vrs(C), out("1_D", C), in("2_D", C)} > 0.
@@ -187,9 +192,6 @@ vr(X, r22) ; ir(X, r22) :- in("1_C", X), out("2_F", X).
 :- #count {A : vrs(A), in("1_D", A), out("2_D", A)} > 0,
    #count {B : vrs(B), in("1_D", B), in("2_D", B)} > 0,
    #count {C : vrs(C), out("1_D", C), in("2_D", C)} = 0.
-:- #count {A : vrs(A), in("1_D", A), out("2_D", A)} > 0,
-   #count {B : vrs(B), in("1_D", B), in("2_D", B)} > 0,
-   #count {C : vrs(C), out("1_D", C), in("2_D", C)} > 0.
 ir(X, r23) :- in("1_D", X), out("2_D", X).
 :- #count {X : vrs(X), in("1_D", X), in("2_D", X)} = 0.
 ir(X, r23) :- out("1_D", X), in("2_D", X).
@@ -209,27 +211,53 @@ vr(X, r24) ; ir(X, r24) :- in("1_E", X), out("2_G", X).
 vr(X, r24) ; ir(X, r24) :- out("1_E", X), in("2_G", X).
 
 % Decoding Rules
-:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, ">"), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, ">"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, ">"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "!"), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "!"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "!"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "<"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
 :- rel(X, Y, "<"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "o"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "!"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
 
-:- not rel(X, Y, ">"), not rel(X, Y, "!"), not rel(X, Y, "<"), not rel(X, Y, "o"), not rel(X, Y, "="), concept2(X, N1), concept2(Y, N2), N1 < N2.
+:- not rel(X, Y, "<"), not rel(X, Y, "="), not rel(X, Y, "o"), not rel(X, Y, "!"), not rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2), N1 < N2.
 
-rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
-rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2).
 rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
-rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
 rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
+rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
 
 hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R).
 hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R).
 hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R).
 
+
+% Child Parent Rules for Viz
+
+bl("1_A", "1_B").
+bl("1_A", "1_C").
+bl("1_A", "1_D").
+bl("1_A", "1_E").
+bl("2_A", "2_B").
+bl("2_A", "2_D").
+bl("2_A", "2_F").
+bl("2_A", "2_G").
+
 #show rel/3.
+eq(A, B) :- rel(A, B, "=").
+po(A, B) :- rel(A, B, "o").
+dr(A, B) :- rel(A, B, "!").
+pp(A, B) :- rel(A, B, "<").
+pp(B, A) :- rel(A, B, ">").
+pp(Y,X) :- bl(X,Y).
+u(X) :- bl(_,X).
+u(X) :- bl(X,_).
+#show eq/2.
+#show po/2.
+#show pp/2.
+#show dr/2.
+#show bl/2.
+#show u/1.
