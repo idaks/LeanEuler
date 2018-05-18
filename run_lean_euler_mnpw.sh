@@ -10,4 +10,4 @@ python3 preprocess_clean_tax.py $CLEAN_TAX_FILE $PROJECT_NAME
 python3 cleanTax_parse.py $PROJECT_NAME
 
 #Generate the clingo file for the provided taxonomy alignment problem. Stores the generated clingo file in Clingo_Input_Files directory as $PROJECT_NAME.lp4
-python3 generate_ASP.py $PROJECT_NAME
+python3 generate_ASP.py -encoding mnpw $PROJECT_NAME
