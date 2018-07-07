@@ -13,17 +13,21 @@ def __main__():
 	fname = args.fname
 	orig_data = open(fname).readlines()
 
-	final_data = []
-
-	for i, line in enumerate(orig_data):
-		if (line.strip() == '') or (line.strip()[0] == '#'):
-			continue
-		else:
-			final_data.append(line)
+	final_data = preprocess_clean_tax(orig_data)
 
 	temp_data = open("{}/{}.txt".format(OUTPUT_FOLDER, args.project_name), 'w')
 	temp_data.writelines(final_data)
 	temp_data.close()
+
+def preprocess_clean_tax(clean_tax_lines):
+
+	def is_an_empty_line(line):
+		return line.strip() == ''
+	def is_a_comment(line):
+		return line.strip()[0] == '#'
+
+	preprocessed_data = [line for line in clean_tax_lines if (not is_an_empty_line(line)) and (not is_a_comment(line))]
+	return preprocessed_data
 
 if __name__ == '__main__':
 	__main__()

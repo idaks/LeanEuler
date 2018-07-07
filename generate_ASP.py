@@ -44,20 +44,26 @@ def __main__():
         print("Could not find the anytree file. Check the project/session name.")
         exit(1)
 
+    rules_to_write = generate_asp(df, anytree_, args.encoding)
+
+    clingo_file = open(CLINGO_FILES_FOLDER + '/' + str(project_name) + '.lp4', 'w')
+    clingo_file.writelines("\n".join(rules_to_write))
+    clingo_file.close()
+
+
+def generate_asp(relations_data, anytree_data, encoding='mnpw'):
+
     get_rules_func = None
-    if args.encoding == 'rcc':
+    if encoding == 'rcc':
         from rcc_encoding import get_rules
         get_rules_func = get_rules
     else:
         from mnpw_encoding import get_rules
         get_rules_func = get_rules
 
-    rules_to_write = get_rules_func(df, anytree_)
+    rules_to_write = get_rules_func(relations_data, anytree_data)
 
-    clingo_file = open(CLINGO_FILES_FOLDER + '/' + str(project_name) + '.lp4', 'w')
-    clingo_file.writelines("\n".join(rules_to_write))
-    clingo_file.close()
-
+    return rules_to_write
 
 
 if __name__ == '__main__':

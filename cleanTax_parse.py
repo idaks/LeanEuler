@@ -31,9 +31,9 @@ EQUALS = "="
 DISJOINT = "!"
 OVERLAPS = "o"
 
-ANYTREE_DATA = None
-GRAPHVIZ_DATA = None
-RELATION_DATA = None
+# ANYTREE_DATA = None
+# GRAPHVIZ_DATA = None
+# RELATION_DATA = None
 
 def gen_node_name(node: str, tax_name: str):
 
@@ -63,7 +63,8 @@ class AntlrCleanTaxListener(CleanTaxListener):
 					 'graphviz_tree' : Digraph(comment='Taxonomies'),
 					 'current_taxonomy': None,
 					 'current_articulation': None,
-					 'articulation_list' : []
+					 'articulation_list' : [],
+					 'relation_data' : None,
 					}
 
 	def enterTax_desc(self, ctx):
@@ -166,17 +167,17 @@ class AntlrCleanTaxListener(CleanTaxListener):
 		self.data['current_relation'] = None
 
 	def exitCt_input(self, ctx):
-		#print (self.data['taxonomies'])
-		#print (self.data['current_taxonomy'])
-		global RELATION_DATA
-		global ANYTREE_DATA
-		#self.data['graphviz_tree'].render(view=True)
-		#print (self.data['graphviz_tree'].source)
-		df = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
-		RELATION_DATA = df
-		ANYTREE_DATA = self.data['taxonomies']
-		#print (RELATION_DATA)
-		self.data = {}
+		# print (self.data['taxonomies'])
+		# print (self.data['current_taxonomy'])
+		# global RELATION_DATA
+		# global ANYTREE_DATA
+		# self.data['graphviz_tree'].render(view=True)
+		# print (self.data['graphviz_tree'].source)
+		self.data['relation_data'] = pd.DataFrame(self.data['articulation_list'], columns = ['Node1', 'Relation', 'Node2'])
+		# RELATION_DATA = self.data['relation_data']
+		# ANYTREE_DATA = self.data['taxonomies']
+		# print (RELATION_DATA)
+		# self.data = {}
 
 
 def __main__():
@@ -195,21 +196,27 @@ def __main__():
 		exit(1)
 
 	file = FileStream(fname)
-	lexer = CleanTaxLexer(file)
-	stream = CommonTokenStream(lexer)
-	parser = CleanTaxParser(stream)
-	tree = parser.ct_input()
-	#print (Trees.toStringTree(tree, None, parser))
-	lean_euler = AntlrCleanTaxListener()
-	walker = ParseTreeWalker()
-	walker.walk(lean_euler, tree)
+	relation_data, anytree_data = parse_cleantax(file)
 
 	pickle_folder = PICKLE_FOLDER + '/' + str(project_name)
 	mkdir_p(pickle_folder)
 	with open(pickle_folder + '/' + TAX_DESC_PANDAS_FILE + '.pkl', 'wb') as f:
-		pickle.dump(RELATION_DATA, f)
+		pickle.dump(relation_data, f)
 	with open(pickle_folder + '/' + ANYTREE_FILE + '.pkl', 'wb') as f:
-		pickle.dump(ANYTREE_DATA, f)
+		pickle.dump(anytree_data, f)
+
+def parse_cleantax(filestream):
+
+	lexer = CleanTaxLexer(filestream)
+	stream = CommonTokenStream(lexer)
+	parser = CleanTaxParser(stream)
+	tree = parser.ct_input()
+	#print (Trees.toStringTree(tree, None, parser))
+	clean_tax_listener = AntlrCleanTaxListener()
+	walker = ParseTreeWalker()
+	walker.walk(clean_tax_listener, tree)
+
+	return clean_tax_listener.data['relation_data'], clean_tax_listener.data['taxonomies']  # Could be a potential bug where this is deleted as the object goes out of scope
 
 if __name__ == '__main__':
 	__main__()
