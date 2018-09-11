@@ -5,7 +5,7 @@ import pickle
 import anytree
 import numpy as np
 import os
-from helper import lineno, isfloat, mkdir_p
+from lean_euler_helper_funcs import lineno, isfloat, mkdir_p
 
 PICKLE_FOLDER = "Temp_Pickle_Data"
 TAX_DESC_PANDAS_FILE = 'taxDesc'

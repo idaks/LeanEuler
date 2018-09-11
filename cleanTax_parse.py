@@ -6,7 +6,7 @@ import pickle
 from CleanTaxLexer import CleanTaxLexer
 from CleanTaxParser import CleanTaxParser
 from CleanTaxListener import CleanTaxListener
-from helper import mkdir_p
+from lean_euler_helper_funcs import mkdir_p
 
 from antlr4 import *
 import pandas as pd

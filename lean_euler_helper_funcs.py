@@ -1,8 +1,5 @@
 import errno
 import inspect
-import sys
-from sys import argv
-import string
 import os
 
 

@@ -353,16 +353,16 @@ ir(X, r58) :- in("BI_Bocks", X), in("BI_PaleLagers", X).
 
 % "PC_Beer" ['='] "BI_Beer"
 :- #count {A : vrs(A), in("PC_Beer", A), out("BI_Beer", A)} > 0,
-   #count {B : vrs(B), in("PC_Beer", B), in("BI_Beer", B)} > 0,
-   #count {C : vrs(C), out("PC_Beer", C), in("BI_Beer", C)} = 0.
+   #count {B : vrs(B), in("PC_Beer", B), in("BI_Beer", B)} = 0,
+   #count {C : vrs(C), out("PC_Beer", C), in("BI_Beer", C)} > 0.
 :- #count {A : vrs(A), in("PC_Beer", A), out("BI_Beer", A)} = 0,
    #count {B : vrs(B), in("PC_Beer", B), in("BI_Beer", B)} > 0,
    #count {C : vrs(C), out("PC_Beer", C), in("BI_Beer", C)} > 0.
 :- #count {A : vrs(A), in("PC_Beer", A), out("BI_Beer", A)} > 0,
    #count {B : vrs(B), in("PC_Beer", B), in("BI_Beer", B)} > 0,
-   #count {C : vrs(C), out("PC_Beer", C), in("BI_Beer", C)} > 0.
+   #count {C : vrs(C), out("PC_Beer", C), in("BI_Beer", C)} = 0.
 :- #count {A : vrs(A), in("PC_Beer", A), out("BI_Beer", A)} > 0,
-   #count {B : vrs(B), in("PC_Beer", B), in("BI_Beer", B)} = 0,
+   #count {B : vrs(B), in("PC_Beer", B), in("BI_Beer", B)} > 0,
    #count {C : vrs(C), out("PC_Beer", C), in("BI_Beer", C)} > 0.
 ir(X, r61) :- in("PC_Beer", X), out("BI_Beer", X).
 :- #count {X : vrs(X), in("PC_Beer", X), in("BI_Beer", X)} = 0.
@@ -370,16 +370,16 @@ ir(X, r61) :- out("PC_Beer", X), in("BI_Beer", X).
 
 % "PC_Ale" ['='] "BI_Ale"
 :- #count {A : vrs(A), in("PC_Ale", A), out("BI_Ale", A)} > 0,
-   #count {B : vrs(B), in("PC_Ale", B), in("BI_Ale", B)} > 0,
-   #count {C : vrs(C), out("PC_Ale", C), in("BI_Ale", C)} = 0.
+   #count {B : vrs(B), in("PC_Ale", B), in("BI_Ale", B)} = 0,
+   #count {C : vrs(C), out("PC_Ale", C), in("BI_Ale", C)} > 0.
 :- #count {A : vrs(A), in("PC_Ale", A), out("BI_Ale", A)} = 0,
    #count {B : vrs(B), in("PC_Ale", B), in("BI_Ale", B)} > 0,
    #count {C : vrs(C), out("PC_Ale", C), in("BI_Ale", C)} > 0.
 :- #count {A : vrs(A), in("PC_Ale", A), out("BI_Ale", A)} > 0,
    #count {B : vrs(B), in("PC_Ale", B), in("BI_Ale", B)} > 0,
-   #count {C : vrs(C), out("PC_Ale", C), in("BI_Ale", C)} > 0.
+   #count {C : vrs(C), out("PC_Ale", C), in("BI_Ale", C)} = 0.
 :- #count {A : vrs(A), in("PC_Ale", A), out("BI_Ale", A)} > 0,
-   #count {B : vrs(B), in("PC_Ale", B), in("BI_Ale", B)} = 0,
+   #count {B : vrs(B), in("PC_Ale", B), in("BI_Ale", B)} > 0,
    #count {C : vrs(C), out("PC_Ale", C), in("BI_Ale", C)} > 0.
 ir(X, r62) :- in("PC_Ale", X), out("BI_Ale", X).
 :- #count {X : vrs(X), in("PC_Ale", X), in("BI_Ale", X)} = 0.
@@ -387,16 +387,16 @@ ir(X, r62) :- out("PC_Ale", X), in("BI_Ale", X).
 
 % "PC_Lager" ['='] "BI_Lager"
 :- #count {A : vrs(A), in("PC_Lager", A), out("BI_Lager", A)} > 0,
-   #count {B : vrs(B), in("PC_Lager", B), in("BI_Lager", B)} > 0,
-   #count {C : vrs(C), out("PC_Lager", C), in("BI_Lager", C)} = 0.
+   #count {B : vrs(B), in("PC_Lager", B), in("BI_Lager", B)} = 0,
+   #count {C : vrs(C), out("PC_Lager", C), in("BI_Lager", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lager", A), out("BI_Lager", A)} = 0,
    #count {B : vrs(B), in("PC_Lager", B), in("BI_Lager", B)} > 0,
    #count {C : vrs(C), out("PC_Lager", C), in("BI_Lager", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lager", A), out("BI_Lager", A)} > 0,
    #count {B : vrs(B), in("PC_Lager", B), in("BI_Lager", B)} > 0,
-   #count {C : vrs(C), out("PC_Lager", C), in("BI_Lager", C)} > 0.
+   #count {C : vrs(C), out("PC_Lager", C), in("BI_Lager", C)} = 0.
 :- #count {A : vrs(A), in("PC_Lager", A), out("BI_Lager", A)} > 0,
-   #count {B : vrs(B), in("PC_Lager", B), in("BI_Lager", B)} = 0,
+   #count {B : vrs(B), in("PC_Lager", B), in("BI_Lager", B)} > 0,
    #count {C : vrs(C), out("PC_Lager", C), in("BI_Lager", C)} > 0.
 ir(X, r63) :- in("PC_Lager", X), out("BI_Lager", X).
 :- #count {X : vrs(X), in("PC_Lager", X), in("BI_Lager", X)} = 0.
@@ -404,30 +404,30 @@ ir(X, r63) :- out("PC_Lager", X), in("BI_Lager", X).
 
 % "PC_PaleAle" ['='] "BI_PaleAles"
 :- #count {A : vrs(A), in("PC_PaleAle", A), out("BI_PaleAles", A)} > 0,
-   #count {B : vrs(B), in("PC_PaleAle", B), in("BI_PaleAles", B)} > 0,
-   #count {C : vrs(C), out("PC_PaleAle", C), in("BI_PaleAles", C)} = 0.
+   #count {B : vrs(B), in("PC_PaleAle", B), in("BI_PaleAles", B)} = 0,
+   #count {C : vrs(C), out("PC_PaleAle", C), in("BI_PaleAles", C)} > 0.
 :- #count {A : vrs(A), in("PC_PaleAle", A), out("BI_PaleAles", A)} = 0,
    #count {B : vrs(B), in("PC_PaleAle", B), in("BI_PaleAles", B)} > 0,
    #count {C : vrs(C), out("PC_PaleAle", C), in("BI_PaleAles", C)} > 0.
 :- #count {A : vrs(A), in("PC_PaleAle", A), out("BI_PaleAles", A)} > 0,
    #count {B : vrs(B), in("PC_PaleAle", B), in("BI_PaleAles", B)} > 0,
-   #count {C : vrs(C), out("PC_PaleAle", C), in("BI_PaleAles", C)} > 0.
+   #count {C : vrs(C), out("PC_PaleAle", C), in("BI_PaleAles", C)} = 0.
 :- #count {A : vrs(A), in("PC_PaleAle", A), out("BI_PaleAles", A)} > 0,
-   #count {B : vrs(B), in("PC_PaleAle", B), in("BI_PaleAles", B)} = 0,
+   #count {B : vrs(B), in("PC_PaleAle", B), in("BI_PaleAles", B)} > 0,
    #count {C : vrs(C), out("PC_PaleAle", C), in("BI_PaleAles", C)} > 0.
 ir(X, r64) :- in("PC_PaleAle", X), out("BI_PaleAles", X).
 :- #count {X : vrs(X), in("PC_PaleAle", X), in("BI_PaleAles", X)} = 0.
 ir(X, r64) :- out("PC_PaleAle", X), in("BI_PaleAles", X).
 
 % "PC_StoutPorter" ['>'] "BI_Stouts"
+:- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Stouts", A)} > 0,
+   #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Stouts", B)} = 0,
+   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Stouts", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Stouts", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Stouts", B)} > 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Stouts", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Stouts", A)} > 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Stouts", B)} > 0,
-   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Stouts", C)} > 0.
-:- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Stouts", A)} > 0,
-   #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Stouts", B)} = 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Stouts", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Stouts", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Stouts", B)} > 0,
@@ -437,14 +437,14 @@ ir(X, r64) :- out("PC_PaleAle", X), in("BI_PaleAles", X).
 ir(X, r65) :- out("PC_StoutPorter", X), in("BI_Stouts", X).
 
 % "PC_StoutPorter" ['>'] "BI_Porters"
+:- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Porters", A)} > 0,
+   #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Porters", B)} = 0,
+   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Porters", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Porters", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Porters", B)} > 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Porters", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Porters", A)} > 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Porters", B)} > 0,
-   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Porters", C)} > 0.
-:- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Porters", A)} > 0,
-   #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Porters", B)} = 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Porters", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Porters", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Porters", B)} > 0,
@@ -455,14 +455,14 @@ ir(X, r66) :- out("PC_StoutPorter", X), in("BI_Porters", X).
 
 % "PC_BelgianAle" ['o'] "BI_Belgians"
 :- #count {A : vrs(A), in("PC_BelgianAle", A), out("BI_Belgians", A)} > 0,
-   #count {B : vrs(B), in("PC_BelgianAle", B), in("BI_Belgians", B)} > 0,
-   #count {C : vrs(C), out("PC_BelgianAle", C), in("BI_Belgians", C)} = 0.
+   #count {B : vrs(B), in("PC_BelgianAle", B), in("BI_Belgians", B)} = 0,
+   #count {C : vrs(C), out("PC_BelgianAle", C), in("BI_Belgians", C)} > 0.
 :- #count {A : vrs(A), in("PC_BelgianAle", A), out("BI_Belgians", A)} = 0,
    #count {B : vrs(B), in("PC_BelgianAle", B), in("BI_Belgians", B)} > 0,
    #count {C : vrs(C), out("PC_BelgianAle", C), in("BI_Belgians", C)} > 0.
 :- #count {A : vrs(A), in("PC_BelgianAle", A), out("BI_Belgians", A)} > 0,
-   #count {B : vrs(B), in("PC_BelgianAle", B), in("BI_Belgians", B)} = 0,
-   #count {C : vrs(C), out("PC_BelgianAle", C), in("BI_Belgians", C)} > 0.
+   #count {B : vrs(B), in("PC_BelgianAle", B), in("BI_Belgians", B)} > 0,
+   #count {C : vrs(C), out("PC_BelgianAle", C), in("BI_Belgians", C)} = 0.
 :- #count {A : vrs(A), in("PC_BelgianAle", A), out("BI_Belgians", A)} = 0,
    #count {B : vrs(B), in("PC_BelgianAle", B), in("BI_Belgians", B)} > 0,
    #count {C : vrs(C), out("PC_BelgianAle", C), in("BI_Belgians", C)} = 0.
@@ -472,30 +472,30 @@ ir(X, r66) :- out("PC_StoutPorter", X), in("BI_Porters", X).
 
 % "PC_MildAle" ['='] "BI_Browns"
 :- #count {A : vrs(A), in("PC_MildAle", A), out("BI_Browns", A)} > 0,
-   #count {B : vrs(B), in("PC_MildAle", B), in("BI_Browns", B)} > 0,
-   #count {C : vrs(C), out("PC_MildAle", C), in("BI_Browns", C)} = 0.
+   #count {B : vrs(B), in("PC_MildAle", B), in("BI_Browns", B)} = 0,
+   #count {C : vrs(C), out("PC_MildAle", C), in("BI_Browns", C)} > 0.
 :- #count {A : vrs(A), in("PC_MildAle", A), out("BI_Browns", A)} = 0,
    #count {B : vrs(B), in("PC_MildAle", B), in("BI_Browns", B)} > 0,
    #count {C : vrs(C), out("PC_MildAle", C), in("BI_Browns", C)} > 0.
 :- #count {A : vrs(A), in("PC_MildAle", A), out("BI_Browns", A)} > 0,
    #count {B : vrs(B), in("PC_MildAle", B), in("BI_Browns", B)} > 0,
-   #count {C : vrs(C), out("PC_MildAle", C), in("BI_Browns", C)} > 0.
+   #count {C : vrs(C), out("PC_MildAle", C), in("BI_Browns", C)} = 0.
 :- #count {A : vrs(A), in("PC_MildAle", A), out("BI_Browns", A)} > 0,
-   #count {B : vrs(B), in("PC_MildAle", B), in("BI_Browns", B)} = 0,
+   #count {B : vrs(B), in("PC_MildAle", B), in("BI_Browns", B)} > 0,
    #count {C : vrs(C), out("PC_MildAle", C), in("BI_Browns", C)} > 0.
 ir(X, r67) :- in("PC_MildAle", X), out("BI_Browns", X).
 :- #count {X : vrs(X), in("PC_MildAle", X), in("BI_Browns", X)} = 0.
 ir(X, r67) :- out("PC_MildAle", X), in("BI_Browns", X).
 
 % "PC_Lambic" ['>'] "BI_Sours"
+:- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Sours", A)} > 0,
+   #count {B : vrs(B), in("PC_Lambic", B), in("BI_Sours", B)} = 0,
+   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Sours", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Sours", A)} = 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Sours", B)} > 0,
    #count {C : vrs(C), out("PC_Lambic", C), in("BI_Sours", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Sours", A)} > 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Sours", B)} > 0,
-   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Sours", C)} > 0.
-:- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Sours", A)} > 0,
-   #count {B : vrs(B), in("PC_Lambic", B), in("BI_Sours", B)} = 0,
    #count {C : vrs(C), out("PC_Lambic", C), in("BI_Sours", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Sours", A)} = 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Sours", B)} > 0,
@@ -506,14 +506,14 @@ ir(X, r68) :- out("PC_Lambic", X), in("BI_Sours", X).
 
 % "PC_Lambic" ['o'] "BI_Belgians"
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Belgians", A)} > 0,
-   #count {B : vrs(B), in("PC_Lambic", B), in("BI_Belgians", B)} > 0,
-   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Belgians", C)} = 0.
+   #count {B : vrs(B), in("PC_Lambic", B), in("BI_Belgians", B)} = 0,
+   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Belgians", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Belgians", A)} = 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Belgians", B)} > 0,
    #count {C : vrs(C), out("PC_Lambic", C), in("BI_Belgians", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Belgians", A)} > 0,
-   #count {B : vrs(B), in("PC_Lambic", B), in("BI_Belgians", B)} = 0,
-   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Belgians", C)} > 0.
+   #count {B : vrs(B), in("PC_Lambic", B), in("BI_Belgians", B)} > 0,
+   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Belgians", C)} = 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Belgians", A)} = 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Belgians", B)} > 0,
    #count {C : vrs(C), out("PC_Lambic", C), in("BI_Belgians", C)} = 0.
@@ -523,14 +523,14 @@ ir(X, r68) :- out("PC_Lambic", X), in("BI_Sours", X).
 
 % "PC_GermanAle" ['<'] "BI_Wheats"
 :- #count {A : vrs(A), in("PC_GermanAle", A), out("BI_Wheats", A)} > 0,
-   #count {B : vrs(B), in("PC_GermanAle", B), in("BI_Wheats", B)} > 0,
-   #count {C : vrs(C), out("PC_GermanAle", C), in("BI_Wheats", C)} = 0.
-:- #count {A : vrs(A), in("PC_GermanAle", A), out("BI_Wheats", A)} > 0,
-   #count {B : vrs(B), in("PC_GermanAle", B), in("BI_Wheats", B)} > 0,
-   #count {C : vrs(C), out("PC_GermanAle", C), in("BI_Wheats", C)} > 0.
-:- #count {A : vrs(A), in("PC_GermanAle", A), out("BI_Wheats", A)} > 0,
    #count {B : vrs(B), in("PC_GermanAle", B), in("BI_Wheats", B)} = 0,
    #count {C : vrs(C), out("PC_GermanAle", C), in("BI_Wheats", C)} > 0.
+:- #count {A : vrs(A), in("PC_GermanAle", A), out("BI_Wheats", A)} > 0,
+   #count {B : vrs(B), in("PC_GermanAle", B), in("BI_Wheats", B)} > 0,
+   #count {C : vrs(C), out("PC_GermanAle", C), in("BI_Wheats", C)} > 0.
+:- #count {A : vrs(A), in("PC_GermanAle", A), out("BI_Wheats", A)} > 0,
+   #count {B : vrs(B), in("PC_GermanAle", B), in("BI_Wheats", B)} > 0,
+   #count {C : vrs(C), out("PC_GermanAle", C), in("BI_Wheats", C)} = 0.
 :- #count {A : vrs(A), in("PC_GermanAle", A), out("BI_Wheats", A)} = 0,
    #count {B : vrs(B), in("PC_GermanAle", B), in("BI_Wheats", B)} > 0,
    #count {C : vrs(C), out("PC_GermanAle", C), in("BI_Wheats", C)} = 0.
@@ -539,14 +539,14 @@ ir(X, r69) :- in("PC_GermanAle", X), out("BI_Wheats", X).
 :- #count {X : vrs(X), out("PC_GermanAle", X), in("BI_Wheats", X)} = 0.
 
 % "PC_GermanLager" ['>'] "BI_Bocks"
+:- #count {A : vrs(A), in("PC_GermanLager", A), out("BI_Bocks", A)} > 0,
+   #count {B : vrs(B), in("PC_GermanLager", B), in("BI_Bocks", B)} = 0,
+   #count {C : vrs(C), out("PC_GermanLager", C), in("BI_Bocks", C)} > 0.
 :- #count {A : vrs(A), in("PC_GermanLager", A), out("BI_Bocks", A)} = 0,
    #count {B : vrs(B), in("PC_GermanLager", B), in("BI_Bocks", B)} > 0,
    #count {C : vrs(C), out("PC_GermanLager", C), in("BI_Bocks", C)} > 0.
 :- #count {A : vrs(A), in("PC_GermanLager", A), out("BI_Bocks", A)} > 0,
    #count {B : vrs(B), in("PC_GermanLager", B), in("BI_Bocks", B)} > 0,
-   #count {C : vrs(C), out("PC_GermanLager", C), in("BI_Bocks", C)} > 0.
-:- #count {A : vrs(A), in("PC_GermanLager", A), out("BI_Bocks", A)} > 0,
-   #count {B : vrs(B), in("PC_GermanLager", B), in("BI_Bocks", B)} = 0,
    #count {C : vrs(C), out("PC_GermanLager", C), in("BI_Bocks", C)} > 0.
 :- #count {A : vrs(A), in("PC_GermanLager", A), out("BI_Bocks", A)} = 0,
    #count {B : vrs(B), in("PC_GermanLager", B), in("BI_Bocks", B)} > 0,
@@ -557,14 +557,14 @@ ir(X, r70) :- out("PC_GermanLager", X), in("BI_Bocks", X).
 
 % "PC_AmericanLager" ['<'] "BI_PaleLagers"
 :- #count {A : vrs(A), in("PC_AmericanLager", A), out("BI_PaleLagers", A)} > 0,
-   #count {B : vrs(B), in("PC_AmericanLager", B), in("BI_PaleLagers", B)} > 0,
-   #count {C : vrs(C), out("PC_AmericanLager", C), in("BI_PaleLagers", C)} = 0.
-:- #count {A : vrs(A), in("PC_AmericanLager", A), out("BI_PaleLagers", A)} > 0,
-   #count {B : vrs(B), in("PC_AmericanLager", B), in("BI_PaleLagers", B)} > 0,
-   #count {C : vrs(C), out("PC_AmericanLager", C), in("BI_PaleLagers", C)} > 0.
-:- #count {A : vrs(A), in("PC_AmericanLager", A), out("BI_PaleLagers", A)} > 0,
    #count {B : vrs(B), in("PC_AmericanLager", B), in("BI_PaleLagers", B)} = 0,
    #count {C : vrs(C), out("PC_AmericanLager", C), in("BI_PaleLagers", C)} > 0.
+:- #count {A : vrs(A), in("PC_AmericanLager", A), out("BI_PaleLagers", A)} > 0,
+   #count {B : vrs(B), in("PC_AmericanLager", B), in("BI_PaleLagers", B)} > 0,
+   #count {C : vrs(C), out("PC_AmericanLager", C), in("BI_PaleLagers", C)} > 0.
+:- #count {A : vrs(A), in("PC_AmericanLager", A), out("BI_PaleLagers", A)} > 0,
+   #count {B : vrs(B), in("PC_AmericanLager", B), in("BI_PaleLagers", B)} > 0,
+   #count {C : vrs(C), out("PC_AmericanLager", C), in("BI_PaleLagers", C)} = 0.
 :- #count {A : vrs(A), in("PC_AmericanLager", A), out("BI_PaleLagers", A)} = 0,
    #count {B : vrs(B), in("PC_AmericanLager", B), in("BI_PaleLagers", B)} > 0,
    #count {C : vrs(C), out("PC_AmericanLager", C), in("BI_PaleLagers", C)} = 0.
@@ -575,13 +575,13 @@ ir(X, r71) :- in("PC_AmericanLager", X), out("BI_PaleLagers", X).
 % "PC_Lambic" ['!'] "BI_Wheats"
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Wheats", A)} > 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Wheats", B)} > 0,
-   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Wheats", C)} = 0.
+   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Wheats", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Wheats", A)} = 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Wheats", B)} > 0,
    #count {C : vrs(C), out("PC_Lambic", C), in("BI_Wheats", C)} > 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Wheats", A)} > 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Wheats", B)} > 0,
-   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Wheats", C)} > 0.
+   #count {C : vrs(C), out("PC_Lambic", C), in("BI_Wheats", C)} = 0.
 :- #count {A : vrs(A), in("PC_Lambic", A), out("BI_Wheats", A)} = 0,
    #count {B : vrs(B), in("PC_Lambic", B), in("BI_Wheats", B)} > 0,
    #count {C : vrs(C), out("PC_Lambic", C), in("BI_Wheats", C)} = 0.
@@ -592,13 +592,13 @@ ir(X, r72) :- in("PC_Lambic", X), in("BI_Wheats", X).
 % "PC_StoutPorter" ['!'] "BI_Belgians"
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Belgians", A)} > 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Belgians", B)} > 0,
-   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Belgians", C)} = 0.
+   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Belgians", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Belgians", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Belgians", B)} > 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Belgians", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Belgians", A)} > 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Belgians", B)} > 0,
-   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Belgians", C)} > 0.
+   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Belgians", C)} = 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Belgians", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Belgians", B)} > 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Belgians", C)} = 0.
@@ -609,13 +609,13 @@ ir(X, r73) :- in("PC_StoutPorter", X), in("BI_Belgians", X).
 % "PC_StoutPorter" ['!'] "BI_Wheats"
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Wheats", A)} > 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Wheats", B)} > 0,
-   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Wheats", C)} = 0.
+   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Wheats", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Wheats", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Wheats", B)} > 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Wheats", C)} > 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Wheats", A)} > 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Wheats", B)} > 0,
-   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Wheats", C)} > 0.
+   #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Wheats", C)} = 0.
 :- #count {A : vrs(A), in("PC_StoutPorter", A), out("BI_Wheats", A)} = 0,
    #count {B : vrs(B), in("PC_StoutPorter", B), in("BI_Wheats", B)} > 0,
    #count {C : vrs(C), out("PC_StoutPorter", C), in("BI_Wheats", C)} = 0.
@@ -624,27 +624,66 @@ ir(X, r74) :- in("PC_StoutPorter", X), in("BI_Wheats", X).
 :- #count {X : vrs(X), out("PC_StoutPorter", X), in("BI_Wheats", X)} = 0.
 
 % Decoding Rules
-:- rel(X, Y, "<"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "<"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "o"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "o"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
-:- rel(X, Y, "o"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
 :- rel(X, Y, ">"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, ">"), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, ">"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
 :- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "<"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
 :- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
 
-:- not rel(X, Y, "<"), not rel(X, Y, "o"), not rel(X, Y, ">"), not rel(X, Y, "="), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2.
+:- not rel(X, Y, ">"), not rel(X, Y, "="), not rel(X, Y, "<"), not rel(X, Y, "o"), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2.
 
-rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
-rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
 rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
 rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
 rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2).
 
 hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R).
 hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R).
 hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R).
 
+
+% Child Parent Rules for Viz
+
+bl("PC_Beer", "PC_Ale").
+bl("PC_Beer", "PC_Lager").
+bl("PC_Ale", "PC_MildAle").
+bl("PC_Ale", "PC_Lambic").
+bl("PC_Ale", "PC_BelgianAle").
+bl("PC_Ale", "PC_GermanAle").
+bl("PC_Ale", "PC_StoutPorter").
+bl("PC_Ale", "PC_PaleAle").
+bl("PC_Lager", "PC_GermanLager").
+bl("PC_Lager", "PC_AmericanLager").
+bl("BI_Beer", "BI_Ale").
+bl("BI_Beer", "BI_Lager").
+bl("BI_Ale", "BI_PaleAles").
+bl("BI_Ale", "BI_Stouts").
+bl("BI_Ale", "BI_Porters").
+bl("BI_Ale", "BI_Browns").
+bl("BI_Ale", "BI_Wheats").
+bl("BI_Ale", "BI_Sours").
+bl("BI_Ale", "BI_Belgians").
+bl("BI_Lager", "BI_Bocks").
+bl("BI_Lager", "BI_PaleLagers").
+
 #show rel/3.
+eq(A, B) :- rel(A, B, "=").
+po(A, B) :- rel(A, B, "o").
+dr(A, B) :- rel(A, B, "!").
+pp(A, B) :- rel(A, B, "<").
+pp(B, A) :- rel(A, B, ">").
+pp(Y,X) :- bl(X,Y).
+u(X) :- bl(_,X).
+u(X) :- bl(X,_).
+#show eq/2.
+#show po/2.
+#show pp/2.
+#show dr/2.
+#show bl/2.
+#show u/1.
