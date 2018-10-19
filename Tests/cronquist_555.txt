@@ -40,6 +40,7 @@ taxonomy C Cronquist
 (Liliidae Liliales Orchidales)
 (Liliales Liliaceae Iridaceae)
 (Orchidales Orchidaceae)
+
 taxonomy APG Angiosperm
 (Angiosperms Magnoliids Eudicots Monocots)
 (Magnoliids Magnoliales)
@@ -76,6 +77,8 @@ taxonomy APG Angiosperm
 (Asparagales Orchidaceae Iridaceae) 
 (Arecales Arecaceae)
 (Poales Poaceae)
+
+
 articulations  C APG
 [C.Magnoliophyta equals	APG.Angiosperms]
 [C.Magnoliaceae equals APG.Magnoliaceae]
@@ -112,3 +115,8 @@ articulations  C APG
 [C.Lamiaceae equals APG.Lamiaceae]
 [C.Scrophulariaceae equals APG.Scrophulariaceae]
 [C.Asteraceae equals APG.Asteraceae]
+[C.Aceraceae disjoint APG.Fabaceae]
+[C.Hippocastanaceae	{!}	APG.Fabaceae]
+[C.Sapindaceae {!} APG.Fabaceae]
+[C.Caesalpiniaceae	{!}	APG.Sapindaceae]
+[C.Mimosaceae	{!}	APG.Sapindaceae]

@@ -40,6 +40,7 @@ taxonomy C Cronquist
 (Liliidae Liliales Orchidales)
 (Liliales Liliaceae Iridaceae)
 (Orchidales Orchidaceae)
+
 taxonomy APG Angiosperm
 (Angiosperms Magnoliids Eudicots Monocots)
 (Magnoliids Magnoliales)
@@ -76,6 +77,8 @@ taxonomy APG Angiosperm
 (Asparagales Orchidaceae Iridaceae) 
 (Arecales Arecaceae)
 (Poales Poaceae)
+
+
 articulations  C APG
 [C.Magnoliophyta equals	APG.Angiosperms]
 [C.Magnoliaceae equals APG.Magnoliaceae]
@@ -91,6 +94,8 @@ articulations  C APG
 [C.Violaceae equals APG.Violaceae]
 [C.Salicaceae equals APG.Salicaceae]
 [C.Euphorbiaceae equals APG.Euphorbiaceae]
+[C.Caesalpiniaceae equals APG.Caesalpinioideae]
+[C.Mimosaceae equals APG.Mimosoideae]
 [C.Moraceae equals APG.Moraceae]
 [C.Cucurbitaceae equals APG.Cucurbitaceae]
 [C.Onagraceae equals APG.Onagraceae]
@@ -101,12 +106,16 @@ articulations  C APG
 [C.Oleaceae equals APG.Oleaceae]
 [C.Asclepiadaceae equals APG.Asclepiadaceae]
 [C.Caprifoliaceae equals APG.Caprifoliaceae]
+[C.Fabaceae equals APG.Faboideae]
 [C.Araceae equals APG.Araceae]
 [C.Liliaceae equals APG.Liliaceae]
 [C.Orchidaceae equals APG.Orchidaceae]
 [C.Iridaceae equals APG.Iridaceae]
 [C.Arecaceae equals APG.Arecaceae]
 [C.Poaceae equals APG.Poaceae]
+[C.Aceraceae is_included_in APG.Sapindaceae]
+[C.Sapindaceae is_included_in APG.Sapindaceae]
+[C.Hippocastanaceae is_included_in APG.Sapindaceae]
 [C.Apiaceae equals APG.Apiaceae]
 [C.Rosaceae equals APG.Rosaceae]
 [C.Lamiaceae equals APG.Lamiaceae]

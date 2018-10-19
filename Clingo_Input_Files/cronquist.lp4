@@ -1,193 +1,2733 @@
-%RCC RULES:
+r(1..1598).
 
-eq(X,Y) :- eq(X,Z), eq(Z,Y).
-dr(X,Y) :- eq(X,Z), dr(Z,Y).
-pp(X,Y) :- eq(X,Z), pp(Z,Y).
-pi(X,Y) :- eq(X,Z), pi(Z,Y).
-po(X,Y) :- eq(X,Z), po(Z,Y).
+% Region Meanings
+in(X, M) :- r(M), concept(X, T, N), N1=N+1, bit(M, T, N1).
+out(X, M) :- r(M), concept(X, T, N), N1=N+1, not bit(M, T, N1).
+in(X, M) :- r(M), concept2(X, _), not out(X, M).
+irs(M) :- in(X, M), out(X, M), r(M), concept2(X, _).
 
-dr(X,Y) :- dr(X,Z), eq(Z,Y).
-1 {dr(X,Y) ; pp(X,Y) ; po(X,Y)} :- dr(X,Z), pp(Z,Y).
-1 {dr(X,Y) ; pi(X,Y) ; po(X,Y)} :- dr(X,Z), pi(Z,Y).
-1 {dr(X,Y) ; pp(X,Y) ; po(X,Y)} :- dr(X,Z), po(Z,Y).
+% Region Constraints
+irs(X) :- ir(X, _).
+vrs(X) :- vr(X, _).
+vr(X, X) :- not irs(X), r(X).
+ir(X, X) :- not vrs(X), r(X).
+:- vrs(X), irs(X).
 
-pp(X,Y) :- pp(X,Z), eq(Z,Y).
-dr(X,Y) :- pp(X,Z), dr(Z,Y).
-pp(X,Y) :- pp(X,Z), pp(Z,Y).
-dr(X,Y) ; pp(X,Y) ; po(X,Y) :- pp(X,Z), po(Z,Y).
+concept2(A, B) :- concept(A,B,_).
 
-pi(X,Y) :- pi(X,Z), eq(Z,Y).
-1 {dr(X,Y) ; pi(X,Y) ; po(X,Y)} :- pi(X,Z), dr(Z,Y).
-pi(X,Y) :- pi(X,Z), pi(Z,Y).
-1 {pi(X,Y) ; po(X,Y)} :- pi(X,Z), po(Z,Y).
+% Taxonomy Description
 
-po(X,Y) :- po(X,Z), eq(Z,Y).
-1 {dr(X,Y) ; pi(X,Y) ; po(X,Y)} :- po(X,Z), dr(Z,Y).
-1 {pp(X,Y) ; po(X,Y)} :- po(X,Z), pp(Z,Y).
-1 {dr(X,Y) ; pi(X,Y) ; po(X,Y)} :- po(X,Z), pi(Z,Y).
+%  Euler Bit
+bit(M, 0, V) :- r(M), M1=M/1, V = M1 \ 41.
 
-u(X) :- dr(X,_).
-u(X) :- dr(_,X).
-u(X) :- eq(X,_).
-u(X) :- eq(_,X).
-u(X) :- po(X,_).
-u(X) :- po(_,X).
-u(X) :- pp(X,_).
-u(X) :- pp(_,X).
-u(X) :- pi(X,_).
-u(X) :- pi(_,X).
+%  Euler Bit
+bit(M, 1, V) :- r(M), M1=M/41, V = M1 \ 39.
+
+concept2("C_Magnoliophyta", 0).
+concept2("C_Magnoliopsida", 0).
+concept2("C_Magnoliidae", 0).
+concept2("C_Magnoliales", 0).
+concept("C_Magnoliaceae", 0, 0).
+concept2("C_Ranunculales", 0).
+concept("C_Ranunculaceae", 0, 1).
+concept2("C_Papaverales", 0).
+concept("C_Papaveraceae", 0, 2).
+concept2("C_Hamamelidae", 0).
+concept2("C_Hamamelidales", 0).
+concept("C_Hamamelidaceae", 0, 3).
+concept2("C_Urticales", 0).
+concept("C_Moraceae", 0, 4).
+concept2("C_Fagales", 0).
+concept("C_Fagaceae", 0, 5).
+concept("C_Betulaceae", 0, 6).
+concept2("C_Caryophyllidae", 0).
+concept2("C_Caryophyllales", 0).
+concept("C_Cactaceae", 0, 7).
+concept("C_Portulacaceae", 0, 8).
+concept("C_Caryophyllaceae", 0, 9).
+concept2("C_Polygonales", 0).
+concept("C_Polygonaceae", 0, 10).
+concept2("C_Malvales", 0).
+concept("C_Malvaceae", 0, 11).
+concept2("C_Violales", 0).
+concept("C_Violaceae", 0, 12).
+concept("C_Cucurbitaceae", 0, 13).
+concept2("C_Salicales", 0).
+concept("C_Salicaceae", 0, 14).
+concept2("C_Capparales", 0).
+concept("C_Brassicaceae", 0, 15).
+concept2("C_Ericales", 0).
+concept("C_Ericaceae", 0, 16).
+concept2("C_Rosidae", 0).
+concept2("C_Rosales", 0).
+concept("C_Rosaceae", 0, 17).
+concept2("C_Fabales", 0).
+concept("C_Mimosaceae", 0, 18).
+concept("C_Caesalpiniaceae", 0, 19).
+concept("C_Fabaceae", 0, 20).
+concept2("C_Myrtales", 0).
+concept("C_Onagraceae", 0, 21).
+concept2("C_Euphorbiales", 0).
+concept("C_Euphorbiaceae", 0, 22).
+concept2("C_Sapindales", 0).
+concept("C_Aceraceae", 0, 23).
+concept("C_Sapindaceae", 0, 24).
+concept("C_Hippocastanaceae", 0, 25).
+concept2("C_Apiales", 0).
+concept("C_Apiaceae", 0, 26).
+concept2("C_Asteridae", 0).
+concept2("C_Gentianales", 0).
+concept("C_Asclepiadaceae", 0, 27).
+concept2("C_Solanales", 0).
+concept("C_Solanaceae", 0, 28).
+concept2("C_Lamiales", 0).
+concept("C_Lamiaceae", 0, 29).
+concept2("C_Scrophulariales", 0).
+concept("C_Scrophulariaceae", 0, 30).
+concept("C_Oleaceae", 0, 31).
+concept2("C_Dipsacales", 0).
+concept("C_Caprifoliaceae", 0, 32).
+concept2("C_Asterales", 0).
+concept("C_Asteraceae", 0, 33).
+concept2("C_Liliopsida", 0).
+concept2("C_Arecidae", 0).
+concept2("C_Arecales", 0).
+concept("C_Arecaceae", 0, 34).
+concept2("C_Arales", 0).
+concept("C_Araceae", 0, 35).
+concept2("C_Commelinidae", 0).
+concept2("C_Cyperales", 0).
+concept("C_Poaceae", 0, 36).
+concept2("C_Liliidae", 0).
+concept2("C_Liliales", 0).
+concept("C_Liliaceae", 0, 37).
+concept("C_Iridaceae", 0, 38).
+concept2("C_Orchidales", 0).
+concept("C_Orchidaceae", 0, 39).
+concept2("APG_Angiosperms", 1).
+concept2("APG_Magnoliids", 1).
+concept2("APG_Magnoliales", 1).
+concept("APG_Magnoliaceae", 1, 0).
+concept2("APG_Eudicots", 1).
+concept2("APG_BasalEudicots", 1).
+concept2("APG_Ranunculales", 1).
+concept("APG_Ranunculaceae", 1, 1).
+concept("APG_Papaveraceae", 1, 2).
+concept2("APG_CoreEudicots", 1).
+concept2("APG_Saxifragales", 1).
+concept("APG_Hamamelidaceae", 1, 3).
+concept2("APG_RosidClade", 1).
+concept2("APG_Malpighiales", 1).
+concept("APG_Euphorbiaceae", 1, 4).
+concept("APG_Salicaceae", 1, 5).
+concept("APG_Violaceae", 1, 6).
+concept2("APG_Fabales", 1).
+concept2("APG_Fabaceae", 1).
+concept("APG_Mimosoideae", 1, 7).
+concept("APG_Caesalpinioideae", 1, 8).
+concept("APG_Faboideae", 1, 9).
+concept2("APG_Rosales", 1).
+concept("APG_Rosaceae", 1, 10).
+concept("APG_Moraceae", 1, 11).
+concept2("APG_Cucurbitales", 1).
+concept("APG_Cucurbitaceae", 1, 12).
+concept2("APG_Fagales", 1).
+concept("APG_Fagaceae", 1, 13).
+concept("APG_Betulaceae", 1, 14).
+concept2("APG_Myrtales", 1).
+concept("APG_Onagraceae", 1, 15).
+concept2("APG_Brassicales", 1).
+concept("APG_Brassicaceae", 1, 16).
+concept2("APG_Malvales", 1).
+concept("APG_Malvaceae", 1, 17).
+concept2("APG_Sapindales", 1).
+concept("APG_Sapindaceae", 1, 18).
+concept2("APG_CaryophyllidClade", 1).
+concept2("APG_Caryophyllales", 1).
+concept("APG_Caryophyllaceae", 1, 19).
+concept("APG_Portulacaceae", 1, 20).
+concept("APG_Cactaceae", 1, 21).
+concept("APG_Polygonaceae", 1, 22).
+concept2("APG_AsteridClade", 1).
+concept2("APG_Ericales", 1).
+concept("APG_Ericaceae", 1, 23).
+concept2("APG_Solanales", 1).
+concept("APG_Solanaceae", 1, 24).
+concept2("APG_Lamiales", 1).
+concept("APG_Oleaceae", 1, 25).
+concept("APG_Lamiaceae", 1, 26).
+concept("APG_Scrophulariaceae", 1, 27).
+concept2("APG_Gentianales", 1).
+concept("APG_Asclepiadaceae", 1, 28).
+concept2("APG_Dipsacales", 1).
+concept("APG_Caprifoliaceae", 1, 29).
+concept2("APG_Apiales", 1).
+concept("APG_Apiaceae", 1, 30).
+concept2("APG_Asterales", 1).
+concept("APG_Asteraceae", 1, 31).
+concept2("APG_Monocots", 1).
+concept2("APG_Alismatales", 1).
+concept("APG_Araceae", 1, 32).
+concept2("APG_Liliales", 1).
+concept("APG_Liliaceae", 1, 33).
+concept2("APG_Asparagales", 1).
+concept("APG_Orchidaceae", 1, 34).
+concept("APG_Iridaceae", 1, 35).
+concept2("APG_Arecales", 1).
+concept("APG_Arecaceae", 1, 36).
+concept2("APG_Poales", 1).
+concept("APG_Poaceae", 1, 37).
+
+% "C_Magnoliopsida" isa "C_Magnoliophyta"
+ir(X, r1) :- in("C_Magnoliopsida", X), out("C_Magnoliophyta", X).
+:- #count {X : vrs(X), in("C_Magnoliopsida", X), in("C_Magnoliophyta", X)} = 0.
+
+% "C_Liliopsida" isa "C_Magnoliophyta"
+ir(X, r2) :- in("C_Liliopsida", X), out("C_Magnoliophyta", X).
+:- #count {X : vrs(X), in("C_Liliopsida", X), in("C_Magnoliophyta", X)} = 0.
+
+% "C_Magnoliidae" isa "C_Magnoliopsida"
+ir(X, r13) :- in("C_Magnoliidae", X), out("C_Magnoliopsida", X).
+:- #count {X : vrs(X), in("C_Magnoliidae", X), in("C_Magnoliopsida", X)} = 0.
+
+% "C_Hamamelidae" isa "C_Magnoliopsida"
+ir(X, r14) :- in("C_Hamamelidae", X), out("C_Magnoliopsida", X).
+:- #count {X : vrs(X), in("C_Hamamelidae", X), in("C_Magnoliopsida", X)} = 0.
+
+% "C_Caryophyllidae" isa "C_Magnoliopsida"
+ir(X, r15) :- in("C_Caryophyllidae", X), out("C_Magnoliopsida", X).
+:- #count {X : vrs(X), in("C_Caryophyllidae", X), in("C_Magnoliopsida", X)} = 0.
+
+% "C_Rosidae" isa "C_Magnoliopsida"
+ir(X, r16) :- in("C_Rosidae", X), out("C_Magnoliopsida", X).
+:- #count {X : vrs(X), in("C_Rosidae", X), in("C_Magnoliopsida", X)} = 0.
+
+% "C_Asteridae" isa "C_Magnoliopsida"
+ir(X, r17) :- in("C_Asteridae", X), out("C_Magnoliopsida", X).
+:- #count {X : vrs(X), in("C_Asteridae", X), in("C_Magnoliopsida", X)} = 0.
+
+% "C_Magnoliales" isa "C_Magnoliidae"
+ir(X, r21) :- in("C_Magnoliales", X), out("C_Magnoliidae", X).
+:- #count {X : vrs(X), in("C_Magnoliales", X), in("C_Magnoliidae", X)} = 0.
+
+% "C_Ranunculales" isa "C_Magnoliidae"
+ir(X, r22) :- in("C_Ranunculales", X), out("C_Magnoliidae", X).
+:- #count {X : vrs(X), in("C_Ranunculales", X), in("C_Magnoliidae", X)} = 0.
+
+% "C_Papaverales" isa "C_Magnoliidae"
+ir(X, r23) :- in("C_Papaverales", X), out("C_Magnoliidae", X).
+:- #count {X : vrs(X), in("C_Papaverales", X), in("C_Magnoliidae", X)} = 0.
+
+% "C_Magnoliaceae" isa "C_Magnoliales"
+ir(X, r24) :- in("C_Magnoliaceae", X), out("C_Magnoliales", X).
+:- #count {X : vrs(X), in("C_Magnoliaceae", X), in("C_Magnoliales", X)} = 0.
+
+% "C_Ranunculaceae" isa "C_Ranunculales"
+ir(X, r25) :- in("C_Ranunculaceae", X), out("C_Ranunculales", X).
+:- #count {X : vrs(X), in("C_Ranunculaceae", X), in("C_Ranunculales", X)} = 0.
+
+% "C_Papaveraceae" isa "C_Papaverales"
+ir(X, r26) :- in("C_Papaveraceae", X), out("C_Papaverales", X).
+:- #count {X : vrs(X), in("C_Papaveraceae", X), in("C_Papaverales", X)} = 0.
+
+% "C_Hamamelidales" isa "C_Hamamelidae"
+ir(X, r30) :- in("C_Hamamelidales", X), out("C_Hamamelidae", X).
+:- #count {X : vrs(X), in("C_Hamamelidales", X), in("C_Hamamelidae", X)} = 0.
+
+% "C_Urticales" isa "C_Hamamelidae"
+ir(X, r31) :- in("C_Urticales", X), out("C_Hamamelidae", X).
+:- #count {X : vrs(X), in("C_Urticales", X), in("C_Hamamelidae", X)} = 0.
+
+% "C_Fagales" isa "C_Hamamelidae"
+ir(X, r32) :- in("C_Fagales", X), out("C_Hamamelidae", X).
+:- #count {X : vrs(X), in("C_Fagales", X), in("C_Hamamelidae", X)} = 0.
+
+% "C_Hamamelidaceae" isa "C_Hamamelidales"
+ir(X, r33) :- in("C_Hamamelidaceae", X), out("C_Hamamelidales", X).
+:- #count {X : vrs(X), in("C_Hamamelidaceae", X), in("C_Hamamelidales", X)} = 0.
+
+% "C_Moraceae" isa "C_Urticales"
+ir(X, r34) :- in("C_Moraceae", X), out("C_Urticales", X).
+:- #count {X : vrs(X), in("C_Moraceae", X), in("C_Urticales", X)} = 0.
+
+% "C_Fagaceae" isa "C_Fagales"
+ir(X, r36) :- in("C_Fagaceae", X), out("C_Fagales", X).
+:- #count {X : vrs(X), in("C_Fagaceae", X), in("C_Fagales", X)} = 0.
+
+% "C_Betulaceae" isa "C_Fagales"
+ir(X, r37) :- in("C_Betulaceae", X), out("C_Fagales", X).
+:- #count {X : vrs(X), in("C_Betulaceae", X), in("C_Fagales", X)} = 0.
+
+% "C_Caryophyllales" isa "C_Caryophyllidae"
+ir(X, r59) :- in("C_Caryophyllales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Polygonales" isa "C_Caryophyllidae"
+ir(X, r60) :- in("C_Polygonales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Polygonales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Malvales" isa "C_Caryophyllidae"
+ir(X, r61) :- in("C_Malvales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Malvales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Violales" isa "C_Caryophyllidae"
+ir(X, r62) :- in("C_Violales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Violales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Salicales" isa "C_Caryophyllidae"
+ir(X, r63) :- in("C_Salicales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Salicales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Capparales" isa "C_Caryophyllidae"
+ir(X, r64) :- in("C_Capparales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Capparales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Ericales" isa "C_Caryophyllidae"
+ir(X, r65) :- in("C_Ericales", X), out("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Ericales", X), in("C_Caryophyllidae", X)} = 0.
+
+% "C_Cactaceae" isa "C_Caryophyllales"
+ir(X, r69) :- in("C_Cactaceae", X), out("C_Caryophyllales", X).
+:- #count {X : vrs(X), in("C_Cactaceae", X), in("C_Caryophyllales", X)} = 0.
+
+% "C_Portulacaceae" isa "C_Caryophyllales"
+ir(X, r70) :- in("C_Portulacaceae", X), out("C_Caryophyllales", X).
+:- #count {X : vrs(X), in("C_Portulacaceae", X), in("C_Caryophyllales", X)} = 0.
+
+% "C_Caryophyllaceae" isa "C_Caryophyllales"
+ir(X, r71) :- in("C_Caryophyllaceae", X), out("C_Caryophyllales", X).
+:- #count {X : vrs(X), in("C_Caryophyllaceae", X), in("C_Caryophyllales", X)} = 0.
+
+% "C_Polygonaceae" isa "C_Polygonales"
+ir(X, r72) :- in("C_Polygonaceae", X), out("C_Polygonales", X).
+:- #count {X : vrs(X), in("C_Polygonaceae", X), in("C_Polygonales", X)} = 0.
+
+% "C_Malvaceae" isa "C_Malvales"
+ir(X, r73) :- in("C_Malvaceae", X), out("C_Malvales", X).
+:- #count {X : vrs(X), in("C_Malvaceae", X), in("C_Malvales", X)} = 0.
+
+% "C_Violaceae" isa "C_Violales"
+ir(X, r75) :- in("C_Violaceae", X), out("C_Violales", X).
+:- #count {X : vrs(X), in("C_Violaceae", X), in("C_Violales", X)} = 0.
+
+% "C_Cucurbitaceae" isa "C_Violales"
+ir(X, r76) :- in("C_Cucurbitaceae", X), out("C_Violales", X).
+:- #count {X : vrs(X), in("C_Cucurbitaceae", X), in("C_Violales", X)} = 0.
+
+% "C_Salicaceae" isa "C_Salicales"
+ir(X, r77) :- in("C_Salicaceae", X), out("C_Salicales", X).
+:- #count {X : vrs(X), in("C_Salicaceae", X), in("C_Salicales", X)} = 0.
+
+% "C_Brassicaceae" isa "C_Capparales"
+ir(X, r78) :- in("C_Brassicaceae", X), out("C_Capparales", X).
+:- #count {X : vrs(X), in("C_Brassicaceae", X), in("C_Capparales", X)} = 0.
+
+% "C_Ericaceae" isa "C_Ericales"
+ir(X, r79) :- in("C_Ericaceae", X), out("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Ericaceae", X), in("C_Ericales", X)} = 0.
+
+% "C_Rosales" isa "C_Rosidae"
+ir(X, r95) :- in("C_Rosales", X), out("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Rosales", X), in("C_Rosidae", X)} = 0.
+
+% "C_Fabales" isa "C_Rosidae"
+ir(X, r96) :- in("C_Fabales", X), out("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Fabales", X), in("C_Rosidae", X)} = 0.
+
+% "C_Myrtales" isa "C_Rosidae"
+ir(X, r97) :- in("C_Myrtales", X), out("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Myrtales", X), in("C_Rosidae", X)} = 0.
+
+% "C_Euphorbiales" isa "C_Rosidae"
+ir(X, r98) :- in("C_Euphorbiales", X), out("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Euphorbiales", X), in("C_Rosidae", X)} = 0.
+
+% "C_Sapindales" isa "C_Rosidae"
+ir(X, r99) :- in("C_Sapindales", X), out("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Sapindales", X), in("C_Rosidae", X)} = 0.
+
+% "C_Apiales" isa "C_Rosidae"
+ir(X, r100) :- in("C_Apiales", X), out("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Apiales", X), in("C_Rosidae", X)} = 0.
+
+% "C_Rosaceae" isa "C_Rosales"
+ir(X, r101) :- in("C_Rosaceae", X), out("C_Rosales", X).
+:- #count {X : vrs(X), in("C_Rosaceae", X), in("C_Rosales", X)} = 0.
+
+% "C_Mimosaceae" isa "C_Fabales"
+ir(X, r105) :- in("C_Mimosaceae", X), out("C_Fabales", X).
+:- #count {X : vrs(X), in("C_Mimosaceae", X), in("C_Fabales", X)} = 0.
+
+% "C_Caesalpiniaceae" isa "C_Fabales"
+ir(X, r106) :- in("C_Caesalpiniaceae", X), out("C_Fabales", X).
+:- #count {X : vrs(X), in("C_Caesalpiniaceae", X), in("C_Fabales", X)} = 0.
+
+% "C_Fabaceae" isa "C_Fabales"
+ir(X, r107) :- in("C_Fabaceae", X), out("C_Fabales", X).
+:- #count {X : vrs(X), in("C_Fabaceae", X), in("C_Fabales", X)} = 0.
+
+% "C_Onagraceae" isa "C_Myrtales"
+ir(X, r108) :- in("C_Onagraceae", X), out("C_Myrtales", X).
+:- #count {X : vrs(X), in("C_Onagraceae", X), in("C_Myrtales", X)} = 0.
+
+% "C_Euphorbiaceae" isa "C_Euphorbiales"
+ir(X, r109) :- in("C_Euphorbiaceae", X), out("C_Euphorbiales", X).
+:- #count {X : vrs(X), in("C_Euphorbiaceae", X), in("C_Euphorbiales", X)} = 0.
+
+% "C_Aceraceae" isa "C_Sapindales"
+ir(X, r113) :- in("C_Aceraceae", X), out("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Aceraceae", X), in("C_Sapindales", X)} = 0.
+
+% "C_Sapindaceae" isa "C_Sapindales"
+ir(X, r114) :- in("C_Sapindaceae", X), out("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Sapindaceae", X), in("C_Sapindales", X)} = 0.
+
+% "C_Hippocastanaceae" isa "C_Sapindales"
+ir(X, r115) :- in("C_Hippocastanaceae", X), out("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Hippocastanaceae", X), in("C_Sapindales", X)} = 0.
+
+% "C_Apiaceae" isa "C_Apiales"
+ir(X, r116) :- in("C_Apiaceae", X), out("C_Apiales", X).
+:- #count {X : vrs(X), in("C_Apiaceae", X), in("C_Apiales", X)} = 0.
+
+% "C_Gentianales" isa "C_Asteridae"
+ir(X, r132) :- in("C_Gentianales", X), out("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Gentianales", X), in("C_Asteridae", X)} = 0.
+
+% "C_Solanales" isa "C_Asteridae"
+ir(X, r133) :- in("C_Solanales", X), out("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Solanales", X), in("C_Asteridae", X)} = 0.
+
+% "C_Lamiales" isa "C_Asteridae"
+ir(X, r134) :- in("C_Lamiales", X), out("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Lamiales", X), in("C_Asteridae", X)} = 0.
+
+% "C_Scrophulariales" isa "C_Asteridae"
+ir(X, r135) :- in("C_Scrophulariales", X), out("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Scrophulariales", X), in("C_Asteridae", X)} = 0.
+
+% "C_Dipsacales" isa "C_Asteridae"
+ir(X, r136) :- in("C_Dipsacales", X), out("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Dipsacales", X), in("C_Asteridae", X)} = 0.
+
+% "C_Asterales" isa "C_Asteridae"
+ir(X, r137) :- in("C_Asterales", X), out("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Asterales", X), in("C_Asteridae", X)} = 0.
+
+% "C_Asclepiadaceae" isa "C_Gentianales"
+ir(X, r138) :- in("C_Asclepiadaceae", X), out("C_Gentianales", X).
+:- #count {X : vrs(X), in("C_Asclepiadaceae", X), in("C_Gentianales", X)} = 0.
+
+% "C_Solanaceae" isa "C_Solanales"
+ir(X, r139) :- in("C_Solanaceae", X), out("C_Solanales", X).
+:- #count {X : vrs(X), in("C_Solanaceae", X), in("C_Solanales", X)} = 0.
+
+% "C_Lamiaceae" isa "C_Lamiales"
+ir(X, r140) :- in("C_Lamiaceae", X), out("C_Lamiales", X).
+:- #count {X : vrs(X), in("C_Lamiaceae", X), in("C_Lamiales", X)} = 0.
+
+% "C_Scrophulariaceae" isa "C_Scrophulariales"
+ir(X, r142) :- in("C_Scrophulariaceae", X), out("C_Scrophulariales", X).
+:- #count {X : vrs(X), in("C_Scrophulariaceae", X), in("C_Scrophulariales", X)} = 0.
+
+% "C_Oleaceae" isa "C_Scrophulariales"
+ir(X, r143) :- in("C_Oleaceae", X), out("C_Scrophulariales", X).
+:- #count {X : vrs(X), in("C_Oleaceae", X), in("C_Scrophulariales", X)} = 0.
+
+% "C_Caprifoliaceae" isa "C_Dipsacales"
+ir(X, r144) :- in("C_Caprifoliaceae", X), out("C_Dipsacales", X).
+:- #count {X : vrs(X), in("C_Caprifoliaceae", X), in("C_Dipsacales", X)} = 0.
+
+% "C_Asteraceae" isa "C_Asterales"
+ir(X, r145) :- in("C_Asteraceae", X), out("C_Asterales", X).
+:- #count {X : vrs(X), in("C_Asteraceae", X), in("C_Asterales", X)} = 0.
+
+% "C_Arecidae" isa "C_Liliopsida"
+ir(X, r149) :- in("C_Arecidae", X), out("C_Liliopsida", X).
+:- #count {X : vrs(X), in("C_Arecidae", X), in("C_Liliopsida", X)} = 0.
+
+% "C_Commelinidae" isa "C_Liliopsida"
+ir(X, r150) :- in("C_Commelinidae", X), out("C_Liliopsida", X).
+:- #count {X : vrs(X), in("C_Commelinidae", X), in("C_Liliopsida", X)} = 0.
+
+% "C_Liliidae" isa "C_Liliopsida"
+ir(X, r151) :- in("C_Liliidae", X), out("C_Liliopsida", X).
+:- #count {X : vrs(X), in("C_Liliidae", X), in("C_Liliopsida", X)} = 0.
+
+% "C_Arecales" isa "C_Arecidae"
+ir(X, r153) :- in("C_Arecales", X), out("C_Arecidae", X).
+:- #count {X : vrs(X), in("C_Arecales", X), in("C_Arecidae", X)} = 0.
+
+% "C_Arales" isa "C_Arecidae"
+ir(X, r154) :- in("C_Arales", X), out("C_Arecidae", X).
+:- #count {X : vrs(X), in("C_Arales", X), in("C_Arecidae", X)} = 0.
+
+% "C_Arecaceae" isa "C_Arecales"
+ir(X, r155) :- in("C_Arecaceae", X), out("C_Arecales", X).
+:- #count {X : vrs(X), in("C_Arecaceae", X), in("C_Arecales", X)} = 0.
+
+% "C_Araceae" isa "C_Arales"
+ir(X, r156) :- in("C_Araceae", X), out("C_Arales", X).
+:- #count {X : vrs(X), in("C_Araceae", X), in("C_Arales", X)} = 0.
+
+% "C_Cyperales" isa "C_Commelinidae"
+ir(X, r157) :- in("C_Cyperales", X), out("C_Commelinidae", X).
+:- #count {X : vrs(X), in("C_Cyperales", X), in("C_Commelinidae", X)} = 0.
+
+% "C_Poaceae" isa "C_Cyperales"
+ir(X, r158) :- in("C_Poaceae", X), out("C_Cyperales", X).
+:- #count {X : vrs(X), in("C_Poaceae", X), in("C_Cyperales", X)} = 0.
+
+% "C_Liliales" isa "C_Liliidae"
+ir(X, r160) :- in("C_Liliales", X), out("C_Liliidae", X).
+:- #count {X : vrs(X), in("C_Liliales", X), in("C_Liliidae", X)} = 0.
+
+% "C_Orchidales" isa "C_Liliidae"
+ir(X, r161) :- in("C_Orchidales", X), out("C_Liliidae", X).
+:- #count {X : vrs(X), in("C_Orchidales", X), in("C_Liliidae", X)} = 0.
+
+% "C_Liliaceae" isa "C_Liliales"
+ir(X, r163) :- in("C_Liliaceae", X), out("C_Liliales", X).
+:- #count {X : vrs(X), in("C_Liliaceae", X), in("C_Liliales", X)} = 0.
+
+% "C_Iridaceae" isa "C_Liliales"
+ir(X, r164) :- in("C_Iridaceae", X), out("C_Liliales", X).
+:- #count {X : vrs(X), in("C_Iridaceae", X), in("C_Liliales", X)} = 0.
+
+% "C_Orchidaceae" isa "C_Orchidales"
+ir(X, r165) :- in("C_Orchidaceae", X), out("C_Orchidales", X).
+:- #count {X : vrs(X), in("C_Orchidaceae", X), in("C_Orchidales", X)} = 0.
+
+% "APG_Magnoliids" isa "APG_Angiosperms"
+ir(X, r169) :- in("APG_Magnoliids", X), out("APG_Angiosperms", X).
+:- #count {X : vrs(X), in("APG_Magnoliids", X), in("APG_Angiosperms", X)} = 0.
+
+% "APG_Eudicots" isa "APG_Angiosperms"
+ir(X, r170) :- in("APG_Eudicots", X), out("APG_Angiosperms", X).
+:- #count {X : vrs(X), in("APG_Eudicots", X), in("APG_Angiosperms", X)} = 0.
+
+% "APG_Monocots" isa "APG_Angiosperms"
+ir(X, r171) :- in("APG_Monocots", X), out("APG_Angiosperms", X).
+:- #count {X : vrs(X), in("APG_Monocots", X), in("APG_Angiosperms", X)} = 0.
+
+% "APG_Magnoliales" isa "APG_Magnoliids"
+ir(X, r172) :- in("APG_Magnoliales", X), out("APG_Magnoliids", X).
+:- #count {X : vrs(X), in("APG_Magnoliales", X), in("APG_Magnoliids", X)} = 0.
+
+% "APG_Magnoliaceae" isa "APG_Magnoliales"
+ir(X, r173) :- in("APG_Magnoliaceae", X), out("APG_Magnoliales", X).
+:- #count {X : vrs(X), in("APG_Magnoliaceae", X), in("APG_Magnoliales", X)} = 0.
+
+% "APG_BasalEudicots" isa "APG_Eudicots"
+ir(X, r184) :- in("APG_BasalEudicots", X), out("APG_Eudicots", X).
+:- #count {X : vrs(X), in("APG_BasalEudicots", X), in("APG_Eudicots", X)} = 0.
+
+% "APG_CoreEudicots" isa "APG_Eudicots"
+ir(X, r185) :- in("APG_CoreEudicots", X), out("APG_Eudicots", X).
+:- #count {X : vrs(X), in("APG_CoreEudicots", X), in("APG_Eudicots", X)} = 0.
+
+% "APG_RosidClade" isa "APG_Eudicots"
+ir(X, r186) :- in("APG_RosidClade", X), out("APG_Eudicots", X).
+:- #count {X : vrs(X), in("APG_RosidClade", X), in("APG_Eudicots", X)} = 0.
+
+% "APG_CaryophyllidClade" isa "APG_Eudicots"
+ir(X, r187) :- in("APG_CaryophyllidClade", X), out("APG_Eudicots", X).
+:- #count {X : vrs(X), in("APG_CaryophyllidClade", X), in("APG_Eudicots", X)} = 0.
+
+% "APG_AsteridClade" isa "APG_Eudicots"
+ir(X, r188) :- in("APG_AsteridClade", X), out("APG_Eudicots", X).
+:- #count {X : vrs(X), in("APG_AsteridClade", X), in("APG_Eudicots", X)} = 0.
+
+% "APG_Ranunculales" isa "APG_BasalEudicots"
+ir(X, r189) :- in("APG_Ranunculales", X), out("APG_BasalEudicots", X).
+:- #count {X : vrs(X), in("APG_Ranunculales", X), in("APG_BasalEudicots", X)} = 0.
+
+% "APG_Ranunculaceae" isa "APG_Ranunculales"
+ir(X, r191) :- in("APG_Ranunculaceae", X), out("APG_Ranunculales", X).
+:- #count {X : vrs(X), in("APG_Ranunculaceae", X), in("APG_Ranunculales", X)} = 0.
+
+% "APG_Papaveraceae" isa "APG_Ranunculales"
+ir(X, r192) :- in("APG_Papaveraceae", X), out("APG_Ranunculales", X).
+:- #count {X : vrs(X), in("APG_Papaveraceae", X), in("APG_Ranunculales", X)} = 0.
+
+% "APG_Saxifragales" isa "APG_CoreEudicots"
+ir(X, r193) :- in("APG_Saxifragales", X), out("APG_CoreEudicots", X).
+:- #count {X : vrs(X), in("APG_Saxifragales", X), in("APG_CoreEudicots", X)} = 0.
+
+% "APG_Hamamelidaceae" isa "APG_Saxifragales"
+ir(X, r194) :- in("APG_Hamamelidaceae", X), out("APG_Saxifragales", X).
+:- #count {X : vrs(X), in("APG_Hamamelidaceae", X), in("APG_Saxifragales", X)} = 0.
+
+% "APG_Malpighiales" isa "APG_RosidClade"
+ir(X, r231) :- in("APG_Malpighiales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Fabales" isa "APG_RosidClade"
+ir(X, r232) :- in("APG_Fabales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Rosales" isa "APG_RosidClade"
+ir(X, r233) :- in("APG_Rosales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Cucurbitales" isa "APG_RosidClade"
+ir(X, r234) :- in("APG_Cucurbitales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Fagales" isa "APG_RosidClade"
+ir(X, r235) :- in("APG_Fagales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Fagales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Myrtales" isa "APG_RosidClade"
+ir(X, r236) :- in("APG_Myrtales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Myrtales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Brassicales" isa "APG_RosidClade"
+ir(X, r237) :- in("APG_Brassicales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Brassicales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Malvales" isa "APG_RosidClade"
+ir(X, r238) :- in("APG_Malvales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Malvales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Sapindales" isa "APG_RosidClade"
+ir(X, r239) :- in("APG_Sapindales", X), out("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_Sapindales", X), in("APG_RosidClade", X)} = 0.
+
+% "APG_Euphorbiaceae" isa "APG_Malpighiales"
+ir(X, r243) :- in("APG_Euphorbiaceae", X), out("APG_Malpighiales", X).
+:- #count {X : vrs(X), in("APG_Euphorbiaceae", X), in("APG_Malpighiales", X)} = 0.
+
+% "APG_Salicaceae" isa "APG_Malpighiales"
+ir(X, r244) :- in("APG_Salicaceae", X), out("APG_Malpighiales", X).
+:- #count {X : vrs(X), in("APG_Salicaceae", X), in("APG_Malpighiales", X)} = 0.
+
+% "APG_Violaceae" isa "APG_Malpighiales"
+ir(X, r245) :- in("APG_Violaceae", X), out("APG_Malpighiales", X).
+:- #count {X : vrs(X), in("APG_Violaceae", X), in("APG_Malpighiales", X)} = 0.
+
+% "APG_Fabaceae" isa "APG_Fabales"
+ir(X, r246) :- in("APG_Fabaceae", X), out("APG_Fabales", X).
+:- #count {X : vrs(X), in("APG_Fabaceae", X), in("APG_Fabales", X)} = 0.
+
+% "APG_Mimosoideae" isa "APG_Fabaceae"
+ir(X, r250) :- in("APG_Mimosoideae", X), out("APG_Fabaceae", X).
+:- #count {X : vrs(X), in("APG_Mimosoideae", X), in("APG_Fabaceae", X)} = 0.
+
+% "APG_Caesalpinioideae" isa "APG_Fabaceae"
+ir(X, r251) :- in("APG_Caesalpinioideae", X), out("APG_Fabaceae", X).
+:- #count {X : vrs(X), in("APG_Caesalpinioideae", X), in("APG_Fabaceae", X)} = 0.
+
+% "APG_Faboideae" isa "APG_Fabaceae"
+ir(X, r252) :- in("APG_Faboideae", X), out("APG_Fabaceae", X).
+:- #count {X : vrs(X), in("APG_Faboideae", X), in("APG_Fabaceae", X)} = 0.
+
+% "APG_Rosaceae" isa "APG_Rosales"
+ir(X, r254) :- in("APG_Rosaceae", X), out("APG_Rosales", X).
+:- #count {X : vrs(X), in("APG_Rosaceae", X), in("APG_Rosales", X)} = 0.
+
+% "APG_Moraceae" isa "APG_Rosales"
+ir(X, r255) :- in("APG_Moraceae", X), out("APG_Rosales", X).
+:- #count {X : vrs(X), in("APG_Moraceae", X), in("APG_Rosales", X)} = 0.
+
+% "APG_Cucurbitaceae" isa "APG_Cucurbitales"
+ir(X, r256) :- in("APG_Cucurbitaceae", X), out("APG_Cucurbitales", X).
+:- #count {X : vrs(X), in("APG_Cucurbitaceae", X), in("APG_Cucurbitales", X)} = 0.
+
+% "APG_Fagaceae" isa "APG_Fagales"
+ir(X, r258) :- in("APG_Fagaceae", X), out("APG_Fagales", X).
+:- #count {X : vrs(X), in("APG_Fagaceae", X), in("APG_Fagales", X)} = 0.
+
+% "APG_Betulaceae" isa "APG_Fagales"
+ir(X, r259) :- in("APG_Betulaceae", X), out("APG_Fagales", X).
+:- #count {X : vrs(X), in("APG_Betulaceae", X), in("APG_Fagales", X)} = 0.
+
+% "APG_Onagraceae" isa "APG_Myrtales"
+ir(X, r260) :- in("APG_Onagraceae", X), out("APG_Myrtales", X).
+:- #count {X : vrs(X), in("APG_Onagraceae", X), in("APG_Myrtales", X)} = 0.
+
+% "APG_Brassicaceae" isa "APG_Brassicales"
+ir(X, r261) :- in("APG_Brassicaceae", X), out("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Brassicaceae", X), in("APG_Brassicales", X)} = 0.
+
+% "APG_Malvaceae" isa "APG_Malvales"
+ir(X, r262) :- in("APG_Malvaceae", X), out("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Malvaceae", X), in("APG_Malvales", X)} = 0.
+
+% "APG_Sapindaceae" isa "APG_Sapindales"
+ir(X, r263) :- in("APG_Sapindaceae", X), out("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Sapindaceae", X), in("APG_Sapindales", X)} = 0.
+
+% "APG_Caryophyllales" isa "APG_CaryophyllidClade"
+ir(X, r264) :- in("APG_Caryophyllales", X), out("APG_CaryophyllidClade", X).
+:- #count {X : vrs(X), in("APG_Caryophyllales", X), in("APG_CaryophyllidClade", X)} = 0.
+
+% "APG_Caryophyllaceae" isa "APG_Caryophyllales"
+ir(X, r271) :- in("APG_Caryophyllaceae", X), out("APG_Caryophyllales", X).
+:- #count {X : vrs(X), in("APG_Caryophyllaceae", X), in("APG_Caryophyllales", X)} = 0.
+
+% "APG_Portulacaceae" isa "APG_Caryophyllales"
+ir(X, r272) :- in("APG_Portulacaceae", X), out("APG_Caryophyllales", X).
+:- #count {X : vrs(X), in("APG_Portulacaceae", X), in("APG_Caryophyllales", X)} = 0.
+
+% "APG_Cactaceae" isa "APG_Caryophyllales"
+ir(X, r273) :- in("APG_Cactaceae", X), out("APG_Caryophyllales", X).
+:- #count {X : vrs(X), in("APG_Cactaceae", X), in("APG_Caryophyllales", X)} = 0.
+
+% "APG_Polygonaceae" isa "APG_Caryophyllales"
+ir(X, r274) :- in("APG_Polygonaceae", X), out("APG_Caryophyllales", X).
+:- #count {X : vrs(X), in("APG_Polygonaceae", X), in("APG_Caryophyllales", X)} = 0.
+
+% "APG_Ericales" isa "APG_AsteridClade"
+ir(X, r296) :- in("APG_Ericales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Solanales" isa "APG_AsteridClade"
+ir(X, r297) :- in("APG_Solanales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Solanales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Lamiales" isa "APG_AsteridClade"
+ir(X, r298) :- in("APG_Lamiales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Lamiales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Gentianales" isa "APG_AsteridClade"
+ir(X, r299) :- in("APG_Gentianales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Gentianales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Dipsacales" isa "APG_AsteridClade"
+ir(X, r300) :- in("APG_Dipsacales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Dipsacales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Apiales" isa "APG_AsteridClade"
+ir(X, r301) :- in("APG_Apiales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Apiales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Asterales" isa "APG_AsteridClade"
+ir(X, r302) :- in("APG_Asterales", X), out("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_Asterales", X), in("APG_AsteridClade", X)} = 0.
+
+% "APG_Ericaceae" isa "APG_Ericales"
+ir(X, r303) :- in("APG_Ericaceae", X), out("APG_Ericales", X).
+:- #count {X : vrs(X), in("APG_Ericaceae", X), in("APG_Ericales", X)} = 0.
+
+% "APG_Solanaceae" isa "APG_Solanales"
+ir(X, r304) :- in("APG_Solanaceae", X), out("APG_Solanales", X).
+:- #count {X : vrs(X), in("APG_Solanaceae", X), in("APG_Solanales", X)} = 0.
+
+% "APG_Oleaceae" isa "APG_Lamiales"
+ir(X, r308) :- in("APG_Oleaceae", X), out("APG_Lamiales", X).
+:- #count {X : vrs(X), in("APG_Oleaceae", X), in("APG_Lamiales", X)} = 0.
+
+% "APG_Lamiaceae" isa "APG_Lamiales"
+ir(X, r309) :- in("APG_Lamiaceae", X), out("APG_Lamiales", X).
+:- #count {X : vrs(X), in("APG_Lamiaceae", X), in("APG_Lamiales", X)} = 0.
+
+% "APG_Scrophulariaceae" isa "APG_Lamiales"
+ir(X, r310) :- in("APG_Scrophulariaceae", X), out("APG_Lamiales", X).
+:- #count {X : vrs(X), in("APG_Scrophulariaceae", X), in("APG_Lamiales", X)} = 0.
+
+% "APG_Asclepiadaceae" isa "APG_Gentianales"
+ir(X, r311) :- in("APG_Asclepiadaceae", X), out("APG_Gentianales", X).
+:- #count {X : vrs(X), in("APG_Asclepiadaceae", X), in("APG_Gentianales", X)} = 0.
+
+% "APG_Caprifoliaceae" isa "APG_Dipsacales"
+ir(X, r312) :- in("APG_Caprifoliaceae", X), out("APG_Dipsacales", X).
+:- #count {X : vrs(X), in("APG_Caprifoliaceae", X), in("APG_Dipsacales", X)} = 0.
+
+% "APG_Apiaceae" isa "APG_Apiales"
+ir(X, r313) :- in("APG_Apiaceae", X), out("APG_Apiales", X).
+:- #count {X : vrs(X), in("APG_Apiaceae", X), in("APG_Apiales", X)} = 0.
+
+% "APG_Asteraceae" isa "APG_Asterales"
+ir(X, r314) :- in("APG_Asteraceae", X), out("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Asteraceae", X), in("APG_Asterales", X)} = 0.
+
+% "APG_Alismatales" isa "APG_Monocots"
+ir(X, r325) :- in("APG_Alismatales", X), out("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Alismatales", X), in("APG_Monocots", X)} = 0.
+
+% "APG_Liliales" isa "APG_Monocots"
+ir(X, r326) :- in("APG_Liliales", X), out("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Liliales", X), in("APG_Monocots", X)} = 0.
+
+% "APG_Asparagales" isa "APG_Monocots"
+ir(X, r327) :- in("APG_Asparagales", X), out("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Asparagales", X), in("APG_Monocots", X)} = 0.
+
+% "APG_Arecales" isa "APG_Monocots"
+ir(X, r328) :- in("APG_Arecales", X), out("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Arecales", X), in("APG_Monocots", X)} = 0.
+
+% "APG_Poales" isa "APG_Monocots"
+ir(X, r329) :- in("APG_Poales", X), out("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Poales", X), in("APG_Monocots", X)} = 0.
+
+% "APG_Araceae" isa "APG_Alismatales"
+ir(X, r330) :- in("APG_Araceae", X), out("APG_Alismatales", X).
+:- #count {X : vrs(X), in("APG_Araceae", X), in("APG_Alismatales", X)} = 0.
+
+% "APG_Liliaceae" isa "APG_Liliales"
+ir(X, r331) :- in("APG_Liliaceae", X), out("APG_Liliales", X).
+:- #count {X : vrs(X), in("APG_Liliaceae", X), in("APG_Liliales", X)} = 0.
+
+% "APG_Orchidaceae" isa "APG_Asparagales"
+ir(X, r333) :- in("APG_Orchidaceae", X), out("APG_Asparagales", X).
+:- #count {X : vrs(X), in("APG_Orchidaceae", X), in("APG_Asparagales", X)} = 0.
+
+% "APG_Iridaceae" isa "APG_Asparagales"
+ir(X, r334) :- in("APG_Iridaceae", X), out("APG_Asparagales", X).
+:- #count {X : vrs(X), in("APG_Iridaceae", X), in("APG_Asparagales", X)} = 0.
+
+% "APG_Arecaceae" isa "APG_Arecales"
+ir(X, r335) :- in("APG_Arecaceae", X), out("APG_Arecales", X).
+:- #count {X : vrs(X), in("APG_Arecaceae", X), in("APG_Arecales", X)} = 0.
+
+% "APG_Poaceae" isa "APG_Poales"
+ir(X, r336) :- in("APG_Poaceae", X), out("APG_Poales", X).
+:- #count {X : vrs(X), in("APG_Poaceae", X), in("APG_Poales", X)} = 0.
+
+% Coverage for "C_Magnoliophyta"
+out("C_Magnoliophyta", X) :- out("C_Magnoliopsida", X), out("C_Liliopsida", X).
+
+% Coverage for "C_Magnoliopsida"
+out("C_Magnoliopsida", X) :- out("C_Magnoliidae", X), out("C_Hamamelidae", X), out("C_Caryophyllidae", X), out("C_Rosidae", X), out("C_Asteridae", X).
+
+% Coverage for "C_Magnoliidae"
+out("C_Magnoliidae", X) :- out("C_Magnoliales", X), out("C_Ranunculales", X), out("C_Papaverales", X).
+
+% Coverage for "C_Magnoliales"
+out("C_Magnoliales", X) :- out("C_Magnoliaceae", X).
+
+% Coverage for "C_Ranunculales"
+out("C_Ranunculales", X) :- out("C_Ranunculaceae", X).
+
+% Coverage for "C_Papaverales"
+out("C_Papaverales", X) :- out("C_Papaveraceae", X).
+
+% Coverage for "C_Hamamelidae"
+out("C_Hamamelidae", X) :- out("C_Hamamelidales", X), out("C_Urticales", X), out("C_Fagales", X).
+
+% Coverage for "C_Hamamelidales"
+out("C_Hamamelidales", X) :- out("C_Hamamelidaceae", X).
+
+% Coverage for "C_Urticales"
+out("C_Urticales", X) :- out("C_Moraceae", X).
+
+% Coverage for "C_Fagales"
+out("C_Fagales", X) :- out("C_Fagaceae", X), out("C_Betulaceae", X).
+
+% Coverage for "C_Caryophyllidae"
+out("C_Caryophyllidae", X) :- out("C_Caryophyllales", X), out("C_Polygonales", X), out("C_Malvales", X), out("C_Violales", X), out("C_Salicales", X), out("C_Capparales", X), out("C_Ericales", X).
+
+% Coverage for "C_Caryophyllales"
+out("C_Caryophyllales", X) :- out("C_Cactaceae", X), out("C_Portulacaceae", X), out("C_Caryophyllaceae", X).
+
+% Coverage for "C_Polygonales"
+out("C_Polygonales", X) :- out("C_Polygonaceae", X).
+
+% Coverage for "C_Malvales"
+out("C_Malvales", X) :- out("C_Malvaceae", X).
+
+% Coverage for "C_Violales"
+out("C_Violales", X) :- out("C_Violaceae", X), out("C_Cucurbitaceae", X).
+
+% Coverage for "C_Salicales"
+out("C_Salicales", X) :- out("C_Salicaceae", X).
+
+% Coverage for "C_Capparales"
+out("C_Capparales", X) :- out("C_Brassicaceae", X).
+
+% Coverage for "C_Ericales"
+out("C_Ericales", X) :- out("C_Ericaceae", X).
+
+% Coverage for "C_Rosidae"
+out("C_Rosidae", X) :- out("C_Rosales", X), out("C_Fabales", X), out("C_Myrtales", X), out("C_Euphorbiales", X), out("C_Sapindales", X), out("C_Apiales", X).
+
+% Coverage for "C_Rosales"
+out("C_Rosales", X) :- out("C_Rosaceae", X).
+
+% Coverage for "C_Fabales"
+out("C_Fabales", X) :- out("C_Mimosaceae", X), out("C_Caesalpiniaceae", X), out("C_Fabaceae", X).
+
+% Coverage for "C_Myrtales"
+out("C_Myrtales", X) :- out("C_Onagraceae", X).
+
+% Coverage for "C_Euphorbiales"
+out("C_Euphorbiales", X) :- out("C_Euphorbiaceae", X).
+
+% Coverage for "C_Sapindales"
+out("C_Sapindales", X) :- out("C_Aceraceae", X), out("C_Sapindaceae", X), out("C_Hippocastanaceae", X).
+
+% Coverage for "C_Apiales"
+out("C_Apiales", X) :- out("C_Apiaceae", X).
+
+% Coverage for "C_Asteridae"
+out("C_Asteridae", X) :- out("C_Gentianales", X), out("C_Solanales", X), out("C_Lamiales", X), out("C_Scrophulariales", X), out("C_Dipsacales", X), out("C_Asterales", X).
+
+% Coverage for "C_Gentianales"
+out("C_Gentianales", X) :- out("C_Asclepiadaceae", X).
+
+% Coverage for "C_Solanales"
+out("C_Solanales", X) :- out("C_Solanaceae", X).
+
+% Coverage for "C_Lamiales"
+out("C_Lamiales", X) :- out("C_Lamiaceae", X).
+
+% Coverage for "C_Scrophulariales"
+out("C_Scrophulariales", X) :- out("C_Scrophulariaceae", X), out("C_Oleaceae", X).
+
+% Coverage for "C_Dipsacales"
+out("C_Dipsacales", X) :- out("C_Caprifoliaceae", X).
+
+% Coverage for "C_Asterales"
+out("C_Asterales", X) :- out("C_Asteraceae", X).
+
+% Coverage for "C_Liliopsida"
+out("C_Liliopsida", X) :- out("C_Arecidae", X), out("C_Commelinidae", X), out("C_Liliidae", X).
+
+% Coverage for "C_Arecidae"
+out("C_Arecidae", X) :- out("C_Arecales", X), out("C_Arales", X).
+
+% Coverage for "C_Arecales"
+out("C_Arecales", X) :- out("C_Arecaceae", X).
+
+% Coverage for "C_Arales"
+out("C_Arales", X) :- out("C_Araceae", X).
+
+% Coverage for "C_Commelinidae"
+out("C_Commelinidae", X) :- out("C_Cyperales", X).
+
+% Coverage for "C_Cyperales"
+out("C_Cyperales", X) :- out("C_Poaceae", X).
+
+% Coverage for "C_Liliidae"
+out("C_Liliidae", X) :- out("C_Liliales", X), out("C_Orchidales", X).
+
+% Coverage for "C_Liliales"
+out("C_Liliales", X) :- out("C_Liliaceae", X), out("C_Iridaceae", X).
+
+% Coverage for "C_Orchidales"
+out("C_Orchidales", X) :- out("C_Orchidaceae", X).
+
+% Coverage for "APG_Angiosperms"
+out("APG_Angiosperms", X) :- out("APG_Magnoliids", X), out("APG_Eudicots", X), out("APG_Monocots", X).
+
+% Coverage for "APG_Magnoliids"
+out("APG_Magnoliids", X) :- out("APG_Magnoliales", X).
+
+% Coverage for "APG_Magnoliales"
+out("APG_Magnoliales", X) :- out("APG_Magnoliaceae", X).
+
+% Coverage for "APG_Eudicots"
+out("APG_Eudicots", X) :- out("APG_BasalEudicots", X), out("APG_CoreEudicots", X), out("APG_RosidClade", X), out("APG_CaryophyllidClade", X), out("APG_AsteridClade", X).
+
+% Coverage for "APG_BasalEudicots"
+out("APG_BasalEudicots", X) :- out("APG_Ranunculales", X).
+
+% Coverage for "APG_Ranunculales"
+out("APG_Ranunculales", X) :- out("APG_Ranunculaceae", X), out("APG_Papaveraceae", X).
+
+% Coverage for "APG_CoreEudicots"
+out("APG_CoreEudicots", X) :- out("APG_Saxifragales", X).
+
+% Coverage for "APG_Saxifragales"
+out("APG_Saxifragales", X) :- out("APG_Hamamelidaceae", X).
+
+% Coverage for "APG_RosidClade"
+out("APG_RosidClade", X) :- out("APG_Malpighiales", X), out("APG_Fabales", X), out("APG_Rosales", X), out("APG_Cucurbitales", X), out("APG_Fagales", X), out("APG_Myrtales", X), out("APG_Brassicales", X), out("APG_Malvales", X), out("APG_Sapindales", X).
+
+% Coverage for "APG_Malpighiales"
+out("APG_Malpighiales", X) :- out("APG_Euphorbiaceae", X), out("APG_Salicaceae", X), out("APG_Violaceae", X).
+
+% Coverage for "APG_Fabales"
+out("APG_Fabales", X) :- out("APG_Fabaceae", X).
+
+% Coverage for "APG_Fabaceae"
+out("APG_Fabaceae", X) :- out("APG_Mimosoideae", X), out("APG_Caesalpinioideae", X), out("APG_Faboideae", X).
+
+% Coverage for "APG_Rosales"
+out("APG_Rosales", X) :- out("APG_Rosaceae", X), out("APG_Moraceae", X).
+
+% Coverage for "APG_Cucurbitales"
+out("APG_Cucurbitales", X) :- out("APG_Cucurbitaceae", X).
+
+% Coverage for "APG_Fagales"
+out("APG_Fagales", X) :- out("APG_Fagaceae", X), out("APG_Betulaceae", X).
+
+% Coverage for "APG_Myrtales"
+out("APG_Myrtales", X) :- out("APG_Onagraceae", X).
+
+% Coverage for "APG_Brassicales"
+out("APG_Brassicales", X) :- out("APG_Brassicaceae", X).
+
+% Coverage for "APG_Malvales"
+out("APG_Malvales", X) :- out("APG_Malvaceae", X).
+
+% Coverage for "APG_Sapindales"
+out("APG_Sapindales", X) :- out("APG_Sapindaceae", X).
+
+% Coverage for "APG_CaryophyllidClade"
+out("APG_CaryophyllidClade", X) :- out("APG_Caryophyllales", X).
+
+% Coverage for "APG_Caryophyllales"
+out("APG_Caryophyllales", X) :- out("APG_Caryophyllaceae", X), out("APG_Portulacaceae", X), out("APG_Cactaceae", X), out("APG_Polygonaceae", X).
+
+% Coverage for "APG_AsteridClade"
+out("APG_AsteridClade", X) :- out("APG_Ericales", X), out("APG_Solanales", X), out("APG_Lamiales", X), out("APG_Gentianales", X), out("APG_Dipsacales", X), out("APG_Apiales", X), out("APG_Asterales", X).
+
+% Coverage for "APG_Ericales"
+out("APG_Ericales", X) :- out("APG_Ericaceae", X).
+
+% Coverage for "APG_Solanales"
+out("APG_Solanales", X) :- out("APG_Solanaceae", X).
+
+% Coverage for "APG_Lamiales"
+out("APG_Lamiales", X) :- out("APG_Oleaceae", X), out("APG_Lamiaceae", X), out("APG_Scrophulariaceae", X).
+
+% Coverage for "APG_Gentianales"
+out("APG_Gentianales", X) :- out("APG_Asclepiadaceae", X).
+
+% Coverage for "APG_Dipsacales"
+out("APG_Dipsacales", X) :- out("APG_Caprifoliaceae", X).
+
+% Coverage for "APG_Apiales"
+out("APG_Apiales", X) :- out("APG_Apiaceae", X).
+
+% Coverage for "APG_Asterales"
+out("APG_Asterales", X) :- out("APG_Asteraceae", X).
+
+% Coverage for "APG_Monocots"
+out("APG_Monocots", X) :- out("APG_Alismatales", X), out("APG_Liliales", X), out("APG_Asparagales", X), out("APG_Arecales", X), out("APG_Poales", X).
+
+% Coverage for "APG_Alismatales"
+out("APG_Alismatales", X) :- out("APG_Araceae", X).
+
+% Coverage for "APG_Liliales"
+out("APG_Liliales", X) :- out("APG_Liliaceae", X).
+
+% Coverage for "APG_Asparagales"
+out("APG_Asparagales", X) :- out("APG_Orchidaceae", X), out("APG_Iridaceae", X).
+
+% Coverage for "APG_Arecales"
+out("APG_Arecales", X) :- out("APG_Arecaceae", X).
+
+% Coverage for "APG_Poales"
+out("APG_Poales", X) :- out("APG_Poaceae", X).
+
+% "C_Magnoliopsida" ! "C_Liliopsida"
+ir(X, r0) :- in("C_Magnoliopsida", X), in("C_Liliopsida", X).
+:- #count {X : vrs(X), in("C_Magnoliopsida", X), out("C_Liliopsida", X)} = 0.
+:- #count {X : vrs(X), in("C_Liliopsida", X), out("C_Magnoliopsida", X)} = 0.
+
+% "C_Magnoliidae" ! "C_Hamamelidae"
+ir(X, r3) :- in("C_Magnoliidae", X), in("C_Hamamelidae", X).
+:- #count {X : vrs(X), in("C_Magnoliidae", X), out("C_Hamamelidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Hamamelidae", X), out("C_Magnoliidae", X)} = 0.
+
+% "C_Magnoliidae" ! "C_Caryophyllidae"
+ir(X, r4) :- in("C_Magnoliidae", X), in("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Magnoliidae", X), out("C_Caryophyllidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Caryophyllidae", X), out("C_Magnoliidae", X)} = 0.
+
+% "C_Magnoliidae" ! "C_Rosidae"
+ir(X, r5) :- in("C_Magnoliidae", X), in("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Magnoliidae", X), out("C_Rosidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Rosidae", X), out("C_Magnoliidae", X)} = 0.
+
+% "C_Magnoliidae" ! "C_Asteridae"
+ir(X, r6) :- in("C_Magnoliidae", X), in("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Magnoliidae", X), out("C_Asteridae", X)} = 0.
+:- #count {X : vrs(X), in("C_Asteridae", X), out("C_Magnoliidae", X)} = 0.
+
+% "C_Hamamelidae" ! "C_Caryophyllidae"
+ir(X, r7) :- in("C_Hamamelidae", X), in("C_Caryophyllidae", X).
+:- #count {X : vrs(X), in("C_Hamamelidae", X), out("C_Caryophyllidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Caryophyllidae", X), out("C_Hamamelidae", X)} = 0.
+
+% "C_Hamamelidae" ! "C_Rosidae"
+ir(X, r8) :- in("C_Hamamelidae", X), in("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Hamamelidae", X), out("C_Rosidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Rosidae", X), out("C_Hamamelidae", X)} = 0.
+
+% "C_Hamamelidae" ! "C_Asteridae"
+ir(X, r9) :- in("C_Hamamelidae", X), in("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Hamamelidae", X), out("C_Asteridae", X)} = 0.
+:- #count {X : vrs(X), in("C_Asteridae", X), out("C_Hamamelidae", X)} = 0.
+
+% "C_Caryophyllidae" ! "C_Rosidae"
+ir(X, r10) :- in("C_Caryophyllidae", X), in("C_Rosidae", X).
+:- #count {X : vrs(X), in("C_Caryophyllidae", X), out("C_Rosidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Rosidae", X), out("C_Caryophyllidae", X)} = 0.
+
+% "C_Caryophyllidae" ! "C_Asteridae"
+ir(X, r11) :- in("C_Caryophyllidae", X), in("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Caryophyllidae", X), out("C_Asteridae", X)} = 0.
+:- #count {X : vrs(X), in("C_Asteridae", X), out("C_Caryophyllidae", X)} = 0.
+
+% "C_Rosidae" ! "C_Asteridae"
+ir(X, r12) :- in("C_Rosidae", X), in("C_Asteridae", X).
+:- #count {X : vrs(X), in("C_Rosidae", X), out("C_Asteridae", X)} = 0.
+:- #count {X : vrs(X), in("C_Asteridae", X), out("C_Rosidae", X)} = 0.
+
+% "C_Magnoliales" ! "C_Ranunculales"
+ir(X, r18) :- in("C_Magnoliales", X), in("C_Ranunculales", X).
+:- #count {X : vrs(X), in("C_Magnoliales", X), out("C_Ranunculales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ranunculales", X), out("C_Magnoliales", X)} = 0.
+
+% "C_Magnoliales" ! "C_Papaverales"
+ir(X, r19) :- in("C_Magnoliales", X), in("C_Papaverales", X).
+:- #count {X : vrs(X), in("C_Magnoliales", X), out("C_Papaverales", X)} = 0.
+:- #count {X : vrs(X), in("C_Papaverales", X), out("C_Magnoliales", X)} = 0.
+
+% "C_Ranunculales" ! "C_Papaverales"
+ir(X, r20) :- in("C_Ranunculales", X), in("C_Papaverales", X).
+:- #count {X : vrs(X), in("C_Ranunculales", X), out("C_Papaverales", X)} = 0.
+:- #count {X : vrs(X), in("C_Papaverales", X), out("C_Ranunculales", X)} = 0.
+
+% "C_Hamamelidales" ! "C_Urticales"
+ir(X, r27) :- in("C_Hamamelidales", X), in("C_Urticales", X).
+:- #count {X : vrs(X), in("C_Hamamelidales", X), out("C_Urticales", X)} = 0.
+:- #count {X : vrs(X), in("C_Urticales", X), out("C_Hamamelidales", X)} = 0.
+
+% "C_Hamamelidales" ! "C_Fagales"
+ir(X, r28) :- in("C_Hamamelidales", X), in("C_Fagales", X).
+:- #count {X : vrs(X), in("C_Hamamelidales", X), out("C_Fagales", X)} = 0.
+:- #count {X : vrs(X), in("C_Fagales", X), out("C_Hamamelidales", X)} = 0.
+
+% "C_Urticales" ! "C_Fagales"
+ir(X, r29) :- in("C_Urticales", X), in("C_Fagales", X).
+:- #count {X : vrs(X), in("C_Urticales", X), out("C_Fagales", X)} = 0.
+:- #count {X : vrs(X), in("C_Fagales", X), out("C_Urticales", X)} = 0.
+
+% "C_Fagaceae" ! "C_Betulaceae"
+ir(X, r35) :- in("C_Fagaceae", X), in("C_Betulaceae", X).
+:- #count {X : vrs(X), in("C_Fagaceae", X), out("C_Betulaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Betulaceae", X), out("C_Fagaceae", X)} = 0.
+
+% "C_Caryophyllales" ! "C_Polygonales"
+ir(X, r38) :- in("C_Caryophyllales", X), in("C_Polygonales", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), out("C_Polygonales", X)} = 0.
+:- #count {X : vrs(X), in("C_Polygonales", X), out("C_Caryophyllales", X)} = 0.
+
+% "C_Caryophyllales" ! "C_Malvales"
+ir(X, r39) :- in("C_Caryophyllales", X), in("C_Malvales", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), out("C_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("C_Malvales", X), out("C_Caryophyllales", X)} = 0.
+
+% "C_Caryophyllales" ! "C_Violales"
+ir(X, r40) :- in("C_Caryophyllales", X), in("C_Violales", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), out("C_Violales", X)} = 0.
+:- #count {X : vrs(X), in("C_Violales", X), out("C_Caryophyllales", X)} = 0.
+
+% "C_Caryophyllales" ! "C_Salicales"
+ir(X, r41) :- in("C_Caryophyllales", X), in("C_Salicales", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), out("C_Salicales", X)} = 0.
+:- #count {X : vrs(X), in("C_Salicales", X), out("C_Caryophyllales", X)} = 0.
+
+% "C_Caryophyllales" ! "C_Capparales"
+ir(X, r42) :- in("C_Caryophyllales", X), in("C_Capparales", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), out("C_Capparales", X)} = 0.
+:- #count {X : vrs(X), in("C_Capparales", X), out("C_Caryophyllales", X)} = 0.
+
+% "C_Caryophyllales" ! "C_Ericales"
+ir(X, r43) :- in("C_Caryophyllales", X), in("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Caryophyllales", X), out("C_Ericales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ericales", X), out("C_Caryophyllales", X)} = 0.
+
+% "C_Polygonales" ! "C_Malvales"
+ir(X, r44) :- in("C_Polygonales", X), in("C_Malvales", X).
+:- #count {X : vrs(X), in("C_Polygonales", X), out("C_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("C_Malvales", X), out("C_Polygonales", X)} = 0.
+
+% "C_Polygonales" ! "C_Violales"
+ir(X, r45) :- in("C_Polygonales", X), in("C_Violales", X).
+:- #count {X : vrs(X), in("C_Polygonales", X), out("C_Violales", X)} = 0.
+:- #count {X : vrs(X), in("C_Violales", X), out("C_Polygonales", X)} = 0.
+
+% "C_Polygonales" ! "C_Salicales"
+ir(X, r46) :- in("C_Polygonales", X), in("C_Salicales", X).
+:- #count {X : vrs(X), in("C_Polygonales", X), out("C_Salicales", X)} = 0.
+:- #count {X : vrs(X), in("C_Salicales", X), out("C_Polygonales", X)} = 0.
+
+% "C_Polygonales" ! "C_Capparales"
+ir(X, r47) :- in("C_Polygonales", X), in("C_Capparales", X).
+:- #count {X : vrs(X), in("C_Polygonales", X), out("C_Capparales", X)} = 0.
+:- #count {X : vrs(X), in("C_Capparales", X), out("C_Polygonales", X)} = 0.
+
+% "C_Polygonales" ! "C_Ericales"
+ir(X, r48) :- in("C_Polygonales", X), in("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Polygonales", X), out("C_Ericales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ericales", X), out("C_Polygonales", X)} = 0.
+
+% "C_Malvales" ! "C_Violales"
+ir(X, r49) :- in("C_Malvales", X), in("C_Violales", X).
+:- #count {X : vrs(X), in("C_Malvales", X), out("C_Violales", X)} = 0.
+:- #count {X : vrs(X), in("C_Violales", X), out("C_Malvales", X)} = 0.
+
+% "C_Malvales" ! "C_Salicales"
+ir(X, r50) :- in("C_Malvales", X), in("C_Salicales", X).
+:- #count {X : vrs(X), in("C_Malvales", X), out("C_Salicales", X)} = 0.
+:- #count {X : vrs(X), in("C_Salicales", X), out("C_Malvales", X)} = 0.
+
+% "C_Malvales" ! "C_Capparales"
+ir(X, r51) :- in("C_Malvales", X), in("C_Capparales", X).
+:- #count {X : vrs(X), in("C_Malvales", X), out("C_Capparales", X)} = 0.
+:- #count {X : vrs(X), in("C_Capparales", X), out("C_Malvales", X)} = 0.
+
+% "C_Malvales" ! "C_Ericales"
+ir(X, r52) :- in("C_Malvales", X), in("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Malvales", X), out("C_Ericales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ericales", X), out("C_Malvales", X)} = 0.
+
+% "C_Violales" ! "C_Salicales"
+ir(X, r53) :- in("C_Violales", X), in("C_Salicales", X).
+:- #count {X : vrs(X), in("C_Violales", X), out("C_Salicales", X)} = 0.
+:- #count {X : vrs(X), in("C_Salicales", X), out("C_Violales", X)} = 0.
+
+% "C_Violales" ! "C_Capparales"
+ir(X, r54) :- in("C_Violales", X), in("C_Capparales", X).
+:- #count {X : vrs(X), in("C_Violales", X), out("C_Capparales", X)} = 0.
+:- #count {X : vrs(X), in("C_Capparales", X), out("C_Violales", X)} = 0.
+
+% "C_Violales" ! "C_Ericales"
+ir(X, r55) :- in("C_Violales", X), in("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Violales", X), out("C_Ericales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ericales", X), out("C_Violales", X)} = 0.
+
+% "C_Salicales" ! "C_Capparales"
+ir(X, r56) :- in("C_Salicales", X), in("C_Capparales", X).
+:- #count {X : vrs(X), in("C_Salicales", X), out("C_Capparales", X)} = 0.
+:- #count {X : vrs(X), in("C_Capparales", X), out("C_Salicales", X)} = 0.
+
+% "C_Salicales" ! "C_Ericales"
+ir(X, r57) :- in("C_Salicales", X), in("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Salicales", X), out("C_Ericales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ericales", X), out("C_Salicales", X)} = 0.
+
+% "C_Capparales" ! "C_Ericales"
+ir(X, r58) :- in("C_Capparales", X), in("C_Ericales", X).
+:- #count {X : vrs(X), in("C_Capparales", X), out("C_Ericales", X)} = 0.
+:- #count {X : vrs(X), in("C_Ericales", X), out("C_Capparales", X)} = 0.
+
+% "C_Cactaceae" ! "C_Portulacaceae"
+ir(X, r66) :- in("C_Cactaceae", X), in("C_Portulacaceae", X).
+:- #count {X : vrs(X), in("C_Cactaceae", X), out("C_Portulacaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Portulacaceae", X), out("C_Cactaceae", X)} = 0.
+
+% "C_Cactaceae" ! "C_Caryophyllaceae"
+ir(X, r67) :- in("C_Cactaceae", X), in("C_Caryophyllaceae", X).
+:- #count {X : vrs(X), in("C_Cactaceae", X), out("C_Caryophyllaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Caryophyllaceae", X), out("C_Cactaceae", X)} = 0.
+
+% "C_Portulacaceae" ! "C_Caryophyllaceae"
+ir(X, r68) :- in("C_Portulacaceae", X), in("C_Caryophyllaceae", X).
+:- #count {X : vrs(X), in("C_Portulacaceae", X), out("C_Caryophyllaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Caryophyllaceae", X), out("C_Portulacaceae", X)} = 0.
+
+% "C_Violaceae" ! "C_Cucurbitaceae"
+ir(X, r74) :- in("C_Violaceae", X), in("C_Cucurbitaceae", X).
+:- #count {X : vrs(X), in("C_Violaceae", X), out("C_Cucurbitaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Cucurbitaceae", X), out("C_Violaceae", X)} = 0.
+
+% "C_Rosales" ! "C_Fabales"
+ir(X, r80) :- in("C_Rosales", X), in("C_Fabales", X).
+:- #count {X : vrs(X), in("C_Rosales", X), out("C_Fabales", X)} = 0.
+:- #count {X : vrs(X), in("C_Fabales", X), out("C_Rosales", X)} = 0.
+
+% "C_Rosales" ! "C_Myrtales"
+ir(X, r81) :- in("C_Rosales", X), in("C_Myrtales", X).
+:- #count {X : vrs(X), in("C_Rosales", X), out("C_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("C_Myrtales", X), out("C_Rosales", X)} = 0.
+
+% "C_Rosales" ! "C_Euphorbiales"
+ir(X, r82) :- in("C_Rosales", X), in("C_Euphorbiales", X).
+:- #count {X : vrs(X), in("C_Rosales", X), out("C_Euphorbiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Euphorbiales", X), out("C_Rosales", X)} = 0.
+
+% "C_Rosales" ! "C_Sapindales"
+ir(X, r83) :- in("C_Rosales", X), in("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Rosales", X), out("C_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("C_Sapindales", X), out("C_Rosales", X)} = 0.
+
+% "C_Rosales" ! "C_Apiales"
+ir(X, r84) :- in("C_Rosales", X), in("C_Apiales", X).
+:- #count {X : vrs(X), in("C_Rosales", X), out("C_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Apiales", X), out("C_Rosales", X)} = 0.
+
+% "C_Fabales" ! "C_Myrtales"
+ir(X, r85) :- in("C_Fabales", X), in("C_Myrtales", X).
+:- #count {X : vrs(X), in("C_Fabales", X), out("C_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("C_Myrtales", X), out("C_Fabales", X)} = 0.
+
+% "C_Fabales" ! "C_Euphorbiales"
+ir(X, r86) :- in("C_Fabales", X), in("C_Euphorbiales", X).
+:- #count {X : vrs(X), in("C_Fabales", X), out("C_Euphorbiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Euphorbiales", X), out("C_Fabales", X)} = 0.
+
+% "C_Fabales" ! "C_Sapindales"
+ir(X, r87) :- in("C_Fabales", X), in("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Fabales", X), out("C_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("C_Sapindales", X), out("C_Fabales", X)} = 0.
+
+% "C_Fabales" ! "C_Apiales"
+ir(X, r88) :- in("C_Fabales", X), in("C_Apiales", X).
+:- #count {X : vrs(X), in("C_Fabales", X), out("C_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Apiales", X), out("C_Fabales", X)} = 0.
+
+% "C_Myrtales" ! "C_Euphorbiales"
+ir(X, r89) :- in("C_Myrtales", X), in("C_Euphorbiales", X).
+:- #count {X : vrs(X), in("C_Myrtales", X), out("C_Euphorbiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Euphorbiales", X), out("C_Myrtales", X)} = 0.
+
+% "C_Myrtales" ! "C_Sapindales"
+ir(X, r90) :- in("C_Myrtales", X), in("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Myrtales", X), out("C_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("C_Sapindales", X), out("C_Myrtales", X)} = 0.
+
+% "C_Myrtales" ! "C_Apiales"
+ir(X, r91) :- in("C_Myrtales", X), in("C_Apiales", X).
+:- #count {X : vrs(X), in("C_Myrtales", X), out("C_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Apiales", X), out("C_Myrtales", X)} = 0.
+
+% "C_Euphorbiales" ! "C_Sapindales"
+ir(X, r92) :- in("C_Euphorbiales", X), in("C_Sapindales", X).
+:- #count {X : vrs(X), in("C_Euphorbiales", X), out("C_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("C_Sapindales", X), out("C_Euphorbiales", X)} = 0.
+
+% "C_Euphorbiales" ! "C_Apiales"
+ir(X, r93) :- in("C_Euphorbiales", X), in("C_Apiales", X).
+:- #count {X : vrs(X), in("C_Euphorbiales", X), out("C_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Apiales", X), out("C_Euphorbiales", X)} = 0.
+
+% "C_Sapindales" ! "C_Apiales"
+ir(X, r94) :- in("C_Sapindales", X), in("C_Apiales", X).
+:- #count {X : vrs(X), in("C_Sapindales", X), out("C_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Apiales", X), out("C_Sapindales", X)} = 0.
+
+% "C_Mimosaceae" ! "C_Caesalpiniaceae"
+ir(X, r102) :- in("C_Mimosaceae", X), in("C_Caesalpiniaceae", X).
+:- #count {X : vrs(X), in("C_Mimosaceae", X), out("C_Caesalpiniaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Caesalpiniaceae", X), out("C_Mimosaceae", X)} = 0.
+
+% "C_Mimosaceae" ! "C_Fabaceae"
+ir(X, r103) :- in("C_Mimosaceae", X), in("C_Fabaceae", X).
+:- #count {X : vrs(X), in("C_Mimosaceae", X), out("C_Fabaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Fabaceae", X), out("C_Mimosaceae", X)} = 0.
+
+% "C_Caesalpiniaceae" ! "C_Fabaceae"
+ir(X, r104) :- in("C_Caesalpiniaceae", X), in("C_Fabaceae", X).
+:- #count {X : vrs(X), in("C_Caesalpiniaceae", X), out("C_Fabaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Fabaceae", X), out("C_Caesalpiniaceae", X)} = 0.
+
+% "C_Aceraceae" ! "C_Sapindaceae"
+ir(X, r110) :- in("C_Aceraceae", X), in("C_Sapindaceae", X).
+:- #count {X : vrs(X), in("C_Aceraceae", X), out("C_Sapindaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Sapindaceae", X), out("C_Aceraceae", X)} = 0.
+
+% "C_Aceraceae" ! "C_Hippocastanaceae"
+ir(X, r111) :- in("C_Aceraceae", X), in("C_Hippocastanaceae", X).
+:- #count {X : vrs(X), in("C_Aceraceae", X), out("C_Hippocastanaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Hippocastanaceae", X), out("C_Aceraceae", X)} = 0.
+
+% "C_Sapindaceae" ! "C_Hippocastanaceae"
+ir(X, r112) :- in("C_Sapindaceae", X), in("C_Hippocastanaceae", X).
+:- #count {X : vrs(X), in("C_Sapindaceae", X), out("C_Hippocastanaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Hippocastanaceae", X), out("C_Sapindaceae", X)} = 0.
+
+% "C_Gentianales" ! "C_Solanales"
+ir(X, r117) :- in("C_Gentianales", X), in("C_Solanales", X).
+:- #count {X : vrs(X), in("C_Gentianales", X), out("C_Solanales", X)} = 0.
+:- #count {X : vrs(X), in("C_Solanales", X), out("C_Gentianales", X)} = 0.
+
+% "C_Gentianales" ! "C_Lamiales"
+ir(X, r118) :- in("C_Gentianales", X), in("C_Lamiales", X).
+:- #count {X : vrs(X), in("C_Gentianales", X), out("C_Lamiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Lamiales", X), out("C_Gentianales", X)} = 0.
+
+% "C_Gentianales" ! "C_Scrophulariales"
+ir(X, r119) :- in("C_Gentianales", X), in("C_Scrophulariales", X).
+:- #count {X : vrs(X), in("C_Gentianales", X), out("C_Scrophulariales", X)} = 0.
+:- #count {X : vrs(X), in("C_Scrophulariales", X), out("C_Gentianales", X)} = 0.
+
+% "C_Gentianales" ! "C_Dipsacales"
+ir(X, r120) :- in("C_Gentianales", X), in("C_Dipsacales", X).
+:- #count {X : vrs(X), in("C_Gentianales", X), out("C_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("C_Dipsacales", X), out("C_Gentianales", X)} = 0.
+
+% "C_Gentianales" ! "C_Asterales"
+ir(X, r121) :- in("C_Gentianales", X), in("C_Asterales", X).
+:- #count {X : vrs(X), in("C_Gentianales", X), out("C_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("C_Asterales", X), out("C_Gentianales", X)} = 0.
+
+% "C_Solanales" ! "C_Lamiales"
+ir(X, r122) :- in("C_Solanales", X), in("C_Lamiales", X).
+:- #count {X : vrs(X), in("C_Solanales", X), out("C_Lamiales", X)} = 0.
+:- #count {X : vrs(X), in("C_Lamiales", X), out("C_Solanales", X)} = 0.
+
+% "C_Solanales" ! "C_Scrophulariales"
+ir(X, r123) :- in("C_Solanales", X), in("C_Scrophulariales", X).
+:- #count {X : vrs(X), in("C_Solanales", X), out("C_Scrophulariales", X)} = 0.
+:- #count {X : vrs(X), in("C_Scrophulariales", X), out("C_Solanales", X)} = 0.
+
+% "C_Solanales" ! "C_Dipsacales"
+ir(X, r124) :- in("C_Solanales", X), in("C_Dipsacales", X).
+:- #count {X : vrs(X), in("C_Solanales", X), out("C_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("C_Dipsacales", X), out("C_Solanales", X)} = 0.
+
+% "C_Solanales" ! "C_Asterales"
+ir(X, r125) :- in("C_Solanales", X), in("C_Asterales", X).
+:- #count {X : vrs(X), in("C_Solanales", X), out("C_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("C_Asterales", X), out("C_Solanales", X)} = 0.
+
+% "C_Lamiales" ! "C_Scrophulariales"
+ir(X, r126) :- in("C_Lamiales", X), in("C_Scrophulariales", X).
+:- #count {X : vrs(X), in("C_Lamiales", X), out("C_Scrophulariales", X)} = 0.
+:- #count {X : vrs(X), in("C_Scrophulariales", X), out("C_Lamiales", X)} = 0.
+
+% "C_Lamiales" ! "C_Dipsacales"
+ir(X, r127) :- in("C_Lamiales", X), in("C_Dipsacales", X).
+:- #count {X : vrs(X), in("C_Lamiales", X), out("C_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("C_Dipsacales", X), out("C_Lamiales", X)} = 0.
+
+% "C_Lamiales" ! "C_Asterales"
+ir(X, r128) :- in("C_Lamiales", X), in("C_Asterales", X).
+:- #count {X : vrs(X), in("C_Lamiales", X), out("C_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("C_Asterales", X), out("C_Lamiales", X)} = 0.
+
+% "C_Scrophulariales" ! "C_Dipsacales"
+ir(X, r129) :- in("C_Scrophulariales", X), in("C_Dipsacales", X).
+:- #count {X : vrs(X), in("C_Scrophulariales", X), out("C_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("C_Dipsacales", X), out("C_Scrophulariales", X)} = 0.
+
+% "C_Scrophulariales" ! "C_Asterales"
+ir(X, r130) :- in("C_Scrophulariales", X), in("C_Asterales", X).
+:- #count {X : vrs(X), in("C_Scrophulariales", X), out("C_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("C_Asterales", X), out("C_Scrophulariales", X)} = 0.
+
+% "C_Dipsacales" ! "C_Asterales"
+ir(X, r131) :- in("C_Dipsacales", X), in("C_Asterales", X).
+:- #count {X : vrs(X), in("C_Dipsacales", X), out("C_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("C_Asterales", X), out("C_Dipsacales", X)} = 0.
+
+% "C_Scrophulariaceae" ! "C_Oleaceae"
+ir(X, r141) :- in("C_Scrophulariaceae", X), in("C_Oleaceae", X).
+:- #count {X : vrs(X), in("C_Scrophulariaceae", X), out("C_Oleaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Oleaceae", X), out("C_Scrophulariaceae", X)} = 0.
+
+% "C_Arecidae" ! "C_Commelinidae"
+ir(X, r146) :- in("C_Arecidae", X), in("C_Commelinidae", X).
+:- #count {X : vrs(X), in("C_Arecidae", X), out("C_Commelinidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Commelinidae", X), out("C_Arecidae", X)} = 0.
+
+% "C_Arecidae" ! "C_Liliidae"
+ir(X, r147) :- in("C_Arecidae", X), in("C_Liliidae", X).
+:- #count {X : vrs(X), in("C_Arecidae", X), out("C_Liliidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Liliidae", X), out("C_Arecidae", X)} = 0.
+
+% "C_Commelinidae" ! "C_Liliidae"
+ir(X, r148) :- in("C_Commelinidae", X), in("C_Liliidae", X).
+:- #count {X : vrs(X), in("C_Commelinidae", X), out("C_Liliidae", X)} = 0.
+:- #count {X : vrs(X), in("C_Liliidae", X), out("C_Commelinidae", X)} = 0.
+
+% "C_Arecales" ! "C_Arales"
+ir(X, r152) :- in("C_Arecales", X), in("C_Arales", X).
+:- #count {X : vrs(X), in("C_Arecales", X), out("C_Arales", X)} = 0.
+:- #count {X : vrs(X), in("C_Arales", X), out("C_Arecales", X)} = 0.
+
+% "C_Liliales" ! "C_Orchidales"
+ir(X, r159) :- in("C_Liliales", X), in("C_Orchidales", X).
+:- #count {X : vrs(X), in("C_Liliales", X), out("C_Orchidales", X)} = 0.
+:- #count {X : vrs(X), in("C_Orchidales", X), out("C_Liliales", X)} = 0.
+
+% "C_Liliaceae" ! "C_Iridaceae"
+ir(X, r162) :- in("C_Liliaceae", X), in("C_Iridaceae", X).
+:- #count {X : vrs(X), in("C_Liliaceae", X), out("C_Iridaceae", X)} = 0.
+:- #count {X : vrs(X), in("C_Iridaceae", X), out("C_Liliaceae", X)} = 0.
+
+% "APG_Magnoliids" ! "APG_Eudicots"
+ir(X, r166) :- in("APG_Magnoliids", X), in("APG_Eudicots", X).
+:- #count {X : vrs(X), in("APG_Magnoliids", X), out("APG_Eudicots", X)} = 0.
+:- #count {X : vrs(X), in("APG_Eudicots", X), out("APG_Magnoliids", X)} = 0.
+
+% "APG_Magnoliids" ! "APG_Monocots"
+ir(X, r167) :- in("APG_Magnoliids", X), in("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Magnoliids", X), out("APG_Monocots", X)} = 0.
+:- #count {X : vrs(X), in("APG_Monocots", X), out("APG_Magnoliids", X)} = 0.
+
+% "APG_Eudicots" ! "APG_Monocots"
+ir(X, r168) :- in("APG_Eudicots", X), in("APG_Monocots", X).
+:- #count {X : vrs(X), in("APG_Eudicots", X), out("APG_Monocots", X)} = 0.
+:- #count {X : vrs(X), in("APG_Monocots", X), out("APG_Eudicots", X)} = 0.
+
+% "APG_BasalEudicots" ! "APG_CoreEudicots"
+ir(X, r174) :- in("APG_BasalEudicots", X), in("APG_CoreEudicots", X).
+:- #count {X : vrs(X), in("APG_BasalEudicots", X), out("APG_CoreEudicots", X)} = 0.
+:- #count {X : vrs(X), in("APG_CoreEudicots", X), out("APG_BasalEudicots", X)} = 0.
+
+% "APG_BasalEudicots" ! "APG_RosidClade"
+ir(X, r175) :- in("APG_BasalEudicots", X), in("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_BasalEudicots", X), out("APG_RosidClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_RosidClade", X), out("APG_BasalEudicots", X)} = 0.
+
+% "APG_BasalEudicots" ! "APG_CaryophyllidClade"
+ir(X, r176) :- in("APG_BasalEudicots", X), in("APG_CaryophyllidClade", X).
+:- #count {X : vrs(X), in("APG_BasalEudicots", X), out("APG_CaryophyllidClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_CaryophyllidClade", X), out("APG_BasalEudicots", X)} = 0.
+
+% "APG_BasalEudicots" ! "APG_AsteridClade"
+ir(X, r177) :- in("APG_BasalEudicots", X), in("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_BasalEudicots", X), out("APG_AsteridClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_AsteridClade", X), out("APG_BasalEudicots", X)} = 0.
+
+% "APG_CoreEudicots" ! "APG_RosidClade"
+ir(X, r178) :- in("APG_CoreEudicots", X), in("APG_RosidClade", X).
+:- #count {X : vrs(X), in("APG_CoreEudicots", X), out("APG_RosidClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_RosidClade", X), out("APG_CoreEudicots", X)} = 0.
+
+% "APG_CoreEudicots" ! "APG_CaryophyllidClade"
+ir(X, r179) :- in("APG_CoreEudicots", X), in("APG_CaryophyllidClade", X).
+:- #count {X : vrs(X), in("APG_CoreEudicots", X), out("APG_CaryophyllidClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_CaryophyllidClade", X), out("APG_CoreEudicots", X)} = 0.
+
+% "APG_CoreEudicots" ! "APG_AsteridClade"
+ir(X, r180) :- in("APG_CoreEudicots", X), in("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_CoreEudicots", X), out("APG_AsteridClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_AsteridClade", X), out("APG_CoreEudicots", X)} = 0.
+
+% "APG_RosidClade" ! "APG_CaryophyllidClade"
+ir(X, r181) :- in("APG_RosidClade", X), in("APG_CaryophyllidClade", X).
+:- #count {X : vrs(X), in("APG_RosidClade", X), out("APG_CaryophyllidClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_CaryophyllidClade", X), out("APG_RosidClade", X)} = 0.
+
+% "APG_RosidClade" ! "APG_AsteridClade"
+ir(X, r182) :- in("APG_RosidClade", X), in("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_RosidClade", X), out("APG_AsteridClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_AsteridClade", X), out("APG_RosidClade", X)} = 0.
+
+% "APG_CaryophyllidClade" ! "APG_AsteridClade"
+ir(X, r183) :- in("APG_CaryophyllidClade", X), in("APG_AsteridClade", X).
+:- #count {X : vrs(X), in("APG_CaryophyllidClade", X), out("APG_AsteridClade", X)} = 0.
+:- #count {X : vrs(X), in("APG_AsteridClade", X), out("APG_CaryophyllidClade", X)} = 0.
+
+% "APG_Ranunculaceae" ! "APG_Papaveraceae"
+ir(X, r190) :- in("APG_Ranunculaceae", X), in("APG_Papaveraceae", X).
+:- #count {X : vrs(X), in("APG_Ranunculaceae", X), out("APG_Papaveraceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Papaveraceae", X), out("APG_Ranunculaceae", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Fabales"
+ir(X, r195) :- in("APG_Malpighiales", X), in("APG_Fabales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Fabales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Rosales"
+ir(X, r196) :- in("APG_Malpighiales", X), in("APG_Rosales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Rosales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Cucurbitales"
+ir(X, r197) :- in("APG_Malpighiales", X), in("APG_Cucurbitales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Cucurbitales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Fagales"
+ir(X, r198) :- in("APG_Malpighiales", X), in("APG_Fagales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Fagales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Myrtales"
+ir(X, r199) :- in("APG_Malpighiales", X), in("APG_Myrtales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Brassicales"
+ir(X, r200) :- in("APG_Malpighiales", X), in("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Brassicales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Malvales"
+ir(X, r201) :- in("APG_Malpighiales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Malpighiales" ! "APG_Sapindales"
+ir(X, r202) :- in("APG_Malpighiales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Malpighiales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Malpighiales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Rosales"
+ir(X, r203) :- in("APG_Fabales", X), in("APG_Rosales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Rosales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Cucurbitales"
+ir(X, r204) :- in("APG_Fabales", X), in("APG_Cucurbitales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Cucurbitales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Fagales"
+ir(X, r205) :- in("APG_Fabales", X), in("APG_Fagales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Fagales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Myrtales"
+ir(X, r206) :- in("APG_Fabales", X), in("APG_Myrtales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Brassicales"
+ir(X, r207) :- in("APG_Fabales", X), in("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Brassicales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Malvales"
+ir(X, r208) :- in("APG_Fabales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Fabales" ! "APG_Sapindales"
+ir(X, r209) :- in("APG_Fabales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Fabales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Fabales", X)} = 0.
+
+% "APG_Rosales" ! "APG_Cucurbitales"
+ir(X, r210) :- in("APG_Rosales", X), in("APG_Cucurbitales", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Cucurbitales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Rosales", X)} = 0.
+
+% "APG_Rosales" ! "APG_Fagales"
+ir(X, r211) :- in("APG_Rosales", X), in("APG_Fagales", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Fagales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Rosales", X)} = 0.
+
+% "APG_Rosales" ! "APG_Myrtales"
+ir(X, r212) :- in("APG_Rosales", X), in("APG_Myrtales", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Rosales", X)} = 0.
+
+% "APG_Rosales" ! "APG_Brassicales"
+ir(X, r213) :- in("APG_Rosales", X), in("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Brassicales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Rosales", X)} = 0.
+
+% "APG_Rosales" ! "APG_Malvales"
+ir(X, r214) :- in("APG_Rosales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Rosales", X)} = 0.
+
+% "APG_Rosales" ! "APG_Sapindales"
+ir(X, r215) :- in("APG_Rosales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Rosales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Rosales", X)} = 0.
+
+% "APG_Cucurbitales" ! "APG_Fagales"
+ir(X, r216) :- in("APG_Cucurbitales", X), in("APG_Fagales", X).
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Fagales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Cucurbitales", X)} = 0.
+
+% "APG_Cucurbitales" ! "APG_Myrtales"
+ir(X, r217) :- in("APG_Cucurbitales", X), in("APG_Myrtales", X).
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Cucurbitales", X)} = 0.
+
+% "APG_Cucurbitales" ! "APG_Brassicales"
+ir(X, r218) :- in("APG_Cucurbitales", X), in("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Brassicales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Cucurbitales", X)} = 0.
+
+% "APG_Cucurbitales" ! "APG_Malvales"
+ir(X, r219) :- in("APG_Cucurbitales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Cucurbitales", X)} = 0.
+
+% "APG_Cucurbitales" ! "APG_Sapindales"
+ir(X, r220) :- in("APG_Cucurbitales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Cucurbitales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Cucurbitales", X)} = 0.
+
+% "APG_Fagales" ! "APG_Myrtales"
+ir(X, r221) :- in("APG_Fagales", X), in("APG_Myrtales", X).
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Myrtales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Fagales", X)} = 0.
+
+% "APG_Fagales" ! "APG_Brassicales"
+ir(X, r222) :- in("APG_Fagales", X), in("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Brassicales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Fagales", X)} = 0.
+
+% "APG_Fagales" ! "APG_Malvales"
+ir(X, r223) :- in("APG_Fagales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Fagales", X)} = 0.
+
+% "APG_Fagales" ! "APG_Sapindales"
+ir(X, r224) :- in("APG_Fagales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Fagales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Fagales", X)} = 0.
+
+% "APG_Myrtales" ! "APG_Brassicales"
+ir(X, r225) :- in("APG_Myrtales", X), in("APG_Brassicales", X).
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Brassicales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Myrtales", X)} = 0.
+
+% "APG_Myrtales" ! "APG_Malvales"
+ir(X, r226) :- in("APG_Myrtales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Myrtales", X)} = 0.
+
+% "APG_Myrtales" ! "APG_Sapindales"
+ir(X, r227) :- in("APG_Myrtales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Myrtales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Myrtales", X)} = 0.
+
+% "APG_Brassicales" ! "APG_Malvales"
+ir(X, r228) :- in("APG_Brassicales", X), in("APG_Malvales", X).
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Malvales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Brassicales", X)} = 0.
+
+% "APG_Brassicales" ! "APG_Sapindales"
+ir(X, r229) :- in("APG_Brassicales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Brassicales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Brassicales", X)} = 0.
+
+% "APG_Malvales" ! "APG_Sapindales"
+ir(X, r230) :- in("APG_Malvales", X), in("APG_Sapindales", X).
+:- #count {X : vrs(X), in("APG_Malvales", X), out("APG_Sapindales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Sapindales", X), out("APG_Malvales", X)} = 0.
+
+% "APG_Euphorbiaceae" ! "APG_Salicaceae"
+ir(X, r240) :- in("APG_Euphorbiaceae", X), in("APG_Salicaceae", X).
+:- #count {X : vrs(X), in("APG_Euphorbiaceae", X), out("APG_Salicaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Salicaceae", X), out("APG_Euphorbiaceae", X)} = 0.
+
+% "APG_Euphorbiaceae" ! "APG_Violaceae"
+ir(X, r241) :- in("APG_Euphorbiaceae", X), in("APG_Violaceae", X).
+:- #count {X : vrs(X), in("APG_Euphorbiaceae", X), out("APG_Violaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Violaceae", X), out("APG_Euphorbiaceae", X)} = 0.
+
+% "APG_Salicaceae" ! "APG_Violaceae"
+ir(X, r242) :- in("APG_Salicaceae", X), in("APG_Violaceae", X).
+:- #count {X : vrs(X), in("APG_Salicaceae", X), out("APG_Violaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Violaceae", X), out("APG_Salicaceae", X)} = 0.
+
+% "APG_Mimosoideae" ! "APG_Caesalpinioideae"
+ir(X, r247) :- in("APG_Mimosoideae", X), in("APG_Caesalpinioideae", X).
+:- #count {X : vrs(X), in("APG_Mimosoideae", X), out("APG_Caesalpinioideae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Caesalpinioideae", X), out("APG_Mimosoideae", X)} = 0.
+
+% "APG_Mimosoideae" ! "APG_Faboideae"
+ir(X, r248) :- in("APG_Mimosoideae", X), in("APG_Faboideae", X).
+:- #count {X : vrs(X), in("APG_Mimosoideae", X), out("APG_Faboideae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Faboideae", X), out("APG_Mimosoideae", X)} = 0.
+
+% "APG_Caesalpinioideae" ! "APG_Faboideae"
+ir(X, r249) :- in("APG_Caesalpinioideae", X), in("APG_Faboideae", X).
+:- #count {X : vrs(X), in("APG_Caesalpinioideae", X), out("APG_Faboideae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Faboideae", X), out("APG_Caesalpinioideae", X)} = 0.
+
+% "APG_Rosaceae" ! "APG_Moraceae"
+ir(X, r253) :- in("APG_Rosaceae", X), in("APG_Moraceae", X).
+:- #count {X : vrs(X), in("APG_Rosaceae", X), out("APG_Moraceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Moraceae", X), out("APG_Rosaceae", X)} = 0.
+
+% "APG_Fagaceae" ! "APG_Betulaceae"
+ir(X, r257) :- in("APG_Fagaceae", X), in("APG_Betulaceae", X).
+:- #count {X : vrs(X), in("APG_Fagaceae", X), out("APG_Betulaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Betulaceae", X), out("APG_Fagaceae", X)} = 0.
+
+% "APG_Caryophyllaceae" ! "APG_Portulacaceae"
+ir(X, r265) :- in("APG_Caryophyllaceae", X), in("APG_Portulacaceae", X).
+:- #count {X : vrs(X), in("APG_Caryophyllaceae", X), out("APG_Portulacaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Portulacaceae", X), out("APG_Caryophyllaceae", X)} = 0.
+
+% "APG_Caryophyllaceae" ! "APG_Cactaceae"
+ir(X, r266) :- in("APG_Caryophyllaceae", X), in("APG_Cactaceae", X).
+:- #count {X : vrs(X), in("APG_Caryophyllaceae", X), out("APG_Cactaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Cactaceae", X), out("APG_Caryophyllaceae", X)} = 0.
+
+% "APG_Caryophyllaceae" ! "APG_Polygonaceae"
+ir(X, r267) :- in("APG_Caryophyllaceae", X), in("APG_Polygonaceae", X).
+:- #count {X : vrs(X), in("APG_Caryophyllaceae", X), out("APG_Polygonaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Polygonaceae", X), out("APG_Caryophyllaceae", X)} = 0.
+
+% "APG_Portulacaceae" ! "APG_Cactaceae"
+ir(X, r268) :- in("APG_Portulacaceae", X), in("APG_Cactaceae", X).
+:- #count {X : vrs(X), in("APG_Portulacaceae", X), out("APG_Cactaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Cactaceae", X), out("APG_Portulacaceae", X)} = 0.
+
+% "APG_Portulacaceae" ! "APG_Polygonaceae"
+ir(X, r269) :- in("APG_Portulacaceae", X), in("APG_Polygonaceae", X).
+:- #count {X : vrs(X), in("APG_Portulacaceae", X), out("APG_Polygonaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Polygonaceae", X), out("APG_Portulacaceae", X)} = 0.
+
+% "APG_Cactaceae" ! "APG_Polygonaceae"
+ir(X, r270) :- in("APG_Cactaceae", X), in("APG_Polygonaceae", X).
+:- #count {X : vrs(X), in("APG_Cactaceae", X), out("APG_Polygonaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Polygonaceae", X), out("APG_Cactaceae", X)} = 0.
+
+% "APG_Ericales" ! "APG_Solanales"
+ir(X, r275) :- in("APG_Ericales", X), in("APG_Solanales", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), out("APG_Solanales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Solanales", X), out("APG_Ericales", X)} = 0.
+
+% "APG_Ericales" ! "APG_Lamiales"
+ir(X, r276) :- in("APG_Ericales", X), in("APG_Lamiales", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), out("APG_Lamiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Lamiales", X), out("APG_Ericales", X)} = 0.
+
+% "APG_Ericales" ! "APG_Gentianales"
+ir(X, r277) :- in("APG_Ericales", X), in("APG_Gentianales", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), out("APG_Gentianales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Gentianales", X), out("APG_Ericales", X)} = 0.
+
+% "APG_Ericales" ! "APG_Dipsacales"
+ir(X, r278) :- in("APG_Ericales", X), in("APG_Dipsacales", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), out("APG_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Dipsacales", X), out("APG_Ericales", X)} = 0.
+
+% "APG_Ericales" ! "APG_Apiales"
+ir(X, r279) :- in("APG_Ericales", X), in("APG_Apiales", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), out("APG_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Apiales", X), out("APG_Ericales", X)} = 0.
+
+% "APG_Ericales" ! "APG_Asterales"
+ir(X, r280) :- in("APG_Ericales", X), in("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Ericales", X), out("APG_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asterales", X), out("APG_Ericales", X)} = 0.
+
+% "APG_Solanales" ! "APG_Lamiales"
+ir(X, r281) :- in("APG_Solanales", X), in("APG_Lamiales", X).
+:- #count {X : vrs(X), in("APG_Solanales", X), out("APG_Lamiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Lamiales", X), out("APG_Solanales", X)} = 0.
+
+% "APG_Solanales" ! "APG_Gentianales"
+ir(X, r282) :- in("APG_Solanales", X), in("APG_Gentianales", X).
+:- #count {X : vrs(X), in("APG_Solanales", X), out("APG_Gentianales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Gentianales", X), out("APG_Solanales", X)} = 0.
+
+% "APG_Solanales" ! "APG_Dipsacales"
+ir(X, r283) :- in("APG_Solanales", X), in("APG_Dipsacales", X).
+:- #count {X : vrs(X), in("APG_Solanales", X), out("APG_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Dipsacales", X), out("APG_Solanales", X)} = 0.
+
+% "APG_Solanales" ! "APG_Apiales"
+ir(X, r284) :- in("APG_Solanales", X), in("APG_Apiales", X).
+:- #count {X : vrs(X), in("APG_Solanales", X), out("APG_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Apiales", X), out("APG_Solanales", X)} = 0.
+
+% "APG_Solanales" ! "APG_Asterales"
+ir(X, r285) :- in("APG_Solanales", X), in("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Solanales", X), out("APG_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asterales", X), out("APG_Solanales", X)} = 0.
+
+% "APG_Lamiales" ! "APG_Gentianales"
+ir(X, r286) :- in("APG_Lamiales", X), in("APG_Gentianales", X).
+:- #count {X : vrs(X), in("APG_Lamiales", X), out("APG_Gentianales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Gentianales", X), out("APG_Lamiales", X)} = 0.
+
+% "APG_Lamiales" ! "APG_Dipsacales"
+ir(X, r287) :- in("APG_Lamiales", X), in("APG_Dipsacales", X).
+:- #count {X : vrs(X), in("APG_Lamiales", X), out("APG_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Dipsacales", X), out("APG_Lamiales", X)} = 0.
+
+% "APG_Lamiales" ! "APG_Apiales"
+ir(X, r288) :- in("APG_Lamiales", X), in("APG_Apiales", X).
+:- #count {X : vrs(X), in("APG_Lamiales", X), out("APG_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Apiales", X), out("APG_Lamiales", X)} = 0.
+
+% "APG_Lamiales" ! "APG_Asterales"
+ir(X, r289) :- in("APG_Lamiales", X), in("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Lamiales", X), out("APG_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asterales", X), out("APG_Lamiales", X)} = 0.
+
+% "APG_Gentianales" ! "APG_Dipsacales"
+ir(X, r290) :- in("APG_Gentianales", X), in("APG_Dipsacales", X).
+:- #count {X : vrs(X), in("APG_Gentianales", X), out("APG_Dipsacales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Dipsacales", X), out("APG_Gentianales", X)} = 0.
+
+% "APG_Gentianales" ! "APG_Apiales"
+ir(X, r291) :- in("APG_Gentianales", X), in("APG_Apiales", X).
+:- #count {X : vrs(X), in("APG_Gentianales", X), out("APG_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Apiales", X), out("APG_Gentianales", X)} = 0.
+
+% "APG_Gentianales" ! "APG_Asterales"
+ir(X, r292) :- in("APG_Gentianales", X), in("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Gentianales", X), out("APG_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asterales", X), out("APG_Gentianales", X)} = 0.
+
+% "APG_Dipsacales" ! "APG_Apiales"
+ir(X, r293) :- in("APG_Dipsacales", X), in("APG_Apiales", X).
+:- #count {X : vrs(X), in("APG_Dipsacales", X), out("APG_Apiales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Apiales", X), out("APG_Dipsacales", X)} = 0.
+
+% "APG_Dipsacales" ! "APG_Asterales"
+ir(X, r294) :- in("APG_Dipsacales", X), in("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Dipsacales", X), out("APG_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asterales", X), out("APG_Dipsacales", X)} = 0.
+
+% "APG_Apiales" ! "APG_Asterales"
+ir(X, r295) :- in("APG_Apiales", X), in("APG_Asterales", X).
+:- #count {X : vrs(X), in("APG_Apiales", X), out("APG_Asterales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asterales", X), out("APG_Apiales", X)} = 0.
+
+% "APG_Oleaceae" ! "APG_Lamiaceae"
+ir(X, r305) :- in("APG_Oleaceae", X), in("APG_Lamiaceae", X).
+:- #count {X : vrs(X), in("APG_Oleaceae", X), out("APG_Lamiaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Lamiaceae", X), out("APG_Oleaceae", X)} = 0.
+
+% "APG_Oleaceae" ! "APG_Scrophulariaceae"
+ir(X, r306) :- in("APG_Oleaceae", X), in("APG_Scrophulariaceae", X).
+:- #count {X : vrs(X), in("APG_Oleaceae", X), out("APG_Scrophulariaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Scrophulariaceae", X), out("APG_Oleaceae", X)} = 0.
+
+% "APG_Lamiaceae" ! "APG_Scrophulariaceae"
+ir(X, r307) :- in("APG_Lamiaceae", X), in("APG_Scrophulariaceae", X).
+:- #count {X : vrs(X), in("APG_Lamiaceae", X), out("APG_Scrophulariaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Scrophulariaceae", X), out("APG_Lamiaceae", X)} = 0.
+
+% "APG_Alismatales" ! "APG_Liliales"
+ir(X, r315) :- in("APG_Alismatales", X), in("APG_Liliales", X).
+:- #count {X : vrs(X), in("APG_Alismatales", X), out("APG_Liliales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Liliales", X), out("APG_Alismatales", X)} = 0.
+
+% "APG_Alismatales" ! "APG_Asparagales"
+ir(X, r316) :- in("APG_Alismatales", X), in("APG_Asparagales", X).
+:- #count {X : vrs(X), in("APG_Alismatales", X), out("APG_Asparagales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asparagales", X), out("APG_Alismatales", X)} = 0.
+
+% "APG_Alismatales" ! "APG_Arecales"
+ir(X, r317) :- in("APG_Alismatales", X), in("APG_Arecales", X).
+:- #count {X : vrs(X), in("APG_Alismatales", X), out("APG_Arecales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Arecales", X), out("APG_Alismatales", X)} = 0.
+
+% "APG_Alismatales" ! "APG_Poales"
+ir(X, r318) :- in("APG_Alismatales", X), in("APG_Poales", X).
+:- #count {X : vrs(X), in("APG_Alismatales", X), out("APG_Poales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Poales", X), out("APG_Alismatales", X)} = 0.
+
+% "APG_Liliales" ! "APG_Asparagales"
+ir(X, r319) :- in("APG_Liliales", X), in("APG_Asparagales", X).
+:- #count {X : vrs(X), in("APG_Liliales", X), out("APG_Asparagales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Asparagales", X), out("APG_Liliales", X)} = 0.
+
+% "APG_Liliales" ! "APG_Arecales"
+ir(X, r320) :- in("APG_Liliales", X), in("APG_Arecales", X).
+:- #count {X : vrs(X), in("APG_Liliales", X), out("APG_Arecales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Arecales", X), out("APG_Liliales", X)} = 0.
+
+% "APG_Liliales" ! "APG_Poales"
+ir(X, r321) :- in("APG_Liliales", X), in("APG_Poales", X).
+:- #count {X : vrs(X), in("APG_Liliales", X), out("APG_Poales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Poales", X), out("APG_Liliales", X)} = 0.
+
+% "APG_Asparagales" ! "APG_Arecales"
+ir(X, r322) :- in("APG_Asparagales", X), in("APG_Arecales", X).
+:- #count {X : vrs(X), in("APG_Asparagales", X), out("APG_Arecales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Arecales", X), out("APG_Asparagales", X)} = 0.
+
+% "APG_Asparagales" ! "APG_Poales"
+ir(X, r323) :- in("APG_Asparagales", X), in("APG_Poales", X).
+:- #count {X : vrs(X), in("APG_Asparagales", X), out("APG_Poales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Poales", X), out("APG_Asparagales", X)} = 0.
+
+% "APG_Arecales" ! "APG_Poales"
+ir(X, r324) :- in("APG_Arecales", X), in("APG_Poales", X).
+:- #count {X : vrs(X), in("APG_Arecales", X), out("APG_Poales", X)} = 0.
+:- #count {X : vrs(X), in("APG_Poales", X), out("APG_Arecales", X)} = 0.
+
+% "APG_Orchidaceae" ! "APG_Iridaceae"
+ir(X, r332) :- in("APG_Orchidaceae", X), in("APG_Iridaceae", X).
+:- #count {X : vrs(X), in("APG_Orchidaceae", X), out("APG_Iridaceae", X)} = 0.
+:- #count {X : vrs(X), in("APG_Iridaceae", X), out("APG_Orchidaceae", X)} = 0.
+
+% Articulations
+
+% "C_Magnoliophyta" ['='] "APG_Angiosperms"
+:- #count {A : vrs(A), in("C_Magnoliophyta", A), out("APG_Angiosperms", A)} = 0,
+   #count {B : vrs(B), in("C_Magnoliophyta", B), in("APG_Angiosperms", B)} > 0,
+   #count {C : vrs(C), out("C_Magnoliophyta", C), in("APG_Angiosperms", C)} > 0.
+:- #count {A : vrs(A), in("C_Magnoliophyta", A), out("APG_Angiosperms", A)} > 0,
+   #count {B : vrs(B), in("C_Magnoliophyta", B), in("APG_Angiosperms", B)} = 0,
+   #count {C : vrs(C), out("C_Magnoliophyta", C), in("APG_Angiosperms", C)} > 0.
+:- #count {A : vrs(A), in("C_Magnoliophyta", A), out("APG_Angiosperms", A)} > 0,
+   #count {B : vrs(B), in("C_Magnoliophyta", B), in("APG_Angiosperms", B)} > 0,
+   #count {C : vrs(C), out("C_Magnoliophyta", C), in("APG_Angiosperms", C)} > 0.
+:- #count {A : vrs(A), in("C_Magnoliophyta", A), out("APG_Angiosperms", A)} > 0,
+   #count {B : vrs(B), in("C_Magnoliophyta", B), in("APG_Angiosperms", B)} > 0,
+   #count {C : vrs(C), out("C_Magnoliophyta", C), in("APG_Angiosperms", C)} = 0.
+ir(X, r337) :- in("C_Magnoliophyta", X), out("APG_Angiosperms", X).
+:- #count {X : vrs(X), in("C_Magnoliophyta", X), in("APG_Angiosperms", X)} = 0.
+ir(X, r337) :- out("C_Magnoliophyta", X), in("APG_Angiosperms", X).
+
+% "C_Magnoliaceae" ['='] "APG_Magnoliaceae"
+:- #count {A : vrs(A), in("C_Magnoliaceae", A), out("APG_Magnoliaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Magnoliaceae", B), in("APG_Magnoliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Magnoliaceae", C), in("APG_Magnoliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Magnoliaceae", A), out("APG_Magnoliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Magnoliaceae", B), in("APG_Magnoliaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Magnoliaceae", C), in("APG_Magnoliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Magnoliaceae", A), out("APG_Magnoliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Magnoliaceae", B), in("APG_Magnoliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Magnoliaceae", C), in("APG_Magnoliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Magnoliaceae", A), out("APG_Magnoliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Magnoliaceae", B), in("APG_Magnoliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Magnoliaceae", C), in("APG_Magnoliaceae", C)} = 0.
+ir(X, r338) :- in("C_Magnoliaceae", X), out("APG_Magnoliaceae", X).
+:- #count {X : vrs(X), in("C_Magnoliaceae", X), in("APG_Magnoliaceae", X)} = 0.
+ir(X, r338) :- out("C_Magnoliaceae", X), in("APG_Magnoliaceae", X).
+
+% "C_Ranunculaceae" ['='] "APG_Ranunculaceae"
+:- #count {A : vrs(A), in("C_Ranunculaceae", A), out("APG_Ranunculaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Ranunculaceae", B), in("APG_Ranunculaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Ranunculaceae", C), in("APG_Ranunculaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Ranunculaceae", A), out("APG_Ranunculaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Ranunculaceae", B), in("APG_Ranunculaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Ranunculaceae", C), in("APG_Ranunculaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Ranunculaceae", A), out("APG_Ranunculaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Ranunculaceae", B), in("APG_Ranunculaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Ranunculaceae", C), in("APG_Ranunculaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Ranunculaceae", A), out("APG_Ranunculaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Ranunculaceae", B), in("APG_Ranunculaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Ranunculaceae", C), in("APG_Ranunculaceae", C)} = 0.
+ir(X, r339) :- in("C_Ranunculaceae", X), out("APG_Ranunculaceae", X).
+:- #count {X : vrs(X), in("C_Ranunculaceae", X), in("APG_Ranunculaceae", X)} = 0.
+ir(X, r339) :- out("C_Ranunculaceae", X), in("APG_Ranunculaceae", X).
+
+% "C_Papaveraceae" ['='] "APG_Papaveraceae"
+:- #count {A : vrs(A), in("C_Papaveraceae", A), out("APG_Papaveraceae", A)} = 0,
+   #count {B : vrs(B), in("C_Papaveraceae", B), in("APG_Papaveraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Papaveraceae", C), in("APG_Papaveraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Papaveraceae", A), out("APG_Papaveraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Papaveraceae", B), in("APG_Papaveraceae", B)} = 0,
+   #count {C : vrs(C), out("C_Papaveraceae", C), in("APG_Papaveraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Papaveraceae", A), out("APG_Papaveraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Papaveraceae", B), in("APG_Papaveraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Papaveraceae", C), in("APG_Papaveraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Papaveraceae", A), out("APG_Papaveraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Papaveraceae", B), in("APG_Papaveraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Papaveraceae", C), in("APG_Papaveraceae", C)} = 0.
+ir(X, r340) :- in("C_Papaveraceae", X), out("APG_Papaveraceae", X).
+:- #count {X : vrs(X), in("C_Papaveraceae", X), in("APG_Papaveraceae", X)} = 0.
+ir(X, r340) :- out("C_Papaveraceae", X), in("APG_Papaveraceae", X).
+
+% "C_Hamamelidaceae" ['='] "APG_Hamamelidaceae"
+:- #count {A : vrs(A), in("C_Hamamelidaceae", A), out("APG_Hamamelidaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Hamamelidaceae", B), in("APG_Hamamelidaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Hamamelidaceae", C), in("APG_Hamamelidaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Hamamelidaceae", A), out("APG_Hamamelidaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Hamamelidaceae", B), in("APG_Hamamelidaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Hamamelidaceae", C), in("APG_Hamamelidaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Hamamelidaceae", A), out("APG_Hamamelidaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Hamamelidaceae", B), in("APG_Hamamelidaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Hamamelidaceae", C), in("APG_Hamamelidaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Hamamelidaceae", A), out("APG_Hamamelidaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Hamamelidaceae", B), in("APG_Hamamelidaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Hamamelidaceae", C), in("APG_Hamamelidaceae", C)} = 0.
+ir(X, r341) :- in("C_Hamamelidaceae", X), out("APG_Hamamelidaceae", X).
+:- #count {X : vrs(X), in("C_Hamamelidaceae", X), in("APG_Hamamelidaceae", X)} = 0.
+ir(X, r341) :- out("C_Hamamelidaceae", X), in("APG_Hamamelidaceae", X).
+
+% "C_Fagaceae" ['='] "APG_Fagaceae"
+:- #count {A : vrs(A), in("C_Fagaceae", A), out("APG_Fagaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Fagaceae", B), in("APG_Fagaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Fagaceae", C), in("APG_Fagaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Fagaceae", A), out("APG_Fagaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Fagaceae", B), in("APG_Fagaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Fagaceae", C), in("APG_Fagaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Fagaceae", A), out("APG_Fagaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Fagaceae", B), in("APG_Fagaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Fagaceae", C), in("APG_Fagaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Fagaceae", A), out("APG_Fagaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Fagaceae", B), in("APG_Fagaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Fagaceae", C), in("APG_Fagaceae", C)} = 0.
+ir(X, r342) :- in("C_Fagaceae", X), out("APG_Fagaceae", X).
+:- #count {X : vrs(X), in("C_Fagaceae", X), in("APG_Fagaceae", X)} = 0.
+ir(X, r342) :- out("C_Fagaceae", X), in("APG_Fagaceae", X).
+
+% "C_Betulaceae" ['='] "APG_Betulaceae"
+:- #count {A : vrs(A), in("C_Betulaceae", A), out("APG_Betulaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Betulaceae", B), in("APG_Betulaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Betulaceae", C), in("APG_Betulaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Betulaceae", A), out("APG_Betulaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Betulaceae", B), in("APG_Betulaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Betulaceae", C), in("APG_Betulaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Betulaceae", A), out("APG_Betulaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Betulaceae", B), in("APG_Betulaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Betulaceae", C), in("APG_Betulaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Betulaceae", A), out("APG_Betulaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Betulaceae", B), in("APG_Betulaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Betulaceae", C), in("APG_Betulaceae", C)} = 0.
+ir(X, r343) :- in("C_Betulaceae", X), out("APG_Betulaceae", X).
+:- #count {X : vrs(X), in("C_Betulaceae", X), in("APG_Betulaceae", X)} = 0.
+ir(X, r343) :- out("C_Betulaceae", X), in("APG_Betulaceae", X).
+
+% "C_Cactaceae" ['='] "APG_Cactaceae"
+:- #count {A : vrs(A), in("C_Cactaceae", A), out("APG_Cactaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Cactaceae", B), in("APG_Cactaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Cactaceae", C), in("APG_Cactaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Cactaceae", A), out("APG_Cactaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Cactaceae", B), in("APG_Cactaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Cactaceae", C), in("APG_Cactaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Cactaceae", A), out("APG_Cactaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Cactaceae", B), in("APG_Cactaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Cactaceae", C), in("APG_Cactaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Cactaceae", A), out("APG_Cactaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Cactaceae", B), in("APG_Cactaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Cactaceae", C), in("APG_Cactaceae", C)} = 0.
+ir(X, r344) :- in("C_Cactaceae", X), out("APG_Cactaceae", X).
+:- #count {X : vrs(X), in("C_Cactaceae", X), in("APG_Cactaceae", X)} = 0.
+ir(X, r344) :- out("C_Cactaceae", X), in("APG_Cactaceae", X).
+
+% "C_Portulacaceae" ['='] "APG_Portulacaceae"
+:- #count {A : vrs(A), in("C_Portulacaceae", A), out("APG_Portulacaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Portulacaceae", B), in("APG_Portulacaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Portulacaceae", C), in("APG_Portulacaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Portulacaceae", A), out("APG_Portulacaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Portulacaceae", B), in("APG_Portulacaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Portulacaceae", C), in("APG_Portulacaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Portulacaceae", A), out("APG_Portulacaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Portulacaceae", B), in("APG_Portulacaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Portulacaceae", C), in("APG_Portulacaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Portulacaceae", A), out("APG_Portulacaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Portulacaceae", B), in("APG_Portulacaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Portulacaceae", C), in("APG_Portulacaceae", C)} = 0.
+ir(X, r345) :- in("C_Portulacaceae", X), out("APG_Portulacaceae", X).
+:- #count {X : vrs(X), in("C_Portulacaceae", X), in("APG_Portulacaceae", X)} = 0.
+ir(X, r345) :- out("C_Portulacaceae", X), in("APG_Portulacaceae", X).
+
+% "C_Caryophyllaceae" ['='] "APG_Caryophyllaceae"
+:- #count {A : vrs(A), in("C_Caryophyllaceae", A), out("APG_Caryophyllaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Caryophyllaceae", B), in("APG_Caryophyllaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Caryophyllaceae", C), in("APG_Caryophyllaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Caryophyllaceae", A), out("APG_Caryophyllaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Caryophyllaceae", B), in("APG_Caryophyllaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Caryophyllaceae", C), in("APG_Caryophyllaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Caryophyllaceae", A), out("APG_Caryophyllaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Caryophyllaceae", B), in("APG_Caryophyllaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Caryophyllaceae", C), in("APG_Caryophyllaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Caryophyllaceae", A), out("APG_Caryophyllaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Caryophyllaceae", B), in("APG_Caryophyllaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Caryophyllaceae", C), in("APG_Caryophyllaceae", C)} = 0.
+ir(X, r346) :- in("C_Caryophyllaceae", X), out("APG_Caryophyllaceae", X).
+:- #count {X : vrs(X), in("C_Caryophyllaceae", X), in("APG_Caryophyllaceae", X)} = 0.
+ir(X, r346) :- out("C_Caryophyllaceae", X), in("APG_Caryophyllaceae", X).
+
+% "C_Polygonaceae" ['='] "APG_Polygonaceae"
+:- #count {A : vrs(A), in("C_Polygonaceae", A), out("APG_Polygonaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Polygonaceae", B), in("APG_Polygonaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Polygonaceae", C), in("APG_Polygonaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Polygonaceae", A), out("APG_Polygonaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Polygonaceae", B), in("APG_Polygonaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Polygonaceae", C), in("APG_Polygonaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Polygonaceae", A), out("APG_Polygonaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Polygonaceae", B), in("APG_Polygonaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Polygonaceae", C), in("APG_Polygonaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Polygonaceae", A), out("APG_Polygonaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Polygonaceae", B), in("APG_Polygonaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Polygonaceae", C), in("APG_Polygonaceae", C)} = 0.
+ir(X, r347) :- in("C_Polygonaceae", X), out("APG_Polygonaceae", X).
+:- #count {X : vrs(X), in("C_Polygonaceae", X), in("APG_Polygonaceae", X)} = 0.
+ir(X, r347) :- out("C_Polygonaceae", X), in("APG_Polygonaceae", X).
+
+% "C_Violaceae" ['='] "APG_Violaceae"
+:- #count {A : vrs(A), in("C_Violaceae", A), out("APG_Violaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Violaceae", B), in("APG_Violaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Violaceae", C), in("APG_Violaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Violaceae", A), out("APG_Violaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Violaceae", B), in("APG_Violaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Violaceae", C), in("APG_Violaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Violaceae", A), out("APG_Violaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Violaceae", B), in("APG_Violaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Violaceae", C), in("APG_Violaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Violaceae", A), out("APG_Violaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Violaceae", B), in("APG_Violaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Violaceae", C), in("APG_Violaceae", C)} = 0.
+ir(X, r348) :- in("C_Violaceae", X), out("APG_Violaceae", X).
+:- #count {X : vrs(X), in("C_Violaceae", X), in("APG_Violaceae", X)} = 0.
+ir(X, r348) :- out("C_Violaceae", X), in("APG_Violaceae", X).
+
+% "C_Salicaceae" ['='] "APG_Salicaceae"
+:- #count {A : vrs(A), in("C_Salicaceae", A), out("APG_Salicaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Salicaceae", B), in("APG_Salicaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Salicaceae", C), in("APG_Salicaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Salicaceae", A), out("APG_Salicaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Salicaceae", B), in("APG_Salicaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Salicaceae", C), in("APG_Salicaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Salicaceae", A), out("APG_Salicaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Salicaceae", B), in("APG_Salicaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Salicaceae", C), in("APG_Salicaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Salicaceae", A), out("APG_Salicaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Salicaceae", B), in("APG_Salicaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Salicaceae", C), in("APG_Salicaceae", C)} = 0.
+ir(X, r349) :- in("C_Salicaceae", X), out("APG_Salicaceae", X).
+:- #count {X : vrs(X), in("C_Salicaceae", X), in("APG_Salicaceae", X)} = 0.
+ir(X, r349) :- out("C_Salicaceae", X), in("APG_Salicaceae", X).
+
+% "C_Euphorbiaceae" ['='] "APG_Euphorbiaceae"
+:- #count {A : vrs(A), in("C_Euphorbiaceae", A), out("APG_Euphorbiaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Euphorbiaceae", B), in("APG_Euphorbiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Euphorbiaceae", C), in("APG_Euphorbiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Euphorbiaceae", A), out("APG_Euphorbiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Euphorbiaceae", B), in("APG_Euphorbiaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Euphorbiaceae", C), in("APG_Euphorbiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Euphorbiaceae", A), out("APG_Euphorbiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Euphorbiaceae", B), in("APG_Euphorbiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Euphorbiaceae", C), in("APG_Euphorbiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Euphorbiaceae", A), out("APG_Euphorbiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Euphorbiaceae", B), in("APG_Euphorbiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Euphorbiaceae", C), in("APG_Euphorbiaceae", C)} = 0.
+ir(X, r350) :- in("C_Euphorbiaceae", X), out("APG_Euphorbiaceae", X).
+:- #count {X : vrs(X), in("C_Euphorbiaceae", X), in("APG_Euphorbiaceae", X)} = 0.
+ir(X, r350) :- out("C_Euphorbiaceae", X), in("APG_Euphorbiaceae", X).
+
+% "C_Moraceae" ['='] "APG_Moraceae"
+:- #count {A : vrs(A), in("C_Moraceae", A), out("APG_Moraceae", A)} = 0,
+   #count {B : vrs(B), in("C_Moraceae", B), in("APG_Moraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Moraceae", C), in("APG_Moraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Moraceae", A), out("APG_Moraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Moraceae", B), in("APG_Moraceae", B)} = 0,
+   #count {C : vrs(C), out("C_Moraceae", C), in("APG_Moraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Moraceae", A), out("APG_Moraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Moraceae", B), in("APG_Moraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Moraceae", C), in("APG_Moraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Moraceae", A), out("APG_Moraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Moraceae", B), in("APG_Moraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Moraceae", C), in("APG_Moraceae", C)} = 0.
+ir(X, r351) :- in("C_Moraceae", X), out("APG_Moraceae", X).
+:- #count {X : vrs(X), in("C_Moraceae", X), in("APG_Moraceae", X)} = 0.
+ir(X, r351) :- out("C_Moraceae", X), in("APG_Moraceae", X).
+
+% "C_Cucurbitaceae" ['='] "APG_Cucurbitaceae"
+:- #count {A : vrs(A), in("C_Cucurbitaceae", A), out("APG_Cucurbitaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Cucurbitaceae", B), in("APG_Cucurbitaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Cucurbitaceae", C), in("APG_Cucurbitaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Cucurbitaceae", A), out("APG_Cucurbitaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Cucurbitaceae", B), in("APG_Cucurbitaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Cucurbitaceae", C), in("APG_Cucurbitaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Cucurbitaceae", A), out("APG_Cucurbitaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Cucurbitaceae", B), in("APG_Cucurbitaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Cucurbitaceae", C), in("APG_Cucurbitaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Cucurbitaceae", A), out("APG_Cucurbitaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Cucurbitaceae", B), in("APG_Cucurbitaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Cucurbitaceae", C), in("APG_Cucurbitaceae", C)} = 0.
+ir(X, r352) :- in("C_Cucurbitaceae", X), out("APG_Cucurbitaceae", X).
+:- #count {X : vrs(X), in("C_Cucurbitaceae", X), in("APG_Cucurbitaceae", X)} = 0.
+ir(X, r352) :- out("C_Cucurbitaceae", X), in("APG_Cucurbitaceae", X).
+
+% "C_Onagraceae" ['='] "APG_Onagraceae"
+:- #count {A : vrs(A), in("C_Onagraceae", A), out("APG_Onagraceae", A)} = 0,
+   #count {B : vrs(B), in("C_Onagraceae", B), in("APG_Onagraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Onagraceae", C), in("APG_Onagraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Onagraceae", A), out("APG_Onagraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Onagraceae", B), in("APG_Onagraceae", B)} = 0,
+   #count {C : vrs(C), out("C_Onagraceae", C), in("APG_Onagraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Onagraceae", A), out("APG_Onagraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Onagraceae", B), in("APG_Onagraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Onagraceae", C), in("APG_Onagraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Onagraceae", A), out("APG_Onagraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Onagraceae", B), in("APG_Onagraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Onagraceae", C), in("APG_Onagraceae", C)} = 0.
+ir(X, r353) :- in("C_Onagraceae", X), out("APG_Onagraceae", X).
+:- #count {X : vrs(X), in("C_Onagraceae", X), in("APG_Onagraceae", X)} = 0.
+ir(X, r353) :- out("C_Onagraceae", X), in("APG_Onagraceae", X).
+
+% "C_Brassicaceae" ['='] "APG_Brassicaceae"
+:- #count {A : vrs(A), in("C_Brassicaceae", A), out("APG_Brassicaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Brassicaceae", B), in("APG_Brassicaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Brassicaceae", C), in("APG_Brassicaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Brassicaceae", A), out("APG_Brassicaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Brassicaceae", B), in("APG_Brassicaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Brassicaceae", C), in("APG_Brassicaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Brassicaceae", A), out("APG_Brassicaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Brassicaceae", B), in("APG_Brassicaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Brassicaceae", C), in("APG_Brassicaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Brassicaceae", A), out("APG_Brassicaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Brassicaceae", B), in("APG_Brassicaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Brassicaceae", C), in("APG_Brassicaceae", C)} = 0.
+ir(X, r354) :- in("C_Brassicaceae", X), out("APG_Brassicaceae", X).
+:- #count {X : vrs(X), in("C_Brassicaceae", X), in("APG_Brassicaceae", X)} = 0.
+ir(X, r354) :- out("C_Brassicaceae", X), in("APG_Brassicaceae", X).
+
+% "C_Malvaceae" ['='] "APG_Malvaceae"
+:- #count {A : vrs(A), in("C_Malvaceae", A), out("APG_Malvaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Malvaceae", B), in("APG_Malvaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Malvaceae", C), in("APG_Malvaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Malvaceae", A), out("APG_Malvaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Malvaceae", B), in("APG_Malvaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Malvaceae", C), in("APG_Malvaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Malvaceae", A), out("APG_Malvaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Malvaceae", B), in("APG_Malvaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Malvaceae", C), in("APG_Malvaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Malvaceae", A), out("APG_Malvaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Malvaceae", B), in("APG_Malvaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Malvaceae", C), in("APG_Malvaceae", C)} = 0.
+ir(X, r355) :- in("C_Malvaceae", X), out("APG_Malvaceae", X).
+:- #count {X : vrs(X), in("C_Malvaceae", X), in("APG_Malvaceae", X)} = 0.
+ir(X, r355) :- out("C_Malvaceae", X), in("APG_Malvaceae", X).
+
+% "C_Ericaceae" ['='] "APG_Ericaceae"
+:- #count {A : vrs(A), in("C_Ericaceae", A), out("APG_Ericaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Ericaceae", B), in("APG_Ericaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Ericaceae", C), in("APG_Ericaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Ericaceae", A), out("APG_Ericaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Ericaceae", B), in("APG_Ericaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Ericaceae", C), in("APG_Ericaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Ericaceae", A), out("APG_Ericaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Ericaceae", B), in("APG_Ericaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Ericaceae", C), in("APG_Ericaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Ericaceae", A), out("APG_Ericaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Ericaceae", B), in("APG_Ericaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Ericaceae", C), in("APG_Ericaceae", C)} = 0.
+ir(X, r356) :- in("C_Ericaceae", X), out("APG_Ericaceae", X).
+:- #count {X : vrs(X), in("C_Ericaceae", X), in("APG_Ericaceae", X)} = 0.
+ir(X, r356) :- out("C_Ericaceae", X), in("APG_Ericaceae", X).
+
+% "C_Solanaceae" ['='] "APG_Solanaceae"
+:- #count {A : vrs(A), in("C_Solanaceae", A), out("APG_Solanaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Solanaceae", B), in("APG_Solanaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Solanaceae", C), in("APG_Solanaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Solanaceae", A), out("APG_Solanaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Solanaceae", B), in("APG_Solanaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Solanaceae", C), in("APG_Solanaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Solanaceae", A), out("APG_Solanaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Solanaceae", B), in("APG_Solanaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Solanaceae", C), in("APG_Solanaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Solanaceae", A), out("APG_Solanaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Solanaceae", B), in("APG_Solanaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Solanaceae", C), in("APG_Solanaceae", C)} = 0.
+ir(X, r357) :- in("C_Solanaceae", X), out("APG_Solanaceae", X).
+:- #count {X : vrs(X), in("C_Solanaceae", X), in("APG_Solanaceae", X)} = 0.
+ir(X, r357) :- out("C_Solanaceae", X), in("APG_Solanaceae", X).
+
+% "C_Oleaceae" ['='] "APG_Oleaceae"
+:- #count {A : vrs(A), in("C_Oleaceae", A), out("APG_Oleaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Oleaceae", B), in("APG_Oleaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Oleaceae", C), in("APG_Oleaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Oleaceae", A), out("APG_Oleaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Oleaceae", B), in("APG_Oleaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Oleaceae", C), in("APG_Oleaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Oleaceae", A), out("APG_Oleaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Oleaceae", B), in("APG_Oleaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Oleaceae", C), in("APG_Oleaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Oleaceae", A), out("APG_Oleaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Oleaceae", B), in("APG_Oleaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Oleaceae", C), in("APG_Oleaceae", C)} = 0.
+ir(X, r358) :- in("C_Oleaceae", X), out("APG_Oleaceae", X).
+:- #count {X : vrs(X), in("C_Oleaceae", X), in("APG_Oleaceae", X)} = 0.
+ir(X, r358) :- out("C_Oleaceae", X), in("APG_Oleaceae", X).
+
+% "C_Asclepiadaceae" ['='] "APG_Asclepiadaceae"
+:- #count {A : vrs(A), in("C_Asclepiadaceae", A), out("APG_Asclepiadaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Asclepiadaceae", B), in("APG_Asclepiadaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Asclepiadaceae", C), in("APG_Asclepiadaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Asclepiadaceae", A), out("APG_Asclepiadaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Asclepiadaceae", B), in("APG_Asclepiadaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Asclepiadaceae", C), in("APG_Asclepiadaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Asclepiadaceae", A), out("APG_Asclepiadaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Asclepiadaceae", B), in("APG_Asclepiadaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Asclepiadaceae", C), in("APG_Asclepiadaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Asclepiadaceae", A), out("APG_Asclepiadaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Asclepiadaceae", B), in("APG_Asclepiadaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Asclepiadaceae", C), in("APG_Asclepiadaceae", C)} = 0.
+ir(X, r359) :- in("C_Asclepiadaceae", X), out("APG_Asclepiadaceae", X).
+:- #count {X : vrs(X), in("C_Asclepiadaceae", X), in("APG_Asclepiadaceae", X)} = 0.
+ir(X, r359) :- out("C_Asclepiadaceae", X), in("APG_Asclepiadaceae", X).
+
+% "C_Caprifoliaceae" ['='] "APG_Caprifoliaceae"
+:- #count {A : vrs(A), in("C_Caprifoliaceae", A), out("APG_Caprifoliaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Caprifoliaceae", B), in("APG_Caprifoliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Caprifoliaceae", C), in("APG_Caprifoliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Caprifoliaceae", A), out("APG_Caprifoliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Caprifoliaceae", B), in("APG_Caprifoliaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Caprifoliaceae", C), in("APG_Caprifoliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Caprifoliaceae", A), out("APG_Caprifoliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Caprifoliaceae", B), in("APG_Caprifoliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Caprifoliaceae", C), in("APG_Caprifoliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Caprifoliaceae", A), out("APG_Caprifoliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Caprifoliaceae", B), in("APG_Caprifoliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Caprifoliaceae", C), in("APG_Caprifoliaceae", C)} = 0.
+ir(X, r360) :- in("C_Caprifoliaceae", X), out("APG_Caprifoliaceae", X).
+:- #count {X : vrs(X), in("C_Caprifoliaceae", X), in("APG_Caprifoliaceae", X)} = 0.
+ir(X, r360) :- out("C_Caprifoliaceae", X), in("APG_Caprifoliaceae", X).
+
+% "C_Araceae" ['='] "APG_Araceae"
+:- #count {A : vrs(A), in("C_Araceae", A), out("APG_Araceae", A)} = 0,
+   #count {B : vrs(B), in("C_Araceae", B), in("APG_Araceae", B)} > 0,
+   #count {C : vrs(C), out("C_Araceae", C), in("APG_Araceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Araceae", A), out("APG_Araceae", A)} > 0,
+   #count {B : vrs(B), in("C_Araceae", B), in("APG_Araceae", B)} = 0,
+   #count {C : vrs(C), out("C_Araceae", C), in("APG_Araceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Araceae", A), out("APG_Araceae", A)} > 0,
+   #count {B : vrs(B), in("C_Araceae", B), in("APG_Araceae", B)} > 0,
+   #count {C : vrs(C), out("C_Araceae", C), in("APG_Araceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Araceae", A), out("APG_Araceae", A)} > 0,
+   #count {B : vrs(B), in("C_Araceae", B), in("APG_Araceae", B)} > 0,
+   #count {C : vrs(C), out("C_Araceae", C), in("APG_Araceae", C)} = 0.
+ir(X, r361) :- in("C_Araceae", X), out("APG_Araceae", X).
+:- #count {X : vrs(X), in("C_Araceae", X), in("APG_Araceae", X)} = 0.
+ir(X, r361) :- out("C_Araceae", X), in("APG_Araceae", X).
+
+% "C_Liliaceae" ['='] "APG_Liliaceae"
+:- #count {A : vrs(A), in("C_Liliaceae", A), out("APG_Liliaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Liliaceae", B), in("APG_Liliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Liliaceae", C), in("APG_Liliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Liliaceae", A), out("APG_Liliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Liliaceae", B), in("APG_Liliaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Liliaceae", C), in("APG_Liliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Liliaceae", A), out("APG_Liliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Liliaceae", B), in("APG_Liliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Liliaceae", C), in("APG_Liliaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Liliaceae", A), out("APG_Liliaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Liliaceae", B), in("APG_Liliaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Liliaceae", C), in("APG_Liliaceae", C)} = 0.
+ir(X, r362) :- in("C_Liliaceae", X), out("APG_Liliaceae", X).
+:- #count {X : vrs(X), in("C_Liliaceae", X), in("APG_Liliaceae", X)} = 0.
+ir(X, r362) :- out("C_Liliaceae", X), in("APG_Liliaceae", X).
+
+% "C_Orchidaceae" ['='] "APG_Orchidaceae"
+:- #count {A : vrs(A), in("C_Orchidaceae", A), out("APG_Orchidaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Orchidaceae", B), in("APG_Orchidaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Orchidaceae", C), in("APG_Orchidaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Orchidaceae", A), out("APG_Orchidaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Orchidaceae", B), in("APG_Orchidaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Orchidaceae", C), in("APG_Orchidaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Orchidaceae", A), out("APG_Orchidaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Orchidaceae", B), in("APG_Orchidaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Orchidaceae", C), in("APG_Orchidaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Orchidaceae", A), out("APG_Orchidaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Orchidaceae", B), in("APG_Orchidaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Orchidaceae", C), in("APG_Orchidaceae", C)} = 0.
+ir(X, r363) :- in("C_Orchidaceae", X), out("APG_Orchidaceae", X).
+:- #count {X : vrs(X), in("C_Orchidaceae", X), in("APG_Orchidaceae", X)} = 0.
+ir(X, r363) :- out("C_Orchidaceae", X), in("APG_Orchidaceae", X).
+
+% "C_Iridaceae" ['='] "APG_Iridaceae"
+:- #count {A : vrs(A), in("C_Iridaceae", A), out("APG_Iridaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Iridaceae", B), in("APG_Iridaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Iridaceae", C), in("APG_Iridaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Iridaceae", A), out("APG_Iridaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Iridaceae", B), in("APG_Iridaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Iridaceae", C), in("APG_Iridaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Iridaceae", A), out("APG_Iridaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Iridaceae", B), in("APG_Iridaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Iridaceae", C), in("APG_Iridaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Iridaceae", A), out("APG_Iridaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Iridaceae", B), in("APG_Iridaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Iridaceae", C), in("APG_Iridaceae", C)} = 0.
+ir(X, r364) :- in("C_Iridaceae", X), out("APG_Iridaceae", X).
+:- #count {X : vrs(X), in("C_Iridaceae", X), in("APG_Iridaceae", X)} = 0.
+ir(X, r364) :- out("C_Iridaceae", X), in("APG_Iridaceae", X).
+
+% "C_Arecaceae" ['='] "APG_Arecaceae"
+:- #count {A : vrs(A), in("C_Arecaceae", A), out("APG_Arecaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Arecaceae", B), in("APG_Arecaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Arecaceae", C), in("APG_Arecaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Arecaceae", A), out("APG_Arecaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Arecaceae", B), in("APG_Arecaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Arecaceae", C), in("APG_Arecaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Arecaceae", A), out("APG_Arecaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Arecaceae", B), in("APG_Arecaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Arecaceae", C), in("APG_Arecaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Arecaceae", A), out("APG_Arecaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Arecaceae", B), in("APG_Arecaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Arecaceae", C), in("APG_Arecaceae", C)} = 0.
+ir(X, r365) :- in("C_Arecaceae", X), out("APG_Arecaceae", X).
+:- #count {X : vrs(X), in("C_Arecaceae", X), in("APG_Arecaceae", X)} = 0.
+ir(X, r365) :- out("C_Arecaceae", X), in("APG_Arecaceae", X).
+
+% "C_Poaceae" ['='] "APG_Poaceae"
+:- #count {A : vrs(A), in("C_Poaceae", A), out("APG_Poaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Poaceae", B), in("APG_Poaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Poaceae", C), in("APG_Poaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Poaceae", A), out("APG_Poaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Poaceae", B), in("APG_Poaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Poaceae", C), in("APG_Poaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Poaceae", A), out("APG_Poaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Poaceae", B), in("APG_Poaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Poaceae", C), in("APG_Poaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Poaceae", A), out("APG_Poaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Poaceae", B), in("APG_Poaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Poaceae", C), in("APG_Poaceae", C)} = 0.
+ir(X, r366) :- in("C_Poaceae", X), out("APG_Poaceae", X).
+:- #count {X : vrs(X), in("C_Poaceae", X), in("APG_Poaceae", X)} = 0.
+ir(X, r366) :- out("C_Poaceae", X), in("APG_Poaceae", X).
+
+% "C_Apiaceae" ['='] "APG_Apiaceae"
+:- #count {A : vrs(A), in("C_Apiaceae", A), out("APG_Apiaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Apiaceae", B), in("APG_Apiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Apiaceae", C), in("APG_Apiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Apiaceae", A), out("APG_Apiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Apiaceae", B), in("APG_Apiaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Apiaceae", C), in("APG_Apiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Apiaceae", A), out("APG_Apiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Apiaceae", B), in("APG_Apiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Apiaceae", C), in("APG_Apiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Apiaceae", A), out("APG_Apiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Apiaceae", B), in("APG_Apiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Apiaceae", C), in("APG_Apiaceae", C)} = 0.
+ir(X, r367) :- in("C_Apiaceae", X), out("APG_Apiaceae", X).
+:- #count {X : vrs(X), in("C_Apiaceae", X), in("APG_Apiaceae", X)} = 0.
+ir(X, r367) :- out("C_Apiaceae", X), in("APG_Apiaceae", X).
+
+% "C_Rosaceae" ['='] "APG_Rosaceae"
+:- #count {A : vrs(A), in("C_Rosaceae", A), out("APG_Rosaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Rosaceae", B), in("APG_Rosaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Rosaceae", C), in("APG_Rosaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Rosaceae", A), out("APG_Rosaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Rosaceae", B), in("APG_Rosaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Rosaceae", C), in("APG_Rosaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Rosaceae", A), out("APG_Rosaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Rosaceae", B), in("APG_Rosaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Rosaceae", C), in("APG_Rosaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Rosaceae", A), out("APG_Rosaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Rosaceae", B), in("APG_Rosaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Rosaceae", C), in("APG_Rosaceae", C)} = 0.
+ir(X, r368) :- in("C_Rosaceae", X), out("APG_Rosaceae", X).
+:- #count {X : vrs(X), in("C_Rosaceae", X), in("APG_Rosaceae", X)} = 0.
+ir(X, r368) :- out("C_Rosaceae", X), in("APG_Rosaceae", X).
+
+% "C_Lamiaceae" ['='] "APG_Lamiaceae"
+:- #count {A : vrs(A), in("C_Lamiaceae", A), out("APG_Lamiaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Lamiaceae", B), in("APG_Lamiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Lamiaceae", C), in("APG_Lamiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Lamiaceae", A), out("APG_Lamiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Lamiaceae", B), in("APG_Lamiaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Lamiaceae", C), in("APG_Lamiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Lamiaceae", A), out("APG_Lamiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Lamiaceae", B), in("APG_Lamiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Lamiaceae", C), in("APG_Lamiaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Lamiaceae", A), out("APG_Lamiaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Lamiaceae", B), in("APG_Lamiaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Lamiaceae", C), in("APG_Lamiaceae", C)} = 0.
+ir(X, r369) :- in("C_Lamiaceae", X), out("APG_Lamiaceae", X).
+:- #count {X : vrs(X), in("C_Lamiaceae", X), in("APG_Lamiaceae", X)} = 0.
+ir(X, r369) :- out("C_Lamiaceae", X), in("APG_Lamiaceae", X).
+
+% "C_Scrophulariaceae" ['='] "APG_Scrophulariaceae"
+:- #count {A : vrs(A), in("C_Scrophulariaceae", A), out("APG_Scrophulariaceae", A)} = 0,
+   #count {B : vrs(B), in("C_Scrophulariaceae", B), in("APG_Scrophulariaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Scrophulariaceae", C), in("APG_Scrophulariaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Scrophulariaceae", A), out("APG_Scrophulariaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Scrophulariaceae", B), in("APG_Scrophulariaceae", B)} = 0,
+   #count {C : vrs(C), out("C_Scrophulariaceae", C), in("APG_Scrophulariaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Scrophulariaceae", A), out("APG_Scrophulariaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Scrophulariaceae", B), in("APG_Scrophulariaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Scrophulariaceae", C), in("APG_Scrophulariaceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Scrophulariaceae", A), out("APG_Scrophulariaceae", A)} > 0,
+   #count {B : vrs(B), in("C_Scrophulariaceae", B), in("APG_Scrophulariaceae", B)} > 0,
+   #count {C : vrs(C), out("C_Scrophulariaceae", C), in("APG_Scrophulariaceae", C)} = 0.
+ir(X, r370) :- in("C_Scrophulariaceae", X), out("APG_Scrophulariaceae", X).
+:- #count {X : vrs(X), in("C_Scrophulariaceae", X), in("APG_Scrophulariaceae", X)} = 0.
+ir(X, r370) :- out("C_Scrophulariaceae", X), in("APG_Scrophulariaceae", X).
+
+% "C_Asteraceae" ['='] "APG_Asteraceae"
+:- #count {A : vrs(A), in("C_Asteraceae", A), out("APG_Asteraceae", A)} = 0,
+   #count {B : vrs(B), in("C_Asteraceae", B), in("APG_Asteraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Asteraceae", C), in("APG_Asteraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Asteraceae", A), out("APG_Asteraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Asteraceae", B), in("APG_Asteraceae", B)} = 0,
+   #count {C : vrs(C), out("C_Asteraceae", C), in("APG_Asteraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Asteraceae", A), out("APG_Asteraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Asteraceae", B), in("APG_Asteraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Asteraceae", C), in("APG_Asteraceae", C)} > 0.
+:- #count {A : vrs(A), in("C_Asteraceae", A), out("APG_Asteraceae", A)} > 0,
+   #count {B : vrs(B), in("C_Asteraceae", B), in("APG_Asteraceae", B)} > 0,
+   #count {C : vrs(C), out("C_Asteraceae", C), in("APG_Asteraceae", C)} = 0.
+ir(X, r371) :- in("C_Asteraceae", X), out("APG_Asteraceae", X).
+:- #count {X : vrs(X), in("C_Asteraceae", X), in("APG_Asteraceae", X)} = 0.
+ir(X, r371) :- out("C_Asteraceae", X), in("APG_Asteraceae", X).
+
+% Decoding Rules
+:- rel(X, Y, "<"), rel(X, Y, ">"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "<"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, ">"), rel(X, Y, "o"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, ">"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, ">"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, "="), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "o"), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+:- rel(X, Y, "="), rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2).
+
+:- not rel(X, Y, "<"), not rel(X, Y, ">"), not rel(X, Y, "o"), not rel(X, Y, "="), not rel(X, Y, "!"), concept2(X, N1), concept2(Y, N2), N1 < N2.
+
+rel(X, Y, "<") :- not hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, ">") :- hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
+rel(X, Y, "o") :- hint(X, Y, 0), hint(X, Y, 1), hint(X, Y, 2).
+rel(X, Y, "=") :- not hint(X, Y, 0), hint(X, Y, 1), not hint(X, Y, 2).
+rel(X, Y, "!") :- hint(X, Y, 0), not hint(X, Y, 1), hint(X, Y, 2).
+
+hint(X, Y, 0) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), out(Y, R).
+hint(X, Y, 1) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), in(X, R), in(Y, R).
+hint(X, Y, 2) :- concept2(X, N1), concept2(Y, N2), N1 < N2, vrs(R), out(X, R), in(Y, R).
+
+
+% Child Parent Rules for Viz
+
+bl("C_Magnoliophyta", "C_Magnoliopsida").
+bl("C_Magnoliophyta", "C_Liliopsida").
+bl("C_Magnoliopsida", "C_Magnoliidae").
+bl("C_Magnoliopsida", "C_Hamamelidae").
+bl("C_Magnoliopsida", "C_Caryophyllidae").
+bl("C_Magnoliopsida", "C_Rosidae").
+bl("C_Magnoliopsida", "C_Asteridae").
+bl("C_Magnoliidae", "C_Magnoliales").
+bl("C_Magnoliidae", "C_Ranunculales").
+bl("C_Magnoliidae", "C_Papaverales").
+bl("C_Magnoliales", "C_Magnoliaceae").
+bl("C_Ranunculales", "C_Ranunculaceae").
+bl("C_Papaverales", "C_Papaveraceae").
+bl("C_Hamamelidae", "C_Hamamelidales").
+bl("C_Hamamelidae", "C_Urticales").
+bl("C_Hamamelidae", "C_Fagales").
+bl("C_Hamamelidales", "C_Hamamelidaceae").
+bl("C_Urticales", "C_Moraceae").
+bl("C_Fagales", "C_Fagaceae").
+bl("C_Fagales", "C_Betulaceae").
+bl("C_Caryophyllidae", "C_Caryophyllales").
+bl("C_Caryophyllidae", "C_Polygonales").
+bl("C_Caryophyllidae", "C_Malvales").
+bl("C_Caryophyllidae", "C_Violales").
+bl("C_Caryophyllidae", "C_Salicales").
+bl("C_Caryophyllidae", "C_Capparales").
+bl("C_Caryophyllidae", "C_Ericales").
+bl("C_Caryophyllales", "C_Cactaceae").
+bl("C_Caryophyllales", "C_Portulacaceae").
+bl("C_Caryophyllales", "C_Caryophyllaceae").
+bl("C_Polygonales", "C_Polygonaceae").
+bl("C_Malvales", "C_Malvaceae").
+bl("C_Violales", "C_Violaceae").
+bl("C_Violales", "C_Cucurbitaceae").
+bl("C_Salicales", "C_Salicaceae").
+bl("C_Capparales", "C_Brassicaceae").
+bl("C_Ericales", "C_Ericaceae").
+bl("C_Rosidae", "C_Rosales").
+bl("C_Rosidae", "C_Fabales").
+bl("C_Rosidae", "C_Myrtales").
+bl("C_Rosidae", "C_Euphorbiales").
+bl("C_Rosidae", "C_Sapindales").
+bl("C_Rosidae", "C_Apiales").
+bl("C_Rosales", "C_Rosaceae").
+bl("C_Fabales", "C_Mimosaceae").
+bl("C_Fabales", "C_Caesalpiniaceae").
+bl("C_Fabales", "C_Fabaceae").
+bl("C_Myrtales", "C_Onagraceae").
+bl("C_Euphorbiales", "C_Euphorbiaceae").
+bl("C_Sapindales", "C_Aceraceae").
+bl("C_Sapindales", "C_Sapindaceae").
+bl("C_Sapindales", "C_Hippocastanaceae").
+bl("C_Apiales", "C_Apiaceae").
+bl("C_Asteridae", "C_Gentianales").
+bl("C_Asteridae", "C_Solanales").
+bl("C_Asteridae", "C_Lamiales").
+bl("C_Asteridae", "C_Scrophulariales").
+bl("C_Asteridae", "C_Dipsacales").
+bl("C_Asteridae", "C_Asterales").
+bl("C_Gentianales", "C_Asclepiadaceae").
+bl("C_Solanales", "C_Solanaceae").
+bl("C_Lamiales", "C_Lamiaceae").
+bl("C_Scrophulariales", "C_Scrophulariaceae").
+bl("C_Scrophulariales", "C_Oleaceae").
+bl("C_Dipsacales", "C_Caprifoliaceae").
+bl("C_Asterales", "C_Asteraceae").
+bl("C_Liliopsida", "C_Arecidae").
+bl("C_Liliopsida", "C_Commelinidae").
+bl("C_Liliopsida", "C_Liliidae").
+bl("C_Arecidae", "C_Arecales").
+bl("C_Arecidae", "C_Arales").
+bl("C_Arecales", "C_Arecaceae").
+bl("C_Arales", "C_Araceae").
+bl("C_Commelinidae", "C_Cyperales").
+bl("C_Cyperales", "C_Poaceae").
+bl("C_Liliidae", "C_Liliales").
+bl("C_Liliidae", "C_Orchidales").
+bl("C_Liliales", "C_Liliaceae").
+bl("C_Liliales", "C_Iridaceae").
+bl("C_Orchidales", "C_Orchidaceae").
+bl("APG_Angiosperms", "APG_Magnoliids").
+bl("APG_Angiosperms", "APG_Eudicots").
+bl("APG_Angiosperms", "APG_Monocots").
+bl("APG_Magnoliids", "APG_Magnoliales").
+bl("APG_Magnoliales", "APG_Magnoliaceae").
+bl("APG_Eudicots", "APG_BasalEudicots").
+bl("APG_Eudicots", "APG_CoreEudicots").
+bl("APG_Eudicots", "APG_RosidClade").
+bl("APG_Eudicots", "APG_CaryophyllidClade").
+bl("APG_Eudicots", "APG_AsteridClade").
+bl("APG_BasalEudicots", "APG_Ranunculales").
+bl("APG_Ranunculales", "APG_Ranunculaceae").
+bl("APG_Ranunculales", "APG_Papaveraceae").
+bl("APG_CoreEudicots", "APG_Saxifragales").
+bl("APG_Saxifragales", "APG_Hamamelidaceae").
+bl("APG_RosidClade", "APG_Malpighiales").
+bl("APG_RosidClade", "APG_Fabales").
+bl("APG_RosidClade", "APG_Rosales").
+bl("APG_RosidClade", "APG_Cucurbitales").
+bl("APG_RosidClade", "APG_Fagales").
+bl("APG_RosidClade", "APG_Myrtales").
+bl("APG_RosidClade", "APG_Brassicales").
+bl("APG_RosidClade", "APG_Malvales").
+bl("APG_RosidClade", "APG_Sapindales").
+bl("APG_Malpighiales", "APG_Euphorbiaceae").
+bl("APG_Malpighiales", "APG_Salicaceae").
+bl("APG_Malpighiales", "APG_Violaceae").
+bl("APG_Fabales", "APG_Fabaceae").
+bl("APG_Fabaceae", "APG_Mimosoideae").
+bl("APG_Fabaceae", "APG_Caesalpinioideae").
+bl("APG_Fabaceae", "APG_Faboideae").
+bl("APG_Rosales", "APG_Rosaceae").
+bl("APG_Rosales", "APG_Moraceae").
+bl("APG_Cucurbitales", "APG_Cucurbitaceae").
+bl("APG_Fagales", "APG_Fagaceae").
+bl("APG_Fagales", "APG_Betulaceae").
+bl("APG_Myrtales", "APG_Onagraceae").
+bl("APG_Brassicales", "APG_Brassicaceae").
+bl("APG_Malvales", "APG_Malvaceae").
+bl("APG_Sapindales", "APG_Sapindaceae").
+bl("APG_CaryophyllidClade", "APG_Caryophyllales").
+bl("APG_Caryophyllales", "APG_Caryophyllaceae").
+bl("APG_Caryophyllales", "APG_Portulacaceae").
+bl("APG_Caryophyllales", "APG_Cactaceae").
+bl("APG_Caryophyllales", "APG_Polygonaceae").
+bl("APG_AsteridClade", "APG_Ericales").
+bl("APG_AsteridClade", "APG_Solanales").
+bl("APG_AsteridClade", "APG_Lamiales").
+bl("APG_AsteridClade", "APG_Gentianales").
+bl("APG_AsteridClade", "APG_Dipsacales").
+bl("APG_AsteridClade", "APG_Apiales").
+bl("APG_AsteridClade", "APG_Asterales").
+bl("APG_Ericales", "APG_Ericaceae").
+bl("APG_Solanales", "APG_Solanaceae").
+bl("APG_Lamiales", "APG_Oleaceae").
+bl("APG_Lamiales", "APG_Lamiaceae").
+bl("APG_Lamiales", "APG_Scrophulariaceae").
+bl("APG_Gentianales", "APG_Asclepiadaceae").
+bl("APG_Dipsacales", "APG_Caprifoliaceae").
+bl("APG_Apiales", "APG_Apiaceae").
+bl("APG_Asterales", "APG_Asteraceae").
+bl("APG_Monocots", "APG_Alismatales").
+bl("APG_Monocots", "APG_Liliales").
+bl("APG_Monocots", "APG_Asparagales").
+bl("APG_Monocots", "APG_Arecales").
+bl("APG_Monocots", "APG_Poales").
+bl("APG_Alismatales", "APG_Araceae").
+bl("APG_Liliales", "APG_Liliaceae").
+bl("APG_Asparagales", "APG_Orchidaceae").
+bl("APG_Asparagales", "APG_Iridaceae").
+bl("APG_Arecales", "APG_Arecaceae").
+bl("APG_Poales", "APG_Poaceae").
+
+#show rel/3.
+eq(A, B) :- rel(A, B, "=").
+po(A, B) :- rel(A, B, "o").
+dr(A, B) :- rel(A, B, "!").
+pp(A, B) :- rel(A, B, "<").
+pp(B, A) :- rel(A, B, ">").
+pp(Y,X) :- bl(X,Y).
 u(X) :- bl(_,X).
 u(X) :- bl(X,_).
-
-eq(X,X) :- u(X).
-pi(X,Y) :- pp(Y,X).
-pp(X,Y) :- pi(Y,X).
-eq(X,Y) :- eq(Y,X).
-po(X,Y) :- po(Y,X).
-dr(X,Y) :- dr(Y,X).
-dr(Y,Z) :- bl(X,Y), bl(X,Z), Y != Z.
-pp(Y,X) :- bl(X,Y).
-
-1 {eq(X,Y) ; dr(X,Y) ; pp(X,Y) ; pi(X,Y) ; po(X,Y)} :- u(X), u(Y), X != Y.
-
-:- eq(X,Y), dr(X,Y).
-:- eq(X,Y), pp(X,Y).
-:- eq(X,Y), pi(X,Y).
-:- eq(X,Y), po(X,Y).
-:- dr(X,Y), pp(X,Y).
-:- dr(X,Y), pi(X,Y).
-:- dr(X,Y), po(X,Y).
-:- pp(X,Y), pi(X,Y).
-:- pp(X,Y), po(X,Y).
-:- pi(X,Y), po(X,Y).
-
-%TAXONOMY DESC RULES
-
-bl("C_Magnoliopsida","C_Magnollidae").
-bl("C_Magnoliopsida","C_Hamamelidae").
-bl("C_Magnoliopsida","C_Caryophyllidae").
-bl("C_Magnoliopsida","C_Rosidae").
-bl("C_Magnoliopsida","C_Asteridae").
-bl("C_Magnoliidae","C_Magnoliales").
-bl("C_Magnoliidae","C_Ranunculales").
-bl("C_Magnoliidae","C_Papaverales").
-bl("C_Magnoliales","C_Magnoliaceae").
-bl("C_Ranunculales","C_Ranunculaceae").
-bl("C_Papaverales","C_Papaveraceae").
-bl("C_Hamamelidae","C_Hamamelidales").
-bl("C_Hamamelidae","C_Urticales").
-bl("C_Hamamelidae","C_Fagales").
-bl("C_Hamamelidales","C_Hamamelidaceae").
-bl("C_Urticales","C_Moraceae").
-bl("C_Fagales","C_Fagaceae").
-bl("C_Fagales","C_Betulaceae").
-bl("C_Caryophyllidae","C_Caryophyllales").
-bl("C_Caryophyllidae","C_Polygonales").
-bl("C_Caryophyllidae","C_Malvales").
-bl("C_Caryophyllidae","C_Violales").
-bl("C_Caryophyllidae","C_Salicales").
-bl("C_Caryophyllidae","C_Capparales").
-bl("C_Caryophyllidae","C_Ericales").
-bl("C_Caryophyllales","C_Cactaceae").
-bl("C_Caryophyllales","C_Portulacaceae").
-bl("C_Caryophyllales","C_Caryophyllaceae").
-bl("C_Polygonales","C_Polygonaceae").
-bl("C_Malvales","C_Malvaceae").
-bl("C_Violales","C_Violaceae").
-bl("C_Violales","C_Cucurbitaceae").
-bl("C_Salicales","C_Salicaceae").
-bl("C_Capparales","C_Brassicaceae").
-bl("C_Ericales","C_Ericaceae").
-bl("C_Rosidae","C_Fabales").
-bl("C_Rosidae","C_Myrtales").
-bl("C_Rosidae","C_Euphorbiales").
-bl("C_Fabales","C_Mimosoideae").
-bl("C_Fabales","C_Caesalpinioideae").
-bl("C_Fabales","C_Fabaceae").
-bl("C_Myrtales","C_Onagraceae").
-bl("C_Euphorbiales","C_Euphorbiaceae").
-bl("C_Asteridae","C_Gentianales").
-bl("C_Asteridae","C_Solanales").
-bl("C_Asteridae","C_Scrophulariales").
-bl("C_Asteridae","C_Dipsacales").
-bl("C_Gentianales","C_Asclepiadaceae").
-bl("C_Solanales","C_Solanaceae").
-bl("C_Scrophulariales","C_Oleaceae").
-bl("C_Dipsacales","C_Caprifoliaceae").
-bl("APG_Angiosperms","APG_Magnoliids").
-bl("APG_Angiosperms","APG_Eudicots").
-bl("APG_Magnoliids","APG_Magnoliales").
-bl("APG_Magnoliales","APG_Magnoliaceae").
-bl("APG_Eudicots","APG_BasalEudicots").
-bl("APG_Eudicots","APG_CoreEudicots").
-bl("APG_Eudicots","APG_RosidClade").
-bl("APG_Eudicots","APG_CaryophyllidClade").
-bl("APG_Eudicots","APG_AsteridClade").
-bl("APG_BasalEudicots","APG_Ranunculales").
-bl("APG_CoreEudicots","APG_Saxifragales").
-bl("APG_CaryophyllidClade","APG_Caryophyllales").
-bl("APG_RosidClade","APG_Malpighiales").
-bl("APG_RosidClade","APG_Fabales").
-bl("APG_RosidClade","APG_Rosales").
-bl("APG_RosidClade","APG_Cucurbitales").
-bl("APG_RosidClade","APG_Fagales").
-bl("APG_RosidClade","APG_Myrtales").
-bl("APG_RosidClade","APG_Brassicales").
-bl("APG_RosidClade","APG_Malvales").
-bl("APG_AsteridClade","APG_Ericales").
-bl("APG_AsteridClade","APG_Solanales").
-bl("APG_AsteridClade","APG_Lamiales").
-bl("APG_AsteridClade","APG_Gentianales").
-bl("APG_AsteridClade","APG_Dipsacales").
-bl("APG_Ranunculales","APG_Ranunculaceae").
-bl("APG_Ranunculales","APG_Papaveraceae").
-bl("APG_Saxifragales","APG_Hamamelidaceae").
-bl("APG_Caryophyllales","APG_Caryophyllaceae").
-bl("APG_Caryophyllales","APG_Portulacaceae").
-bl("APG_Caryophyllales","APG_Cactaceae").
-bl("APG_Caryophyllales","APG_Polygonaceae").
-bl("APG_Malpighiales","APG_Euphorbiaceae").
-bl("APG_Malpighiales","APG_Salicaceae").
-bl("APG_Malpighiales","APG_Violaceae").
-bl("APG_Fabales","APG_Fabaceae").
-bl("APG_Fabaceae","APG_Mimosoideae").
-bl("APG_Fabaceae","APG_Caesalpinioideae").
-bl("APG_Fabaceae","APG_Faboideae").
-bl("APG_Rosales","APG_Moraceae").
-bl("APG_Cucurbitales","APG_Cucurbitaceae").
-bl("APG_Fagales","APG_Fagaceae").
-bl("APG_Fagales","APG_Betulaceae").
-bl("APG_Myrtales","APG_Onagraceae").
-bl("APG_Brassicales","APG_Brassicaceae").
-bl("APG_Malvales","APG_Malvaceae").
-bl("APG_Ericales","APG_Ericaceae").
-bl("APG_Solanales","APG_Solanaceae").
-bl("APG_Lamiales","APG_Oleaceae").
-bl("APG_Gentianales","APG_Asclepiadaceae").
-bl("APG_Dipsacales","APG_Caprifoliaceae").
-eq("C_Magnoliaceae","APG_Magnoliaceae").
-eq("C_Ranunculaceae","APG_Ranunculaceae").
-eq("C_Papaveraceae","APG_Papaveraceae").
-eq("C_Hamamelidaceae","APG_Hamamelidaceae").
-eq("C_Fagaceae","APG_Fagaceae").
-eq("C_Betulaceae","APG_Betulaceae").
-eq("C_Cactaceae","APG_Cactaceae").
-eq("C_Portulacaceae","APG_Portulacaceae").
-eq("C_Caryophyllaceae","APG_Caryophyllaceae").
-eq("C_Polygonaceae","APG_Polygonaceae").
-eq("C_Violaceae","APG_Violaceae").
-eq("C_Salicaceae","APG_Salicaceae").
-eq("C_Euphorbiaceae","APG_Euphorbiaceae").
-eq("C_Caesalpinioideae","APG_Caesalpinioideae").
-eq("C_Mimosoideae","APG_Mimosoideae").
-eq("C_Moraceae","APG_Moraceae").
-eq("C_Cucurbitaceae","APG_Cucurbitaceae").
-eq("C_Onagraceae","APG_Onagraceae").
-eq("C_Brassicaceae","APG_Brassicaceae").
-eq("C_Malvaceae","APG_Malvaceae").
-eq("C_Ericaceae","APG_Ericaceae").
-eq("C_Solanaceae","APG_Solanaceae").
-eq("C_Oleaceae","APG_Oleaceae").
-eq("C_Asclepiadaceae","APG_Asclepiadaceae").
-eq("C_Caprifoliaceae","APG_Caprifoliaceae").
-eq("C_Fabaceae","APG_Faboideae").
+#show eq/2.
+#show po/2.
+#show pp/2.
+#show dr/2.
+#show bl/2.
+#show u/1.
