@@ -18,7 +18,7 @@ articulations T1 T2
 [T1.Sedan_BMW equals T2.Sedan_BMW]
 [T1.Wagon_Audi equals T2.Wagon_Audi]
 # Adding this constraint
-[T1.Wagon_BMW equals T2.Wagon_BMW]
-#[T1.Wagon_BMW is_included_in T2.BMW]
+#[T1.Wagon_BMW equals T2.Wagon_BMW]
+[T1.Wagon_BMW is_included_in T2.BMW]
 [T1.SUV includes T2.SUV_Audi]
 [T1.SUV includes T2.SUV_BMW]
