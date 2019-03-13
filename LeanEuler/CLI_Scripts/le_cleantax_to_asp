@@ -1,0 +1,51 @@
+import argparse
+import os
+import pickle
+
+from LeanEuler.lean_euler_helper_funcs import (
+    mkdir_p,
+    CLEANTAX_INPUT_FOLDER,
+    PICKLE_FOLDER,
+    TAX_DESC_PANDAS_FILE,
+    ANYTREE_FILE,
+    CLINGO_FILES_FOLDER,
+)
+from LeanEuler.lean_euler import LeanEuler
+
+
+def __main__():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-f", "--fname", type=str,
+                        help="provide the preprocessed cleantax txt file to parse. Need not provide one if it already "
+                             "exists in the cleanTax_input folder as $project_name.txt")
+    parser.add_argument("project_name", type=str, help="provide session/project name used while preprocessing")
+    args = parser.parse_args()
+
+    fname = args.fname
+    project_name = args.project_name
+    if fname is None:
+        fname = "{}/{}.txt".format(CLEANTAX_INPUT_FOLDER, str(project_name))
+    if not os.path.exists(fname):
+        print("No file by the name {}.txt exists in the clingo_output folder. Please recheck the project name.".format(
+            project_name))
+        exit(1)
+
+    with open(fname, 'r') as f:
+        cleantax_lines = f.read().splitlines()
+        relation_data, anytree_data = LeanEuler.parse_cleantax(cleantax_lines)
+
+    pickle_folder = "{}/{}".format(PICKLE_FOLDER, str(project_name))
+    mkdir_p(pickle_folder)
+    with open("{}/{}.pkl".format(pickle_folder, TAX_DESC_PANDAS_FILE), 'wb') as f:
+        pickle.dump(relation_data, f)
+    with open("{}/{}.pkl".format(pickle_folder, ANYTREE_FILE), 'wb') as f:
+        pickle.dump(anytree_data, f)
+
+    rules_to_write = LeanEuler.gen_asp_rules(relation_data, anytree_data, args.encoding)
+
+    with open("{}/{}.lp4".format(CLINGO_FILES_FOLDER, str(project_name)), 'w') as clingo_file:
+        clingo_file.writelines("\n".join(rules_to_write))
+
+
+if __name__ == '__main__':
+    __main__()

@@ -1,0 +1,58 @@
+import argparse
+import pandas as pd
+import pickle
+import anytree
+import numpy as np
+import os
+
+from LeanEuler.lean_euler import LeanEuler
+from LeanEuler.lean_euler_helper_funcs import (
+    PICKLE_FOLDER,
+    TAX_DESC_PANDAS_FILE,
+    ANYTREE_FILE,
+    CLINGO_FILES_FOLDER,
+)
+
+
+def __main__():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("project_name", type=str,
+                        help="provide session/project name used while parsing")
+    parser.add_argument("-encoding", choices=('rcc', 'mnpw'), default='mnpw',
+                        help="Select the encoding you want to use. 'rcc' or 'mnpw'")
+    args = parser.parse_args()
+
+    project_name = args.project_name
+    relations_file = "{}/{}/{}.pkl".format(PICKLE_FOLDER, project_name, TAX_DESC_PANDAS_FILE)
+    anytree_file = "{}/{}/{}.pkl".format(PICKLE_FOLDER, project_name, ANYTREE_FILE)
+
+    if not os.path.exists(relations_file):
+        print("No file by the name {}.pkl exists in the {} folder. Please recheck the project name.".
+              format(TAX_DESC_PANDAS_FILE, PICKLE_FOLDER+'/'+project_name))
+        exit(1)
+
+    df = None
+    try:
+        with open(relations_file, 'rb') as input_file:
+            df = pickle.load(input_file)
+    except IOError:
+        print("Could not find the project, check project/session name entered.")
+        exit(1)
+
+    anytree_data = None
+    try:
+        with open(anytree_file, 'rb') as f:
+            anytree_data = pickle.load(f)
+    except IOError:
+        print("Could not find the anytree file. Check the project/session name.")
+        exit(1)
+
+    rules_to_write = LeanEuler.gen_asp_rules(df, anytree_data, args.encoding)
+
+    with open("{}/{}.lp4".format(CLINGO_FILES_FOLDER, str(project_name)), 'w') as clingo_file:
+        clingo_file.writelines("\n".join(rules_to_write))
+
+
+if __name__ == '__main__':
+    __main__()
