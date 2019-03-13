@@ -1,0 +1,10 @@
+pw-explorer>=0.0.19
+antlr4-python3-runtime>=4.7.2
+anytree>=2.6.0
+argparse>=1.4.0
+networkx>=2.2
+nxpd>=0.2.0
+pandas>=0.24.1
+numpy>=1.16.2
+matplotlib>=3.0.3
+scipy>=1.2.1

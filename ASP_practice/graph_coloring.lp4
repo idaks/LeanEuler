@@ -1,6 +1,0 @@
-c(1..5).
-1 {color(X,I) : c(I)} 1 :- v(X).
-:- color(X,I), color(Y,I), e(X,Y), c(I).
-
-v(1..100).
-e(1,55).
