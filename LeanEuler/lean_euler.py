@@ -71,7 +71,7 @@ class LeanEuler:
         return pw_rel_dfs, rel_schemas, pw_objs
 
     @staticmethod
-    def visualize_output(pw_rels_dfs, project_name, pws_to_visualize: list=None):
+    def visualize_output(pw_rels_dfs: dict, project_name: str, pws_to_visualize: list):
         return visualize_euler_output(pw_rels_dfs, project_name, pws_to_visualize)
 
     @staticmethod

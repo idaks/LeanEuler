@@ -1,9 +1,8 @@
-from ..lean_euler_helper_funcs import mkdir_p
-from nxpd import draw
 import networkx as nx
-import os
-from collections import defaultdict
-from PW_explorer.pwe_helper import pw_slicer
+from PW_explorer.pwe_helper import pw_slicer, rel_slicer
+from PW_explorer.run_clingo import run_clingo
+from PW_explorer.load_worlds import load_worlds
+from PW_explorer.export import PWEExport
 
 
 def get_styles(project_name, pw_id):
@@ -91,10 +90,27 @@ def merge_nodes(G,nodes, new_node, attr):
     return G__
 
 
+def remove_redundant_edges(orig_pw_obj, edges_rel_name: str='pp_2'):
+    _,_, sliced_orig_pw_obj = rel_slicer(None, None, [orig_pw_obj], [edges_rel_name])
+    orig_pp_facts = PWEExport.export_as_asp_facts(sliced_orig_pw_obj, include_pw_ids=False)
+    rel_name = edges_rel_name.rsplit('_', maxsplit=1)[0]  # Without arity
+    output_rel_name = 'useful_e'
+    redundancy_removal_rules = ['% define child(CHILD, PARENT)',
+                                'child(X,Y) :- {}(X,Y).'.format(rel_name),
+                                'child(X,Y) :- {}(X,Z), child(Z,Y).'.format(rel_name),
+                                'redundant_child(X,Y) :- child(X,Y), child(X,Z), child(Z,Y), X!=Y, Y!=Z, X!=Y.',
+                                '{}(X,Y) :- child(X,Y), not redundant_child(X,Y).'.format(output_rel_name),
+                                '#show {}/2.'.format(output_rel_name),
+                                ]
+    useful_pp_clingo_soln, _ = run_clingo(orig_pp_facts+redundancy_removal_rules)
+    useful_pp_dfs, _, _ = load_worlds(useful_pp_clingo_soln)  # TODO: Add silent option once it's added to PWE
+    useful_pp_dfs, _ = pw_slicer(useful_pp_dfs, None, [1])
+    return useful_pp_dfs['{}_2'.format(output_rel_name)]
+
 # Visualization function
 
 
-def visualize(pw_rels_dfs, project_name, pws_to_use: list=None):
+def visualize(pw_rels_dfs, project_name, pws_to_use: list):
     """
     Assumees the pw_rels_dfs has been sliced to contain the pws of interest
     :param pw_rels_dfs:
@@ -102,13 +118,6 @@ def visualize(pw_rels_dfs, project_name, pws_to_use: list=None):
     :param pws_to_use:
     :return:
     """
-
-
-    def get_pw_ids(pw_rels_dfs):
-        pw_ids = set([])
-        for rel_name, rel_df in pw_rels_dfs.items():
-            pw_ids = pw_ids.union(set(list(rel_df['pw'].unique())))
-        return list(pw_ids)
 
     def visualize_pw(units_df, proper_part_edges_df, partial_overlap_df, equivalent_nodes_df, pw_id):
 
@@ -130,19 +139,6 @@ def visualize(pw_rels_dfs, project_name, pws_to_use: list=None):
         # Add proper part edges
         for idx, row in proper_part_edges_df.iterrows():
             g.add_edge(remove_quotes(row['x1']), remove_quotes(row['x2']), **styles['edge_styles']['proper_part_edge'])
-
-        # Remove the redundant edges i.e. edges that go to ancestors of a parent
-        for node in g.nodes:
-            pred = list(g.predecessors(node))
-            succ = list(g.successors(node))
-            # print('node: {}'.format(node))
-            for pred_ in pred:
-                # print('predecessor: {}'.format(pred_))
-                for succ_ in succ:
-                    # print('successor: {}'.format(succ_))
-                    if g.has_edge(pred_, succ_):
-                        #  print('removing edge {} {}'.format(pred_, succ_))
-                        g.remove_edge(pred_, succ_)
 
         # Add partial overlap edges
         for idx, row in partial_overlap_df.iterrows():
@@ -176,16 +172,13 @@ def visualize(pw_rels_dfs, project_name, pws_to_use: list=None):
         for final_djs_ in final_djs:
             g = merge_nodes(g, final_djs_, '\n'.join(final_djs_), styles['node_styles']['node_equal'])
 
-        # TODO Merged nodes may have redundant edges (direct edges to successors of parent)
-
         return g
 
     graphs = {}
-    if not pws_to_use:
-        pws_to_use = get_pw_ids(pw_rels_dfs)
 
-    for pw_id in pws_to_use:
-        dfs, _ = pw_slicer(pw_rels_dfs, None, [pw_id])
-        graphs[pw_id] = visualize_pw(dfs['u_1'], dfs['pp_2'], dfs['po_2'], dfs['eq_2'], pw_id)
+    for pw in pws_to_use:
+        dfs, _ = pw_slicer(pw_rels_dfs, None, [pw.pw_id])
+        proper_part_edges = remove_redundant_edges(pw, edges_rel_name='pp_2')
+        graphs[pw.pw_id] = visualize_pw(dfs['u_1'], proper_part_edges, dfs['po_2'], dfs['eq_2'], pw.pw_id)
 
     return graphs
