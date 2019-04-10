@@ -8,7 +8,7 @@ with open('requirements.txt', 'r') as fh:
 
 setuptools.setup(
     name="LeanEuler",
-    version="0.0.3",
+    version="0.0.4",
     author="Sahil Gupta",
     author_email="",
     description="Lean implementation of core of EulerX functionality",
