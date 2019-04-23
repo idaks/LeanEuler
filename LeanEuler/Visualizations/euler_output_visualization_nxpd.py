@@ -103,7 +103,7 @@ def remove_redundant_edges(orig_pw_obj, edges_rel_name: str='pp_2'):
                                 '#show {}/2.'.format(output_rel_name),
                                 ]
     useful_pp_clingo_soln, _ = run_clingo(orig_pp_facts+redundancy_removal_rules)
-    useful_pp_dfs, _, _ = load_worlds(useful_pp_clingo_soln)  # TODO: Add silent option once it's added to PWE
+    useful_pp_dfs, _, _ = load_worlds(useful_pp_clingo_soln, silent=True, reasoner='clingo')
     useful_pp_dfs, _ = pw_slicer(useful_pp_dfs, None, [1])
     return useful_pp_dfs['{}_2'.format(output_rel_name)]
 
